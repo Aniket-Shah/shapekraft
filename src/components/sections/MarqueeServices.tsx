@@ -5,42 +5,40 @@ const ITEMS = [
   'AI AUTOMATION',
   'PERFORMANCE BUILDS',
   'LANDING PAGES',
+  'SAAS PRODUCTS',
+  'WEBHOOK SYSTEMS',
   'ENGINEERING',
   'CONVERSION',
 ]
 
 export function MarqueeServices() {
-  const separator = (
+  const dot = (
     <span
-      className="mx-6 text-2xl font-black"
-      style={{ color: 'var(--color-primary)' }}
+      className="inline-block mx-6 w-1.5 h-1.5 rounded-full align-middle"
+      style={{ backgroundColor: 'var(--color-primary)', opacity: 0.7 }}
       aria-hidden="true"
-    >
-      ·
-    </span>
+    />
   )
 
   return (
     <section
       aria-label="Services marquee"
-      className="py-8 border-y overflow-hidden"
-      style={{ borderColor: 'var(--color-border)' }}
+      className="py-6 border-y overflow-hidden"
+      style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
     >
-      <Marquee speed={40}>
+      <Marquee speed={38}>
         {ITEMS.map((item) => (
-          <span key={item} className="flex items-center shrink-0">
+          <span key={item} className="inline-flex items-center shrink-0">
             <span
               className="font-display font-black tracking-widest uppercase"
               style={{
-                fontSize: 'var(--fs-xl)',
+                fontSize: 'var(--fs-lg)',
                 color: 'var(--color-muted)',
-                paddingLeft: '1.5rem',
-                paddingRight: '1.5rem',
               }}
             >
               {item}
             </span>
-            {separator}
+            {dot}
           </span>
         ))}
       </Marquee>

@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${syne.variable}`}>
-      <body>
+      <body suppressHydrationWarning>
         {/* Skip to main content — accessibility */}
         <a
           href="#main-content"

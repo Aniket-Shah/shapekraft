@@ -1,7 +1,13 @@
 'use client'
 import { useRef, useEffect } from 'react'
 
-const LINES = ['WE BUILD', 'WE SHIP', 'WE SCALE']
+const ROWS = [
+  { text: 'WE BUILD', isAccent: false, parallaxDir: -1 as const },
+  { text: 'WE SHIP',  isAccent: true,  parallaxDir:  1 as const },
+  { text: 'WE SCALE', isAccent: false, parallaxDir: -1 as const },
+]
+
+const REPEAT = 7
 
 export function HugeTextScroll() {
   const containerRef = useRef<HTMLElement>(null)
@@ -14,24 +20,23 @@ export function HugeTextScroll() {
       const { gsap } = await import('gsap')
       const { ScrollTrigger } = await import('gsap/ScrollTrigger')
       gsap.registerPlugin(ScrollTrigger)
-
       if (!containerRef.current) return
 
       const ctx = gsap.context(() => {
         linesRef.current.forEach((line, i) => {
           if (!line) return
-          const dir = i % 2 === 0 ? -1 : 1
+          const dir = ROWS[i].parallaxDir
           gsap.fromTo(
             line,
-            { x: dir * 80 },
+            { x: dir * 120 },
             {
-              x: dir * -80,
+              x: dir * -120,
               ease: 'none',
               scrollTrigger: {
                 trigger: containerRef.current,
                 start: 'top bottom',
                 end: 'bottom top',
-                scrub: 1.2,
+                scrub: 1.4,
               },
             }
           )
@@ -47,28 +52,49 @@ export function HugeTextScroll() {
   return (
     <section
       ref={containerRef}
-      className="overflow-hidden py-24"
+      className="overflow-hidden"
       aria-label="Agency statement"
-      style={{ backgroundColor: 'var(--color-bg)' }}
+      style={{
+        backgroundColor: 'var(--color-bg)',
+        borderTop: '1px solid var(--color-border)',
+        borderBottom: '1px solid var(--color-border)',
+        padding: '5rem 0',
+      }}
     >
-      <div className="flex flex-col gap-2">
-        {LINES.map((line, i) => (
+      <div className="flex flex-col gap-4">
+        {ROWS.map((row, rowIdx) => (
           <div
-            key={line}
-            ref={(el) => { linesRef.current[i] = el }}
-            className="font-display font-black leading-none tracking-tighter whitespace-nowrap select-none"
-            style={{
-              fontSize: 'clamp(4rem, 12vw, 11rem)',
-              color: i === 1 ? 'var(--color-primary)' : 'transparent',
-              WebkitTextStroke: i === 1 ? 'none' : '1px var(--color-border)',
-            }}
-            aria-hidden="true"
+            key={row.text}
+            ref={(el) => { linesRef.current[rowIdx] = el }}
+            className="flex items-center whitespace-nowrap"
+            style={{ gap: '2.5rem' }}
           >
-            {line}
+            {Array.from({ length: REPEAT }, (_, i) => (
+              <span
+                key={i}
+                className="font-display font-black leading-none tracking-tighter select-none"
+                style={{
+                  fontSize: 'clamp(3.5rem, 8.5vw, 8rem)',
+                  color: row.isAccent
+                    ? 'var(--color-primary)'
+                    : i % 2 === 0
+                      ? 'transparent'
+                      : 'rgba(255,255,255,0.05)',
+                  WebkitTextStroke: row.isAccent
+                    ? 'none'
+                    : i % 2 === 0
+                      ? '1px rgba(255,255,255,0.2)'
+                      : 'none',
+                }}
+                aria-hidden="true"
+              >
+                {row.text}
+              </span>
+            ))}
           </div>
         ))}
-        <span className="sr-only">{LINES.join(' — ')}</span>
       </div>
+      <span className="sr-only">{ROWS.map((r) => r.text).join(' · ')}</span>
     </section>
   )
 }

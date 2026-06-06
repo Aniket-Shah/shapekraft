@@ -1,60 +1,170 @@
 'use client'
 import Link from 'next/link'
 
-const LINKS = [
-  { label: 'Services', href: '#services' },
-  { label: 'Process',  href: '#process' },
-  { label: 'Contact',  href: '#contact' },
+const SERVICES_LINKS = [
+  { label: 'Website Design', href: '#services' },
+  { label: 'AI Automation', href: '#services' },
+  { label: 'Performance', href: '#services' },
+  { label: 'Webhooks', href: '#services' },
+]
+
+const COMPANY_LINKS = [
+  { label: 'Work', href: '#work' },
+  { label: 'Process', href: '#process' },
+  { label: 'Contact', href: '#contact' },
+]
+
+const SOCIAL_LINKS = [
+  { label: 'Twitter / X', href: '#' },
+  { label: 'LinkedIn', href: '#' },
+  { label: 'GitHub', href: '#' },
 ]
 
 export function SiteFooter() {
   return (
     <footer
       className="border-t"
-      style={{
-        borderColor: 'var(--color-border)',
-        padding: 'var(--s-8) var(--gutter)',
-      }}
+      style={{ borderColor: 'var(--color-border)' }}
       aria-label="Site footer"
     >
       <div
-        className="flex flex-col md:flex-row items-center justify-between gap-6"
-        style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}
+        style={{
+          maxWidth: 'var(--max-w)',
+          margin: '0 auto',
+          padding: 'var(--s-12) var(--gutter) var(--s-6)',
+        }}
       >
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-display font-bold"
-          style={{ color: 'var(--color-text)' }}
-          aria-label="ShapeKraft — Home"
-        >
-          <FooterLogoMark />
-          <span>ShapeKraft</span>
-        </Link>
-
-        {/* Nav */}
-        <nav aria-label="Footer navigation" className="flex items-center gap-6">
-          {LINKS.map(({ label, href }) => (
+        {/* 4-col grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+          {/* Brand col */}
+          <div className="md:col-span-5 flex flex-col gap-5">
             <Link
-              key={href}
-              href={href}
-              className="text-sm transition-colors duration-200"
-              style={{ color: 'var(--color-muted)' }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
+              href="/"
+              className="flex items-center gap-2.5 font-display font-bold text-lg w-fit"
+              style={{ color: 'var(--color-text)' }}
+              aria-label="ShapeKraft — Home"
             >
-              {label}
+              <FooterLogoMark />
+              <span>ShapeKraft</span>
             </Link>
-          ))}
-        </nav>
+            <p
+              className="max-w-xs leading-relaxed"
+              style={{ fontSize: 'var(--fs-sm)', color: 'var(--color-muted)', lineHeight: 1.75 }}
+            >
+              We build websites that perform — fast, precise, and built to convert. No templates. No shortcuts. Pure craft.
+            </p>
+            <a
+              href="mailto:hello@shapekraft.co"
+              className="text-sm font-medium w-fit transition-colors duration-200"
+              style={{ color: 'var(--color-accent)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-accent)')}
+            >
+              hello@shapekraft.co
+            </a>
+          </div>
 
-        {/* Copyright */}
-        <p
-          className="text-sm"
-          style={{ color: 'var(--color-muted)' }}
+          {/* Services col */}
+          <div className="md:col-span-3 flex flex-col gap-4">
+            <span
+              className="text-xs font-semibold tracking-widest uppercase"
+              style={{ color: 'var(--color-muted)' }}
+            >
+              Services
+            </span>
+            <nav aria-label="Footer services" className="flex flex-col gap-3">
+              {SERVICES_LINKS.map(({ label, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="text-sm transition-colors duration-200"
+                  style={{ color: 'var(--color-muted)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Company + Social col */}
+          <div className="md:col-span-2 flex flex-col gap-4">
+            <span
+              className="text-xs font-semibold tracking-widest uppercase"
+              style={{ color: 'var(--color-muted)' }}
+            >
+              Company
+            </span>
+            <nav aria-label="Footer company" className="flex flex-col gap-3">
+              {COMPANY_LINKS.map(({ label, href }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  className="text-sm transition-colors duration-200"
+                  style={{ color: 'var(--color-muted)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Connect col */}
+          <div className="md:col-span-2 flex flex-col gap-4">
+            <span
+              className="text-xs font-semibold tracking-widest uppercase"
+              style={{ color: 'var(--color-muted)' }}
+            >
+              Connect
+            </span>
+            <nav aria-label="Footer social links" className="flex flex-col gap-3">
+              {SOCIAL_LINKS.map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="text-sm transition-colors duration-200 inline-flex items-center gap-1"
+                  style={{ color: 'var(--color-muted)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {label}
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                    <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3M8.5 1.5V7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div
+          className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t"
+          style={{ borderColor: 'var(--color-border)' }}
         >
-          © 2026 ShapeKraft. All rights reserved.
-        </p>
+          <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
+            © 2026 ShapeKraft. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            {['Privacy', 'Terms'].map((label) => (
+              <a
+                key={label}
+                href="#"
+                className="text-xs transition-colors duration-200"
+                style={{ color: 'var(--color-muted)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </footer>
   )

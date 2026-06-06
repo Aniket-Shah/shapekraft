@@ -1,3 +1,4 @@
+'use client'
 import { FadeUp } from '@/components/motion/FadeUp'
 
 interface Step {
@@ -69,8 +70,11 @@ export function ProcessSteps() {
           {STEPS.map((step, i) => (
             <FadeUp key={step.number} delay={i * 100}>
               <li
-                className="p-8 flex flex-col gap-6"
+                className="p-8 flex flex-col gap-6 transition-colors duration-300"
                 style={{ backgroundColor: 'var(--color-bg)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-bg)')}
+
               >
                 <div className="flex items-center justify-between">
                   <span
@@ -90,7 +94,7 @@ export function ProcessSteps() {
                     >
                       <path
                         d="M3 8h10M9 4l4 4-4 4"
-                        stroke="var(--color-border)"
+                        stroke="var(--color-muted)"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"

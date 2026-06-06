@@ -137,6 +137,12 @@ body {
   color: var(--color-primary-fg);
 }
 
+/* ── Scroll dot animation (hero indicator) ── */
+@keyframes scrollDot {
+  0%, 100% { opacity: 1; top: 6px; }
+  50%       { opacity: 0.2; top: 22px; }
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;

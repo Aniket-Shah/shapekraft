@@ -139,12 +139,28 @@ export function HeroBigStatement() {
         <FadeUp delay={2000}>
           <div className="flex items-center gap-3 mt-20">
             <div
-              className="w-px h-12"
+              className="relative flex items-center justify-center"
               style={{
-                background: 'linear-gradient(to bottom, transparent, var(--color-border))',
+                width: 24,
+                height: 40,
+                border: '1px solid var(--color-border)',
+                borderRadius: 12,
+                overflow: 'hidden',
               }}
               aria-hidden="true"
-            />
+            >
+              <div
+                className="absolute"
+                style={{
+                  width: 3,
+                  height: 7,
+                  borderRadius: 2,
+                  backgroundColor: 'var(--color-accent)',
+                  top: 6,
+                  animation: 'scrollDot 2s ease-in-out infinite',
+                }}
+              />
+            </div>
             <span
               className="text-xs tracking-widest uppercase"
               style={{ color: 'var(--color-muted)' }}
