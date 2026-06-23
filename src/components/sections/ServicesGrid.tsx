@@ -95,8 +95,8 @@ export function ServicesGrid() {
             <FadeUp key={service.number} delay={i * 80}>
               <article
                 role="listitem"
-                className={cn('cursor-pointer p-8 md:p-10 flex flex-col gap-5 transition-colors duration-300')}
-                style={{ backgroundColor: 'var(--color-bg)' }}
+                className={cn('cursor-pointer p-8 md:p-10 flex flex-col gap-5 transition-colors duration-300 border-b md:border-b-0')}
+                style={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)' }}
                 onClick={() => setExpanded(expanded === i ? null : i)}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.backgroundColor = 'var(--color-surface)')

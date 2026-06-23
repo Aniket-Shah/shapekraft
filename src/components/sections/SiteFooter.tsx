@@ -34,13 +34,13 @@ export function SiteFooter() {
         style={{
           maxWidth: 'var(--max-w)',
           margin: '0 auto',
-          padding: 'var(--s-12) var(--gutter) var(--s-6)',
+          padding: 'clamp(2.5rem, 6vw, var(--s-12)) var(--gutter) var(--s-6)',
         }}
       >
         {/* 4-col grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-10 md:mb-16">
           {/* Brand col */}
-          <div className="md:col-span-5 flex flex-col gap-5">
+          <div className="md:col-span-6 flex flex-col gap-5">
             <Link
               href="/"
               className="flex items-center gap-3 w-fit"
@@ -61,7 +61,7 @@ export function SiteFooter() {
               className="max-w-xs leading-relaxed"
               style={{ fontSize: 'var(--fs-sm)', color: 'var(--color-muted)', lineHeight: 1.75 }}
             >
-              We build websites that perform — fast, precise, and built to convert. No templates. No shortcuts. Pure craft.
+              Precision-built digital products for companies that compete at the highest level. No templates. No shortcuts. Pure craft.
             </p>
             <a
               href={`mailto:${email}`}
@@ -75,7 +75,7 @@ export function SiteFooter() {
           </div>
 
           {/* Services col */}
-          <div className="md:col-span-3 flex flex-col gap-4">
+          <div className="md:col-span-3 flex flex-col gap-4 md:pl-4">
             <span
               className="text-xs font-semibold tracking-widest uppercase"
               style={{ color: 'var(--color-muted)' }}
@@ -98,8 +98,8 @@ export function SiteFooter() {
             </nav>
           </div>
 
-          {/* Company + Social col */}
-          <div className="md:col-span-2 flex flex-col gap-4">
+          {/* Company col */}
+          <div className="md:col-span-3 flex flex-col gap-4">
             <span
               className="text-xs font-semibold tracking-widest uppercase"
               style={{ color: 'var(--color-muted)' }}

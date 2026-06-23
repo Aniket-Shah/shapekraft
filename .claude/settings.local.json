@@ -59,7 +59,8 @@
       "Bash(npx -y @playwright/mcp@latest --help)",
       "Bash(sudo pkill -f \"playwright/mcp\")",
       "Bash(echo \"exit: $?\")",
-      "Bash(pkill -f \"playwright/mcp\")"
+      "Bash(pkill -f \"playwright/mcp\")",
+      "Bash(npx plugins *)"
     ]
   }
 }

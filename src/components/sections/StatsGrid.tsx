@@ -60,7 +60,7 @@ function AnimatedStat({ stat }: { stat: Stat }) {
     >
       <span
         className="font-display font-black block mb-3 leading-none tabular-nums"
-        style={{ fontSize: 'var(--fs-3xl)', color: 'var(--color-text)' }}
+        style={{ fontSize: 'clamp(1.75rem, 6.5vw, 5rem)', color: 'var(--color-text)' }}
       >
         {stat.prefix}{count}{stat.suffix}
         <span style={{ color: 'var(--color-primary)' }}>.</span>

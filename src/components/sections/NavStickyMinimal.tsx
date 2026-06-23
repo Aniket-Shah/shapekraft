@@ -114,7 +114,7 @@ export function NavStickyMinimal() {
               className="block w-6 h-px transition-all duration-300"
               style={{
                 backgroundColor: 'var(--color-text)',
-                transform: menuOpen ? 'rotate(45deg) translateY(4px)' : 'none',
+                transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none',
               }}
             />
             <span
@@ -122,13 +122,14 @@ export function NavStickyMinimal() {
               style={{
                 backgroundColor: 'var(--color-text)',
                 opacity: menuOpen ? 0 : 1,
+                transform: menuOpen ? 'scaleX(0)' : 'scaleX(1)',
               }}
             />
             <span
               className="block w-6 h-px transition-all duration-300"
               style={{
                 backgroundColor: 'var(--color-text)',
-                transform: menuOpen ? 'rotate(-45deg) translateY(-4px)' : 'none',
+                transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none',
               }}
             />
           </button>

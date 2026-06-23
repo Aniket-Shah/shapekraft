@@ -9,8 +9,8 @@ export function ContactBigCTA() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden"
-      style={{ padding: 'var(--s-24) var(--gutter)' }}
+      className="relative overflow-hidden py-20 md:py-40"
+      style={{ paddingLeft: 'var(--gutter)', paddingRight: 'var(--gutter)' }}
       aria-labelledby="contact-heading"
     >
       {/* Background glow */}
@@ -38,8 +38,8 @@ export function ContactBigCTA() {
         <FadeUp delay={100}>
           <h2
             id="contact-heading"
-            className="font-display font-black leading-none tracking-tight mb-8"
-            style={{ fontSize: 'var(--fs-hero)', color: 'var(--color-text)' }}
+            className="font-display font-black leading-none tracking-tight mb-8 break-words"
+            style={{ fontSize: 'clamp(2.5rem, 10vw, 8rem)', color: 'var(--color-text)' }}
           >
             START A{' '}
             <span style={{ color: 'var(--color-primary)' }}>PROJECT</span>
