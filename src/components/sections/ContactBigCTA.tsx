@@ -1,8 +1,11 @@
 'use client'
 import { FadeUp } from '@/components/motion/FadeUp'
 import { MagneticButton } from '@/components/motion/MagneticButton'
+import { useBrandEmail } from '@/lib/useBrandEmail'
 
 export function ContactBigCTA() {
+  const email = useBrandEmail()
+
   return (
     <section
       id="contact"
@@ -55,7 +58,7 @@ export function ContactBigCTA() {
         <FadeUp delay={300}>
           <MagneticButton strength={0.2} className="inline-block">
             <a
-              href="mailto:hello@shapekraft.co"
+              href={`mailto:${email}`}
               className="group relative inline-flex items-center gap-3 px-12 py-6 rounded-full font-semibold text-lg transition-all duration-300 overflow-hidden"
               style={{
                 backgroundColor: 'var(--color-primary)',
@@ -69,9 +72,9 @@ export function ContactBigCTA() {
                 e.currentTarget.style.backgroundColor = 'var(--color-primary)'
                 e.currentTarget.style.color = 'var(--color-primary-fg)'
               }}
-              aria-label="Send us an email at hello@shapekraft.co"
+              aria-label={`Send us an email at ${email}`}
             >
-              <span>hello@shapekraft.co</span>
+              <span>{email}</span>
               <svg
                 width="20"
                 height="20"

@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import { useBrandEmail } from '@/lib/useBrandEmail'
 
 const SERVICES_LINKS = [
   { label: 'Website Design', href: '#services' },
@@ -21,6 +22,8 @@ const SOCIAL_LINKS = [
 ]
 
 export function SiteFooter() {
+  const email = useBrandEmail()
+
   return (
     <footer
       className="border-t"
@@ -61,13 +64,13 @@ export function SiteFooter() {
               We build websites that perform — fast, precise, and built to convert. No templates. No shortcuts. Pure craft.
             </p>
             <a
-              href="mailto:hello@shapekraft.co"
+              href={`mailto:${email}`}
               className="text-sm font-medium w-fit transition-colors duration-200"
               style={{ color: 'var(--color-accent)' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-accent)')}
             >
-              hello@shapekraft.co
+              {email}
             </a>
           </div>
 
