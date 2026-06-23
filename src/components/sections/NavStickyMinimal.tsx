@@ -56,12 +56,19 @@ export function NavStickyMinimal() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-display font-bold text-lg tracking-tight"
-            style={{ color: 'var(--color-text)' }}
+            className="flex items-center gap-3"
             aria-label="ShapeKraft — Home"
           >
-            <LogoMark />
-            <span>ShapeKraft</span>
+            <LogoMark color="var(--color-text)" />
+            <div style={{
+              fontFamily: 'var(--font-black-ops-one), sans-serif',
+              lineHeight: 0.86,
+              letterSpacing: '0.03em',
+              color: 'var(--color-text)',
+            }}>
+              <span style={{ display: 'block', fontSize: '22px' }}>SHAPE</span>
+              <span style={{ display: 'block', fontSize: '22px', paddingLeft: '2px' }}>KRAFT</span>
+            </div>
           </Link>
 
           {/* Desktop nav */}
@@ -84,7 +91,7 @@ export function NavStickyMinimal() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               href="#contact"
-              className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300"
+              className="px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300"
               style={{
                 backgroundColor: 'var(--color-primary)',
                 color: 'var(--color-primary-fg)',
@@ -158,7 +165,7 @@ export function NavStickyMinimal() {
           <Link
             href="#contact"
             onClick={closeMenu}
-            className="mt-4 px-6 py-4 rounded-full text-lg font-semibold text-center"
+            className="mt-4 px-8 py-5 rounded-full text-lg font-semibold text-center"
             style={{
               backgroundColor: 'var(--color-primary)',
               color: 'var(--color-primary-fg)',
@@ -172,28 +179,14 @@ export function NavStickyMinimal() {
   )
 }
 
-function LogoMark() {
+function LogoMark({ color = 'white' }: { color?: string }) {
   return (
-    <svg
-      width="28"
-      height="28"
-      viewBox="0 0 28 28"
-      fill="none"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="28" height="28" rx="6" fill="var(--color-primary)" />
-      <path
-        d="M8 9h7.5a4.5 4.5 0 0 1 0 9H8V9Z"
-        fill="var(--color-primary-fg)"
-        opacity="0.9"
-      />
-      <path
-        d="M15 14h5"
-        stroke="var(--color-primary-fg)"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+    <svg width="36" height="42" viewBox="0 0 140 155" fill="none" aria-hidden="true">
+      <rect x="20" y="15" width="100" height="100" stroke={color} strokeWidth="1.7" />
+      <polygon points="70,15 120,65 70,115 20,65" stroke={color} strokeWidth="1.7" fill="none" />
+      <line x1="20" y1="65" x2="120" y2="65" stroke={color} strokeWidth="1.7" />
+      <line x1="70" y1="15" x2="70" y2="115" stroke={color} strokeWidth="1.7" />
+      <path d="M4,92 L4,137 L44,137" stroke={color} strokeWidth="1.7" fill="none" strokeLinecap="square" />
     </svg>
   )
 }

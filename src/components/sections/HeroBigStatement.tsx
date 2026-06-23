@@ -86,7 +86,7 @@ export function HeroBigStatement() {
               color: 'var(--color-muted)',
             }}
           >
-            We build websites that perform — fast, precise, and built to convert.
+            Precision-built for companies that compete at the highest level.
             No templates. No shortcuts. Pure craft.
           </p>
         </FadeUp>
@@ -97,7 +97,7 @@ export function HeroBigStatement() {
             <MagneticButton>
               <Link
                 href="#contact"
-                className="px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 inline-block"
+                className="px-10 py-5 rounded-full font-semibold text-base transition-all duration-300 inline-block"
                 style={{
                   backgroundColor: 'var(--color-primary)',
                   color: 'var(--color-primary-fg)',
@@ -116,7 +116,7 @@ export function HeroBigStatement() {
             </MagneticButton>
             <Link
               href="#services"
-              className="px-8 py-4 rounded-full font-semibold text-base border transition-all duration-300"
+              className="px-10 py-5 rounded-full font-semibold text-base border transition-all duration-300"
               style={{
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-muted)',

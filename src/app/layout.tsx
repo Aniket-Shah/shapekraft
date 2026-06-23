@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Syne } from 'next/font/google'
+import { Inter, Syne, Black_Ops_One } from 'next/font/google'
 import './globals.css'
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider'
 import { ClientEffects } from '@/components/providers/ClientEffects'
@@ -14,6 +14,13 @@ const syne = Syne({
   subsets: ['latin'],
   variable: '--font-syne',
   weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+})
+
+const blackOpsOne = Black_Ops_One({
+  subsets: ['latin'],
+  variable: '--font-black-ops-one',
+  weight: ['400'],
   display: 'swap',
 })
 
@@ -43,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${syne.variable}`}>
+    <html lang="en" className={`${inter.variable} ${syne.variable} ${blackOpsOne.variable}`}>
       <body suppressHydrationWarning>
         {/* Skip to main content — accessibility */}
         <a

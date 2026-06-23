@@ -43,7 +43,23 @@
       "PowerShell(& \"C:\\\\Python\\\\python.exe\" --version 2>$null)",
       "PowerShell(& \"C:\\\\Python\\\\Scripts\\\\pip.exe\" --version 2>$null)",
       "PowerShell($pythonPath = \"C:\\\\Users\\\\shaha\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe\"; & $pythonPath --version)",
-      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:LOCALAPPDATA\\\\nvm\" -ErrorAction SilentlyContinue | Select-Object -First 5; Get-ChildItem \"C:\\\\nvm\" -ErrorAction SilentlyContinue | Select-Object -First 5)"
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:LOCALAPPDATA\\\\nvm\" -ErrorAction SilentlyContinue | Select-Object -First 5; Get-ChildItem \"C:\\\\nvm\" -ErrorAction SilentlyContinue | Select-Object -First 5)",
+      "mcp__playwright__browser_navigate",
+      "Read(//usr/bin/**)",
+      "Read(//home/**)",
+      "Bash(curl -sL https://shapekraft.co)",
+      "Bash(PLAYWRIGHT_BROWSERS_PATH=/home/aniketshah24/.playwright-browsers npx playwright@1.49.0 install chromium)",
+      "Bash(sudo npx *)",
+      "Bash(curl *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('mcpServers',{}\\), indent=2\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); mcp=d.get\\('mcpServers',{}\\); print\\(json.dumps\\(mcp, indent=2\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); mcp=d.get\\('projects',{}\\); keys=list\\(mcp.keys\\(\\)\\); print\\(keys[:5]\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); mcp=d.get\\('projects',{}\\).get\\('/var/www/html/shapekraft',{}\\); print\\(json.dumps\\(mcp.get\\('mcpServers',{}\\), indent=2\\)\\)\")",
+      "Bash(python3 *)",
+      "Bash(npx -y @playwright/mcp@latest --help)",
+      "Bash(sudo pkill -f \"playwright/mcp\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(pkill -f \"playwright/mcp\")"
     ]
   }
 }

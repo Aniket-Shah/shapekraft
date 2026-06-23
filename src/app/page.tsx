@@ -2,7 +2,8 @@ import { NavStickyMinimal }  from '@/components/sections/NavStickyMinimal'
 import { HeroBigStatement }  from '@/components/sections/HeroBigStatement'
 import { MarqueeServices }   from '@/components/sections/MarqueeServices'
 import { HugeTextScroll }    from '@/components/sections/HugeTextScroll'
-import { FeaturedWork }      from '@/components/sections/FeaturedWork'
+// import { FeaturedWork }      from '@/components/sections/FeaturedWork'
+import { AboutStrip }        from '@/components/sections/AboutStrip'
 import { ServicesGrid }      from '@/components/sections/ServicesGrid'
 import { StatsGrid }         from '@/components/sections/StatsGrid'
 import { ProcessSteps }      from '@/components/sections/ProcessSteps'
@@ -17,8 +18,9 @@ export default function HomePage() {
       <main id="main-content">
         <HeroBigStatement />
         <MarqueeServices />
+        <AboutStrip />
         <HugeTextScroll />
-        <FeaturedWork />
+        {/* <FeaturedWork /> */}
         <ServicesGrid />
         <StatsGrid />
         <ProcessSteps />

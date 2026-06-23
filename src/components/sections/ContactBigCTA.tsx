@@ -56,7 +56,7 @@ export function ContactBigCTA() {
           <MagneticButton strength={0.2} className="inline-block">
             <a
               href="mailto:hello@shapekraft.co"
-              className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-full font-semibold text-lg transition-all duration-300 overflow-hidden"
+              className="group relative inline-flex items-center gap-3 px-12 py-6 rounded-full font-semibold text-lg transition-all duration-300 overflow-hidden"
               style={{
                 backgroundColor: 'var(--color-primary)',
                 color: 'var(--color-primary-fg)',

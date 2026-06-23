@@ -40,12 +40,19 @@ export function SiteFooter() {
           <div className="md:col-span-5 flex flex-col gap-5">
             <Link
               href="/"
-              className="flex items-center gap-2.5 font-display font-bold text-lg w-fit"
-              style={{ color: 'var(--color-text)' }}
+              className="flex items-center gap-3 w-fit"
               aria-label="ShapeKraft — Home"
             >
               <FooterLogoMark />
-              <span>ShapeKraft</span>
+              <div style={{
+                fontFamily: 'var(--font-black-ops-one), sans-serif',
+                lineHeight: 0.86,
+                letterSpacing: '0.03em',
+                color: 'var(--color-text)',
+              }}>
+                <span style={{ display: 'block', fontSize: '20px' }}>SHAPE</span>
+                <span style={{ display: 'block', fontSize: '20px', paddingLeft: '2px' }}>KRAFT</span>
+              </div>
             </Link>
             <p
               className="max-w-xs leading-relaxed"
@@ -112,34 +119,10 @@ export function SiteFooter() {
             </nav>
           </div>
 
-          {/* Connect col */}
-          <div className="md:col-span-2 flex flex-col gap-4">
-            <span
-              className="text-xs font-semibold tracking-widest uppercase"
-              style={{ color: 'var(--color-muted)' }}
-            >
-              Connect
-            </span>
-            <nav aria-label="Footer social links" className="flex flex-col gap-3">
-              {SOCIAL_LINKS.map(({ label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="text-sm transition-colors duration-200 inline-flex items-center gap-1"
-                  style={{ color: 'var(--color-muted)' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {label}
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                    <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3M8.5 1.5V7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              ))}
-            </nav>
-          </div>
+          {/* Connect col — hidden until social profiles are ready */}
+          {/* <div className="md:col-span-2 flex flex-col gap-4">
+            ...
+          </div> */}
         </div>
 
         {/* Bottom bar */}
@@ -172,26 +155,12 @@ export function SiteFooter() {
 
 function FooterLogoMark() {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 28 28"
-      fill="none"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect width="28" height="28" rx="6" fill="var(--color-primary)" />
-      <path
-        d="M8 9h7.5a4.5 4.5 0 0 1 0 9H8V9Z"
-        fill="var(--color-primary-fg)"
-        opacity="0.9"
-      />
-      <path
-        d="M15 14h5"
-        stroke="var(--color-primary-fg)"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+    <svg width="32" height="37" viewBox="0 0 140 155" fill="none" aria-hidden="true">
+      <rect x="20" y="15" width="100" height="100" stroke="var(--color-text)" strokeWidth="1.7" />
+      <polygon points="70,15 120,65 70,115 20,65" stroke="var(--color-text)" strokeWidth="1.7" fill="none" />
+      <line x1="20" y1="65" x2="120" y2="65" stroke="var(--color-text)" strokeWidth="1.7" />
+      <line x1="70" y1="15" x2="70" y2="115" stroke="var(--color-text)" strokeWidth="1.7" />
+      <path d="M4,92 L4,137 L44,137" stroke="var(--color-text)" strokeWidth="1.7" fill="none" strokeLinecap="square" />
     </svg>
   )
 }
