@@ -18,7 +18,7 @@ export default function QuotePage() {
   return (
     <>
       <NavStickyMinimal />
-      <main id="main-content">
+      <main id="main-content" style={{ paddingTop: '5rem' }}>
         <QuotePageClient />
       </main>
       <SiteFooter />
