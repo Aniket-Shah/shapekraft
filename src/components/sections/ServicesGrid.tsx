@@ -56,12 +56,12 @@ export function ServicesGrid() {
   return (
     <section
       id="services"
-      style={{ padding: 'var(--s-24) var(--gutter)' }}
+      style={{ padding: 'clamp(3rem, 8vw, var(--s-24)) var(--gutter)' }}
       aria-labelledby="services-heading"
     >
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <FadeUp>
-          <div className="flex items-end justify-between mb-16 flex-wrap gap-6">
+          <div className="flex items-end justify-between mb-8 md:mb-16 flex-wrap gap-6">
             <div>
               <span
                 className="text-xs font-semibold tracking-widest uppercase block mb-3"
@@ -92,10 +92,10 @@ export function ServicesGrid() {
           role="list"
         >
           {SERVICES.map((service, i) => (
-            <FadeUp key={service.number} delay={i * 80}>
+            <FadeUp key={service.number} delay={i * 80} className="h-full">
               <article
                 role="listitem"
-                className={cn('cursor-pointer p-8 md:p-10 flex flex-col gap-5 transition-colors duration-300 border-b md:border-b-0')}
+                className={cn('h-full cursor-pointer p-8 md:p-10 flex flex-col gap-5 transition-colors duration-300 border-b md:border-b-0')}
                 style={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)' }}
                 onClick={() => setExpanded(expanded === i ? null : i)}
                 onMouseEnter={(e) =>

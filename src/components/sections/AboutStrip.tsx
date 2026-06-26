@@ -11,7 +11,7 @@ export function AboutStrip() {
   return (
     <section
       style={{
-        padding: 'var(--s-16) var(--gutter)',
+        padding: 'clamp(2.5rem, 7vw, var(--s-16)) var(--gutter)',
         borderBottom: '1px solid var(--color-border)',
       }}
       aria-labelledby="about-heading"

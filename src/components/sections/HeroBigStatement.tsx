@@ -137,7 +137,7 @@ export function HeroBigStatement() {
 
         {/* Scroll indicator */}
         <FadeUp delay={2000}>
-          <div className="flex items-center gap-3 mt-20">
+          <div className="flex items-center gap-3 mt-10 md:mt-20">
             <div
               className="relative flex items-center justify-center"
               style={{

@@ -58,7 +58,7 @@ export function SplitText({
   return (
     <span ref={ref} className={className} aria-label={text}>
       {words.map((word, wi) => (
-        <span key={wi} className="inline-block overflow-hidden" aria-hidden="true">
+        <span key={wi} className="inline-block overflow-hidden" style={{ whiteSpace: 'nowrap' }} aria-hidden="true">
           {word.split('').map((char, ci) => (
             <span key={ci} className="char inline-block" style={{ opacity: 0 }}>
               {char}

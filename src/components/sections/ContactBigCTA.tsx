@@ -38,11 +38,11 @@ export function ContactBigCTA() {
         <FadeUp delay={100}>
           <h2
             id="contact-heading"
-            className="font-display font-black leading-none tracking-tight mb-8 break-words"
+            className="font-display font-black leading-none tracking-tight mb-8"
             style={{ fontSize: 'clamp(2.5rem, 10vw, 8rem)', color: 'var(--color-text)' }}
           >
-            START A{' '}
-            <span style={{ color: 'var(--color-primary)' }}>PROJECT</span>
+            <span className="block">START A</span>
+            <span className="block" style={{ color: 'var(--color-primary)' }}>PROJECT</span>
           </h2>
         </FadeUp>
 

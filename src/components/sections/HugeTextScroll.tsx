@@ -58,7 +58,7 @@ export function HugeTextScroll() {
         backgroundColor: 'var(--color-bg)',
         borderTop: '1px solid var(--color-border)',
         borderBottom: '1px solid var(--color-border)',
-        padding: '5rem 0',
+        padding: 'clamp(2rem, 6vw, 5rem) 0',
       }}
     >
       <div className="flex flex-col gap-4">

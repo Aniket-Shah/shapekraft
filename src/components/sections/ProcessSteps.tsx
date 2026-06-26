@@ -39,7 +39,7 @@ export function ProcessSteps() {
     <section
       id="process"
       aria-labelledby="process-heading"
-      style={{ padding: 'var(--s-24) var(--gutter)' }}
+      style={{ padding: 'clamp(3rem, 8vw, var(--s-24)) var(--gutter)' }}
     >
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         {/* Header */}
@@ -52,7 +52,7 @@ export function ProcessSteps() {
           </span>
           <h2
             id="process-heading"
-            className="font-display font-black tracking-tight mb-16"
+            className="font-display font-black tracking-tight mb-8 md:mb-16"
             style={{ fontSize: 'var(--fs-3xl)', color: 'var(--color-text)' }}
           >
             Our Process
@@ -68,9 +68,9 @@ export function ProcessSteps() {
           }}
         >
           {STEPS.map((step, i) => (
-            <FadeUp key={step.number} delay={i * 100}>
+            <FadeUp key={step.number} delay={i * 100} className="h-full">
               <li
-                className="p-8 flex flex-col gap-6 transition-colors duration-300"
+                className="h-full p-8 flex flex-col gap-6 transition-colors duration-300"
                 style={{ backgroundColor: 'var(--color-bg)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-bg)')}
