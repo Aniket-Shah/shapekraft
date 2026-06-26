@@ -4,6 +4,7 @@ import './globals.css'
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider'
 import { ClientEffects } from '@/components/providers/ClientEffects'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -109,6 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ClientEffects />
           {children}
         </SmoothScrollProvider>
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
