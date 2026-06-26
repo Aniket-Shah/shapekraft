@@ -14,55 +14,55 @@ export const CONFIG = {
     {
       id: 'basic',
       tier: 'Basic',
-      label: 'Landing Page',
-      description: 'Responsive single-page site, contact form, basic SEO',
+      label: 'Basic Website',
+      description: 'A clean, fast site that looks great on every device. Includes a contact form and the basics to get found on Google.',
       priceINR: 12_000,
       priceUSD: 175,
     },
     {
       id: 'pro',
       tier: 'Pro',
-      label: 'Landing Page',
-      description: 'Multi-section, scroll animations, CMS integration, SEO',
+      label: 'Pro Website',
+      description: 'Multiple sections, smooth animations, a blog or portfolio you can update yourself, and better SEO out of the box.',
       priceINR: 25_000,
       priceUSD: 350,
     },
     {
       id: 'advanced',
       tier: 'Advanced',
-      label: 'Landing Page',
-      description: 'Fully custom build, design system, complex interactions',
+      label: 'Advanced Website',
+      description: 'Built from scratch to match your brand exactly — your own design system, custom interactions, no templates.',
       priceINR: 40_000,
       priceUSD: 550,
     },
     {
       id: 'b2b',
       tier: 'B2B',
-      label: 'Business',
-      description: 'Enterprise site with dedicated collab call support, proposals & decks included',
-      priceINR: 35_000,
-      priceUSD: 500,
+      label: 'Business B2B',
+      description: 'We hop on calls, understand your business, build the site, and handle proposals, decks, and AMC. Pricing depends on scope.',
+      priceINR: 0,
+      priceUSD: 0,
     },
   ],
   addons: [
     {
       id: 'ai',
       label: 'AI Automation & Agents',
-      description: 'LLM integrations, RAG pipelines, custom workflows',
+      description: 'Hook AI into your product — automate the repetitive stuff, build smart workflows, stop doing things manually.',
       priceINR: 25_000,
       priceUSD: 350,
     },
     {
       id: 'performance',
       label: 'Performance Optimisation',
-      description: 'Core Web Vitals audit, Lighthouse 100, sub-2s LCP',
-      priceINR: 15_000,
-      priceUSD: 200,
+      description: 'Make your site noticeably faster. Better Google scores, lower bounce rate, happier users.',
+      priceINR: 10_000,
+      priceUSD: 150,
     },
     {
       id: 'webhook',
       label: 'Webhook & Integrations',
-      description: 'Event systems, API orchestration, third-party pipelines',
+      description: 'Connect the tools you already use — CRMs, payment gateways, email, anything. They talk to each other so you don\'t have to.',
       priceINR: 10_000,
       priceUSD: 150,
     },
@@ -106,7 +106,8 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
       })
   }, [])
 
-  const showPages = selectedPackage !== null
+  // B2B scope is discussed on call — no page count applies
+  const showPages = selectedPackage !== null && selectedPackage !== 'b2b'
 
   const getPkgPrice = (p: (typeof CONFIG.packages)[number]) =>
     currency === 'INR' ? p.priceINR : p.priceUSD
@@ -134,16 +135,22 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
   }
 
   function pkgDisplayName(p: (typeof CONFIG.packages)[number]): string {
-    return p.tier === 'B2B' ? 'Business B2B' : `${p.label} — ${p.tier}`
+    return p.label
   }
+
+  const isB2B = selectedPackage === 'b2b'
 
   function buildSummary(): string {
     const lines: string[] = []
     if (activePkg) lines.push(pkgDisplayName(activePkg))
     CONFIG.addons.filter((a) => selectedAddons.has(a.id)).forEach((a) => lines.push(a.label))
     let msg = `Hi ShapeKraft! I'd like a quote for: ${lines.join(', ')}.`
-    if (showPages) msg += ` Pages: ${pages}.`
-    msg += ` Estimate: ${formatPrice(total, currency)}.`
+    if (showPages && !isB2B) msg += ` Pages: ${pages}.`
+    if (isB2B) {
+      msg += ` B2B pricing to be discussed on call.`
+    } else {
+      msg += ` Estimate: ${formatPrice(total, currency)}.`
+    }
     if (negotiationNote.trim()) msg += ` Note: ${negotiationNote.trim()}`
     msg += ` Please get in touch.`
     return msg
@@ -165,7 +172,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
   function handlePDF() {
     if (!hasSelection) return
     const pkgRow = activePkg
-      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td style="text-align:right;font-family:monospace">${formatPrice(getPkgPrice(activePkg), currency)}</td></tr>`
+      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td style="text-align:right;font-family:monospace">${isB2B ? 'Custom — on call' : formatPrice(getPkgPrice(activePkg), currency)}</td></tr>`
       : ''
     const addonRows = CONFIG.addons
       .filter((a) => selectedAddons.has(a.id))
@@ -243,7 +250,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
             Build your quote
           </h1>
           <p style={{ color: 'var(--color-muted)', fontSize: 'var(--fs-lg)', maxWidth: '520px' }}>
-            Pick a package, add services, get a live estimate. No forms, no waitlists.
+            Pick what you need, see the price right away. No forms, no sales calls, no waiting.
           </p>
         </FadeUp>
 
@@ -307,28 +314,30 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex items-center gap-2 flex-wrap">
                             <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>
-                              {pkg.tier === 'B2B' ? 'Business B2B' : pkg.label}
+                              {pkg.label}
                             </span>
-                            <span
-                              className="font-semibold"
-                              style={{
-                                fontSize: '10px',
-                                letterSpacing: '0.07em',
-                                textTransform: 'uppercase',
-                                color: badge.color,
-                                backgroundColor: badge.bg,
-                                padding: '2px 7px',
-                                borderRadius: 4,
-                              }}
-                            >
-                              {pkg.tier === 'B2B' ? 'Call Support' : pkg.tier}
-                            </span>
+                            {pkg.tier === 'B2B' && (
+                              <span
+                                className="font-semibold"
+                                style={{
+                                  fontSize: '10px',
+                                  letterSpacing: '0.07em',
+                                  textTransform: 'uppercase',
+                                  color: badge.color,
+                                  backgroundColor: badge.bg,
+                                  padding: '2px 7px',
+                                  borderRadius: 4,
+                                }}
+                              >
+                                Call Support
+                              </span>
+                            )}
                           </div>
                           <span
                             className="font-mono text-sm shrink-0"
                             style={{ color: active ? 'var(--color-accent)' : 'var(--color-muted)' }}
                           >
-                            {formatPrice(getPkgPrice(pkg), currency)}
+                            {pkg.id === 'b2b' ? 'Custom' : formatPrice(getPkgPrice(pkg), currency)}
                           </span>
                         </div>
                         <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
@@ -482,11 +491,12 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                   <div
                     className="font-display font-black leading-none"
                     style={{
-                      fontSize: 'clamp(2rem, 8vw, var(--fs-3xl))',
+                      fontSize: 'clamp(1.6rem, 4vw, 2.5rem)',
                       color: 'var(--color-text)',
+                      wordBreak: 'break-word',
                     }}
                   >
-                    {formatPrice(total, currency)}
+                    {isB2B && total === 0 ? 'Custom' : formatPrice(total, currency)}
                   </div>
                 ) : (
                   <div
@@ -497,7 +507,9 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                   </div>
                 )}
                 <p className="text-xs mt-2" style={{ color: 'var(--color-muted)' }}>
-                  Estimate only · final quote after discovery call
+                  {isB2B && total === 0
+                    ? 'Pricing discussed on call — AMC & scope included'
+                    : 'Estimate only · final quote after discovery call'}
                 </p>
               </div>
 
@@ -569,7 +581,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                     <div className="flex items-center justify-between text-sm">
                       <span style={{ color: 'var(--color-muted)' }}>{pkgDisplayName(activePkg)}</span>
                       <span className="font-mono" style={{ color: 'var(--color-text)' }}>
-                        {formatPrice(pkgPrice, currency)}
+                        {isB2B ? 'On call' : formatPrice(pkgPrice, currency)}
                       </span>
                     </div>
                   )}
@@ -614,7 +626,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                     <textarea
                       value={negotiationNote}
                       onChange={(e) => setNegotiationNote(e.target.value)}
-                      placeholder="E.g. My budget is ₹20,000 — can we work something out?"
+                      placeholder="E.g. I have ₹20k to work with — can you make it happen?"
                       rows={3}
                       className="w-full mt-3 p-3 text-sm resize-none"
                       style={{
