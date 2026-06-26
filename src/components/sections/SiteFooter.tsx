@@ -3,16 +3,16 @@ import Link from 'next/link'
 import { useBrandEmail } from '@/lib/useBrandEmail'
 
 const SERVICES_LINKS = [
-  { label: 'Website Design', href: '#services' },
-  { label: 'AI Automation', href: '#services' },
-  { label: 'Performance', href: '#services' },
-  { label: 'Webhooks', href: '#services' },
+  { label: 'Website Design', href: '/#services' },
+  { label: 'AI Automation', href: '/#services' },
+  { label: 'Performance', href: '/#services' },
+  { label: 'Webhooks', href: '/#services' },
 ]
 
 const COMPANY_LINKS = [
-  { label: 'Process', href: '#process' },
+  { label: 'Process', href: '/#process' },
   { label: 'Get a Quote', href: '/quote' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 const SOCIAL_LINKS = [
@@ -137,17 +137,17 @@ export function SiteFooter() {
             © 2026 ShapeKraft. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            {['Privacy', 'Terms'].map((label) => (
-              <a
+            {[{ label: 'Privacy', href: '/privacy' }, { label: 'Terms', href: '/terms' }].map(({ label, href }) => (
+              <Link
                 key={label}
-                href="#"
+                href={href}
                 className="text-xs transition-colors duration-200"
                 style={{ color: 'var(--color-muted)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
               >
                 {label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

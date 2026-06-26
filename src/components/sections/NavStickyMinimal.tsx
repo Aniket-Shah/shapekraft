@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
-  { label: 'Services', href: '#services' },
-  { label: 'Process',  href: '#process' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Process',  href: '/#process' },
   { label: 'Get a Quote', href: '/quote' },
-  { label: 'Contact',  href: '#contact' },
+  { label: 'Contact',  href: '/#contact' },
 ]
 
 export function NavStickyMinimal() {
@@ -90,7 +90,7 @@ export function NavStickyMinimal() {
           {/* CTA */}
           <div className="hidden md:flex items-center gap-4">
             <Link
-              href="#contact"
+              href="/#contact"
               className="px-7 py-3 rounded-full text-sm font-semibold transition-all duration-300"
               style={{
                 backgroundColor: 'var(--color-primary)',
@@ -164,7 +164,7 @@ export function NavStickyMinimal() {
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/#contact"
             onClick={closeMenu}
             className="mt-4 px-8 py-5 rounded-full text-lg font-semibold text-center"
             style={{
