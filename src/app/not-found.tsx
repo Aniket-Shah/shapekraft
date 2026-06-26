@@ -40,13 +40,13 @@ export default function NotFound() {
           }}
         />
 
-        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-          {/* Big 404 */}
+        <div className="relative z-10 text-center w-full">
+          {/* Big 404 — unrestricted width so it never clips on any desktop */}
           <p
             aria-hidden
             className="font-display font-black leading-none select-none"
             style={{
-              fontSize: 'clamp(7rem, 22vw, 16rem)',
+              fontSize: 'clamp(5rem, 20vw, 14rem)',
               background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 55%, #7C3AED 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -57,6 +57,7 @@ export default function NotFound() {
             404
           </p>
 
+          <div className="px-6 max-w-3xl mx-auto">
           <h1
             className="font-display font-bold mt-2 mb-4"
             style={{ fontSize: 'var(--fs-2xl)', color: 'var(--color-text)', lineHeight: 1.2 }}
@@ -93,6 +94,7 @@ export default function NotFound() {
             >
               Get in Touch
             </Link>
+          </div>
           </div>
         </div>
       </main>
