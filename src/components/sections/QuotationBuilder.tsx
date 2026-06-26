@@ -16,8 +16,8 @@ export const CONFIG = {
       tier: 'Basic',
       label: 'Basic Website',
       description: 'A clean, fast site that looks great on every device. Includes a contact form and the basics to get found on Google.',
-      priceINR: 12_000,
-      priceUSD: 175,
+      priceINR: 8_000,
+      priceUSD: 110,
     },
     {
       id: 'pro',
@@ -80,13 +80,8 @@ const TIER_BADGE: Record<string, { color: string; bg: string }> = {
   B2B:      { color: 'var(--color-text)',    bg: 'rgba(255,255,255,0.08)' },
 }
 
-interface Props {
-  onRequestQuote?: (summary: string) => void
-}
-
-export function QuotationBuilder({ onRequestQuote }: Props) {
+export function QuotationBuilder() {
   const [currency, setCurrency] = useState<Currency>('USD')
-  const [hostname, setHostname] = useState('')
   const [selectedPackage, setSelectedPackage] = useState<string | null>('basic')
   const [selectedAddons, setSelectedAddons] = useState<Set<string>>(new Set())
   const [pages, setPages] = useState<number>(CONFIG.basePages)
@@ -95,7 +90,6 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
 
   useEffect(() => {
     const host = window.location.hostname
-    setHostname(host)
     fetch('https://api.country.is/')
       .then((r) => r.json())
       .then((data: { ip: string; country: string }) => {
@@ -140,79 +134,117 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
 
   const isB2B = selectedPackage === 'b2b'
 
-  function buildSummary(): string {
-    const lines: string[] = []
-    if (activePkg) lines.push(pkgDisplayName(activePkg))
-    CONFIG.addons.filter((a) => selectedAddons.has(a.id)).forEach((a) => lines.push(a.label))
-    let msg = `Hi ShapeKraft! I'd like a quote for: ${lines.join(', ')}.`
-    if (showPages && !isB2B) msg += ` Pages: ${pages}.`
-    if (isB2B) {
-      msg += ` B2B pricing to be discussed on call.`
-    } else {
-      msg += ` Estimate: ${formatPrice(total, currency)}.`
-    }
-    if (negotiationNote.trim()) msg += ` Note: ${negotiationNote.trim()}`
-    msg += ` Please get in touch.`
-    return msg
-  }
-
-  function handleCTA() {
-    if (!hasSelection) return
-    if (onRequestQuote) { onRequestQuote(buildSummary()); return }
-    const number = hostname.endsWith('.in')
-      ? CONFIG.whatsapp.IN.replace('+', '')
-      : CONFIG.whatsapp.US.replace('+', '')
-    window.open(
-      `https://wa.me/${number}?text=${encodeURIComponent(buildSummary())}`,
-      '_blank',
-      'noopener,noreferrer',
-    )
-  }
-
   function handlePDF() {
     if (!hasSelection) return
+
+    const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+    const totalDisplay = isB2B && total === 0 ? 'Custom' : formatPrice(total, currency)
+
     const pkgRow = activePkg
-      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td style="text-align:right;font-family:monospace">${isB2B ? 'Custom — on call' : formatPrice(getPkgPrice(activePkg), currency)}</td></tr>`
+      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td>${isB2B ? 'On call' : formatPrice(getPkgPrice(activePkg), currency)}</td></tr>`
       : ''
     const addonRows = CONFIG.addons
       .filter((a) => selectedAddons.has(a.id))
-      .map((a) => `<tr><td>${a.label}</td><td style="text-align:right;font-family:monospace">${formatPrice(getAddonPrice(a), currency)}</td></tr>`)
+      .map((a) => `<tr><td>${a.label}</td><td>${formatPrice(getAddonPrice(a), currency)}</td></tr>`)
       .join('')
     const pageRow = showPages
-      ? `<tr><td>${pages} page${pages !== 1 ? 's' : ''} × ${formatPrice(CONFIG.pageRate[currency], currency)}</td><td style="text-align:right;font-family:monospace">${formatPrice(pageTotal, currency)}</td></tr>`
+      ? `<tr><td>${pages} page${pages !== 1 ? 's' : ''} × ${formatPrice(CONFIG.pageRate[currency], currency)}</td><td>${formatPrice(pageTotal, currency)}</td></tr>`
       : ''
     const noteBlock = negotiationNote.trim()
-      ? `<p class="label">Notes / Budget</p><div class="custom-note">${negotiationNote.trim()}</div>`
+      ? `<div class="section">Notes / Budget</div><div class="notes">${negotiationNote.trim()}</div>`
       : ''
-    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>ShapeKraft Quote</title><style>
-      *{box-sizing:border-box;margin:0;padding:0}
-      body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#0a0a0a;max-width:600px;margin:48px auto;padding:0 24px}
-      h1{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-bottom:2px}
-      .date{font-size:13px;color:#666;margin-bottom:36px}
-      .label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#888;margin:24px 0 10px}
-      table{width:100%;border-collapse:collapse}
-      td{padding:9px 0;border-bottom:1px solid #eee;font-size:14px;color:#111}
-      .total{font-size:32px;font-weight:900;letter-spacing:-.02em;margin:8px 0 4px;font-family:monospace}
-      .note{font-size:12px;color:#888}
-      .phase{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:14px}
-      .custom-note{font-size:14px;color:#333;line-height:1.6;background:#f8f8f8;padding:12px;border-radius:6px}
-      .footer{margin-top:40px;font-size:11px;color:#aaa;border-top:1px solid #eee;padding-top:16px}
-      @media print{body{margin:24px auto}}
-    </style></head><body>
-      <h1>ShapeKraft</h1>
-      <p class="date">Project Estimate · ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-      <p class="label">Services</p>
-      <table>${pkgRow}${addonRows}${pageRow}</table>
-      <p class="label">Estimated Total</p>
-      <div class="total">${formatPrice(total, currency)}</div>
-      <p class="note">Estimate only · final quote confirmed after discovery call</p>
-      <p class="label">Payment Schedule</p>
-      <div class="phase"><span>Design · ${CONFIG.split.design}%</span><span style="font-family:monospace">${formatPrice(phaseDesign, currency)}</span></div>
-      <div class="phase"><span>Build · ${CONFIG.split.build}%</span><span style="font-family:monospace">${formatPrice(phaseBuild, currency)}</span></div>
-      <div class="phase"><span>Launch · ${CONFIG.split.launch}%</span><span style="font-family:monospace">${formatPrice(phaseLaunch, currency)}</span></div>
-      ${noteBlock}
-      <div class="footer">Generated by ShapeKraft · shapekraft.co</div>
-    </body></html>`
+    const scheduleBlock = total > 0 ? `
+      <div class="section">Payment Schedule</div>
+      <div class="schedule">
+        <div class="schedule-title">How payments are split</div>
+        <div class="phase"><div class="phase-left"><span class="dot"></span>Design · 40%</div><div class="phase-right">${formatPrice(phaseDesign, currency)}</div></div>
+        <div class="phase"><div class="phase-left"><span class="dot"></span>Build · 30%</div><div class="phase-right">${formatPrice(phaseBuild, currency)}</div></div>
+        <div class="phase"><div class="phase-left"><span class="dot"></span>Launch · 30%</div><div class="phase-right">${formatPrice(phaseLaunch, currency)}</div></div>
+        <div class="bar-wrap"><div class="bar-a" style="flex:40"></div><div class="bar-b" style="flex:30"></div><div class="bar-c" style="flex:30"></div></div>
+      </div>` : ''
+
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ShapeKraft — Project Estimate</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:#080808;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+    background:#080808;color:#f0f0f0;
+    max-width:680px;margin:0 auto;padding:52px 48px;
+    print-color-adjust:exact;-webkit-print-color-adjust:exact;
+  }
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:52px}
+  .brand-name{font-size:14px;font-weight:900;letter-spacing:0.05em;line-height:0.9;color:#f0f0f0;text-transform:uppercase}
+  .doc-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#7C3AED;margin-bottom:6px}
+  .doc-date{font-size:13px;color:#6a6a6a;margin-bottom:44px}
+  .section{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#444;margin:36px 0 14px}
+  table{width:100%;border-collapse:collapse}
+  tr:last-child td{border-bottom:none}
+  td{padding:12px 0;border-bottom:1px solid #222;font-size:14px;line-height:1.4}
+  td:first-child{color:#f0f0f0;font-weight:500;padding-right:20px}
+  td:last-child{text-align:right;color:#6a6a6a;font-family:'Courier New',monospace;white-space:nowrap}
+  .total-wrap{margin-top:10px;padding:28px 0 24px;border-top:1px solid #222}
+  .total-amount{font-size:48px;font-weight:900;letter-spacing:-0.03em;color:#f0f0f0;line-height:1;margin-bottom:8px}
+  .total-amount.custom{font-size:36px;color:#A78BFA}
+  .total-note{font-size:12px;color:#444}
+  .schedule{background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.2);border-radius:10px;padding:22px 24px}
+  .schedule-title{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#7C3AED;margin-bottom:18px}
+  .phase{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .phase:last-of-type{border-bottom:none}
+  .phase-left{display:flex;align-items:center;gap:10px;font-size:14px;color:#6a6a6a}
+  .dot{width:6px;height:6px;border-radius:50%;background:#7C3AED;flex-shrink:0;display:inline-block}
+  .phase-right{font-family:'Courier New',monospace;font-size:14px;font-weight:600;color:#f0f0f0}
+  .bar-wrap{display:flex;height:3px;border-radius:2px;overflow:hidden;margin-top:18px;gap:2px}
+  .bar-a{background:#7C3AED;border-radius:2px 0 0 2px}
+  .bar-b{background:#A78BFA}
+  .bar-c{background:rgba(167,139,250,0.25);border-radius:0 2px 2px 0}
+  .notes{background:rgba(255,255,255,0.03);border:1px solid #222;border-radius:8px;padding:16px 20px;font-size:14px;color:#6a6a6a;line-height:1.7}
+  .footer{margin-top:52px;padding-top:20px;border-top:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+  .footer-brand{font-size:12px;font-weight:700;letter-spacing:0.06em;color:#333;text-transform:uppercase}
+  .footer-note{font-size:11px;color:#333}
+  @media print{
+    html,body{background:#080808 !important;print-color-adjust:exact !important;-webkit-print-color-adjust:exact !important}
+    body{padding:40px 44px}
+  }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <svg width="28" height="32" viewBox="0 0 140 155" fill="none" aria-hidden="true">
+      <rect x="20" y="15" width="100" height="100" stroke="#f0f0f0" stroke-width="1.7"/>
+      <polygon points="70,15 120,65 70,115 20,65" stroke="#f0f0f0" stroke-width="1.7" fill="none"/>
+      <line x1="20" y1="65" x2="120" y2="65" stroke="#f0f0f0" stroke-width="1.7"/>
+      <line x1="70" y1="15" x2="70" y2="115" stroke="#f0f0f0" stroke-width="1.7"/>
+      <path d="M4,92 L4,137 L44,137" stroke="#f0f0f0" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+    </svg>
+    <div class="brand-name">SHAPE<br>KRAFT</div>
+  </div>
+
+  <div class="doc-label">Project Estimate</div>
+  <div class="doc-date">${date}</div>
+
+  <div class="section">Services</div>
+  <table>${pkgRow}${addonRows}${pageRow}</table>
+
+  <div class="total-wrap">
+    <div class="total-amount${isB2B && total === 0 ? ' custom' : ''}">${totalDisplay}</div>
+    <div class="total-note">${isB2B && total === 0 ? 'B2B pricing discussed on call · AMC &amp; scope included' : 'Estimate only · final quote confirmed after discovery call'}</div>
+  </div>
+
+  ${scheduleBlock}
+  ${noteBlock}
+
+  <div class="footer">
+    <div class="footer-brand">shapekraft.co</div>
+    <div class="footer-note">Valid for 30 days from date of issue</div>
+  </div>
+</body>
+</html>`
+
     const iframe = document.createElement('iframe')
     iframe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;'
     document.body.appendChild(iframe)
@@ -641,11 +673,11 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                 </div>
               )}
 
-              {/* Primary CTA */}
+              {/* Primary: Download PDF */}
               <button
-                onClick={handleCTA}
+                onClick={handlePDF}
                 disabled={!hasSelection}
-                className="w-full py-4 font-semibold text-base transition-all duration-300"
+                className="flex items-center justify-center gap-2 w-full py-4 font-semibold text-base transition-all duration-300"
                 style={{
                   backgroundColor: hasSelection ? 'var(--color-primary)' : 'var(--color-border)',
                   color: hasSelection ? 'var(--color-primary-fg)' : 'var(--color-muted)',
@@ -662,22 +694,26 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                   e.currentTarget.style.backgroundColor = 'var(--color-primary)'
                   e.currentTarget.style.color = 'var(--color-primary-fg)'
                 }}
-                aria-label={hasSelection ? 'Request quote via WhatsApp' : 'Select a package to continue'}
+                aria-label={hasSelection ? 'Download quote as PDF' : 'Select a package to continue'}
               >
-                {hasSelection ? 'Request Quote via WhatsApp →' : 'Select a package to continue'}
+                {hasSelection ? (
+                  <><Download size={16} /> Download Quote as PDF</>
+                ) : (
+                  'Select a package to continue'
+                )}
               </button>
 
-              {/* PDF download */}
+              {/* Secondary: Contact */}
               {hasSelection && (
-                <button
-                  onClick={handlePDF}
+                <a
+                  href="/#contact"
                   className="flex items-center justify-center gap-2 w-full py-3 text-sm font-medium transition-all duration-200"
                   style={{
                     backgroundColor: 'transparent',
                     border: '1px solid var(--color-border)',
                     borderRadius: 'var(--radius-full)',
                     color: 'var(--color-muted)',
-                    cursor: 'pointer',
+                    textDecoration: 'none',
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = 'var(--color-text)'
@@ -688,13 +724,12 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                     e.currentTarget.style.color = 'var(--color-muted)'
                   }}
                 >
-                  <Download size={14} />
-                  Download as PDF
-                </button>
+                  Talk to us about this →
+                </a>
               )}
 
               <p className="text-center text-xs" style={{ color: 'var(--color-muted)' }}>
-                No spam · We respond within one business day
+                We respond within one business day
               </p>
             </div>
           </FadeUp>
