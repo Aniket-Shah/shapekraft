@@ -10,14 +10,41 @@ export const CONFIG = {
     IN: '+919999999999', // UPDATE: your India WhatsApp number
     US: '+14155550000',  // UPDATE: your US/global WhatsApp number
   },
-  services: [
+  packages: [
     {
-      id: 'website',
-      label: 'Website Design & Development',
-      description: 'Custom Next.js build, design system, CMS integration',
-      priceINR: 30_000,
-      priceUSD: 400,
+      id: 'basic',
+      tier: 'Basic',
+      label: 'Landing Page',
+      description: 'Responsive single-page site, contact form, basic SEO',
+      priceINR: 12_000,
+      priceUSD: 175,
     },
+    {
+      id: 'pro',
+      tier: 'Pro',
+      label: 'Landing Page',
+      description: 'Multi-section, scroll animations, CMS integration, SEO',
+      priceINR: 25_000,
+      priceUSD: 350,
+    },
+    {
+      id: 'advanced',
+      tier: 'Advanced',
+      label: 'Landing Page',
+      description: 'Fully custom build, design system, complex interactions',
+      priceINR: 40_000,
+      priceUSD: 550,
+    },
+    {
+      id: 'b2b',
+      tier: 'B2B',
+      label: 'Business',
+      description: 'Enterprise site with dedicated collab call support, proposals & decks included',
+      priceINR: 35_000,
+      priceUSD: 500,
+    },
+  ],
+  addons: [
     {
       id: 'ai',
       label: 'AI Automation & Agents',
@@ -46,8 +73,12 @@ export const CONFIG = {
   split: { design: 40, build: 30, launch: 30 },
 } as const
 
-// Only website design benefits from page count
-const PAGE_SERVICES = new Set(['website'])
+const TIER_BADGE: Record<string, { color: string; bg: string }> = {
+  Basic:    { color: 'var(--color-muted)',   bg: 'rgba(255,255,255,0.05)' },
+  Pro:      { color: 'var(--color-primary)', bg: 'rgba(124,58,237,0.10)' },
+  Advanced: { color: 'var(--color-accent)',  bg: 'rgba(124,58,237,0.15)' },
+  B2B:      { color: 'var(--color-text)',    bg: 'rgba(255,255,255,0.08)' },
+}
 
 interface Props {
   onRequestQuote?: (summary: string) => void
@@ -56,7 +87,8 @@ interface Props {
 export function QuotationBuilder({ onRequestQuote }: Props) {
   const [currency, setCurrency] = useState<Currency>('USD')
   const [hostname, setHostname] = useState('')
-  const [selected, setSelected] = useState<Set<string>>(new Set(['website']))
+  const [selectedPackage, setSelectedPackage] = useState<string | null>('basic')
+  const [selectedAddons, setSelectedAddons] = useState<Set<string>>(new Set())
   const [pages, setPages] = useState<number>(CONFIG.basePages)
   const [negotiationNote, setNegotiationNote] = useState('')
   const [showNegotiation, setShowNegotiation] = useState(false)
@@ -64,7 +96,6 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
   useEffect(() => {
     const host = window.location.hostname
     setHostname(host)
-    // IP geolocation — fall back to hostname if request fails
     fetch('https://api.country.is/')
       .then((r) => r.json())
       .then((data: { ip: string; country: string }) => {
@@ -75,35 +106,42 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
       })
   }, [])
 
-  const showPages = CONFIG.services.some((s) => selected.has(s.id) && PAGE_SERVICES.has(s.id))
+  const showPages = selectedPackage !== null
 
-  const getPrice = (s: (typeof CONFIG.services)[number]) =>
-    currency === 'INR' ? s.priceINR : s.priceUSD
+  const getPkgPrice = (p: (typeof CONFIG.packages)[number]) =>
+    currency === 'INR' ? p.priceINR : p.priceUSD
+  const getAddonPrice = (a: (typeof CONFIG.addons)[number]) =>
+    currency === 'INR' ? a.priceINR : a.priceUSD
 
-  const serviceTotal = CONFIG.services
-    .filter((s) => selected.has(s.id))
-    .reduce((sum, s) => sum + getPrice(s), 0)
+  const activePkg = CONFIG.packages.find((p) => p.id === selectedPackage) ?? null
+  const pkgPrice = activePkg ? getPkgPrice(activePkg) : 0
+  const addonTotal = CONFIG.addons
+    .filter((a) => selectedAddons.has(a.id))
+    .reduce((sum, a) => sum + getAddonPrice(a), 0)
   const pageTotal = showPages ? pages * CONFIG.pageRate[currency] : 0
-  const total = serviceTotal + pageTotal
+  const total = pkgPrice + addonTotal + pageTotal
 
   const phaseDesign = Math.round((total * CONFIG.split.design) / 100)
   const phaseBuild = Math.round((total * CONFIG.split.build) / 100)
   const phaseLaunch = total - phaseDesign - phaseBuild
 
-  function toggle(id: string) {
-    setSelected((prev) => {
+  function toggleAddon(id: string) {
+    setSelectedAddons((prev) => {
       const next = new Set(prev)
       next.has(id) ? next.delete(id) : next.add(id)
       return next
     })
   }
 
+  function pkgDisplayName(p: (typeof CONFIG.packages)[number]): string {
+    return p.tier === 'B2B' ? 'Business B2B' : `${p.label} — ${p.tier}`
+  }
+
   function buildSummary(): string {
-    const labels = CONFIG.services
-      .filter((s) => selected.has(s.id))
-      .map((s) => s.label)
-      .join(', ')
-    let msg = `Hi ShapeKraft! I'd like a quote for: ${labels}.`
+    const lines: string[] = []
+    if (activePkg) lines.push(pkgDisplayName(activePkg))
+    CONFIG.addons.filter((a) => selectedAddons.has(a.id)).forEach((a) => lines.push(a.label))
+    let msg = `Hi ShapeKraft! I'd like a quote for: ${lines.join(', ')}.`
     if (showPages) msg += ` Pages: ${pages}.`
     msg += ` Estimate: ${formatPrice(total, currency)}.`
     if (negotiationNote.trim()) msg += ` Note: ${negotiationNote.trim()}`
@@ -112,11 +150,8 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
   }
 
   function handleCTA() {
-    if (selected.size === 0) return
-    if (onRequestQuote) {
-      onRequestQuote(buildSummary())
-      return
-    }
+    if (!hasSelection) return
+    if (onRequestQuote) { onRequestQuote(buildSummary()); return }
     const number = hostname.endsWith('.in')
       ? CONFIG.whatsapp.IN.replace('+', '')
       : CONFIG.whatsapp.US.replace('+', '')
@@ -128,23 +163,20 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
   }
 
   function handlePDF() {
-    if (selected.size === 0) return
-    const serviceRows = CONFIG.services
-      .filter((s) => selected.has(s.id))
-      .map(
-        (s) =>
-          `<tr><td>${s.label}</td><td style="text-align:right;font-family:monospace">${formatPrice(getPrice(s), currency)}</td></tr>`,
-      )
+    if (!hasSelection) return
+    const pkgRow = activePkg
+      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td style="text-align:right;font-family:monospace">${formatPrice(getPkgPrice(activePkg), currency)}</td></tr>`
+      : ''
+    const addonRows = CONFIG.addons
+      .filter((a) => selectedAddons.has(a.id))
+      .map((a) => `<tr><td>${a.label}</td><td style="text-align:right;font-family:monospace">${formatPrice(getAddonPrice(a), currency)}</td></tr>`)
       .join('')
-
     const pageRow = showPages
       ? `<tr><td>${pages} page${pages !== 1 ? 's' : ''} × ${formatPrice(CONFIG.pageRate[currency], currency)}</td><td style="text-align:right;font-family:monospace">${formatPrice(pageTotal, currency)}</td></tr>`
       : ''
-
     const noteBlock = negotiationNote.trim()
       ? `<p class="label">Notes / Budget</p><div class="custom-note">${negotiationNote.trim()}</div>`
       : ''
-
     const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>ShapeKraft Quote</title><style>
       *{box-sizing:border-box;margin:0;padding:0}
       body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#0a0a0a;max-width:600px;margin:48px auto;padding:0 24px}
@@ -163,7 +195,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
       <h1>ShapeKraft</h1>
       <p class="date">Project Estimate · ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
       <p class="label">Services</p>
-      <table>${serviceRows}${pageRow}</table>
+      <table>${pkgRow}${addonRows}${pageRow}</table>
       <p class="label">Estimated Total</p>
       <div class="total">${formatPrice(total, currency)}</div>
       <p class="note">Estimate only · final quote confirmed after discovery call</p>
@@ -174,7 +206,6 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
       ${noteBlock}
       <div class="footer">Generated by ShapeKraft · shapekraft.co</div>
     </body></html>`
-
     const iframe = document.createElement('iframe')
     iframe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;'
     document.body.appendChild(iframe)
@@ -187,15 +218,16 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
     setTimeout(() => document.body.removeChild(iframe), 2000)
   }
 
-  const hasSelection = selected.size > 0
+  const hasSelection = selectedPackage !== null || selectedAddons.size > 0
 
   return (
     <section
       aria-labelledby="quote-heading"
       style={{ padding: 'clamp(3rem, 8vw, var(--s-24)) var(--gutter)' }}
     >
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
 
+        {/* ── Header ── */}
         <FadeUp>
           <span
             className="text-xs font-semibold tracking-widest uppercase block mb-4"
@@ -211,35 +243,122 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
             Build your quote
           </h1>
           <p style={{ color: 'var(--color-muted)', fontSize: 'var(--fs-lg)', maxWidth: '520px' }}>
-            Select services and page count for a live estimate. No forms, no waitlists.
+            Pick a package, add services, get a live estimate. No forms, no waitlists.
           </p>
         </FadeUp>
 
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
 
           {/* ── LEFT: controls ── */}
           <div className="flex flex-col gap-8">
 
-            {/* Services */}
+            {/* PACKAGES — radio group */}
             <FadeUp delay={100}>
               <h2
                 className="text-xs font-semibold tracking-widest uppercase mb-4"
                 style={{ color: 'var(--color-muted)' }}
               >
-                Services
+                Choose a package
               </h2>
-              <div className="flex flex-col gap-3" role="group" aria-label="Select services">
-                {CONFIG.services.map((service) => {
-                  const active = selected.has(service.id)
+              <div className="flex flex-col gap-3" role="radiogroup" aria-label="Choose a website package">
+                {CONFIG.packages.map((pkg) => {
+                  const active = selectedPackage === pkg.id
+                  const badge = TIER_BADGE[pkg.tier] ?? TIER_BADGE.Basic
                   return (
                     <button
-                      key={service.id}
-                      onClick={() => toggle(service.id)}
-                      className="flex items-start gap-4 p-5 text-left w-full transition-all duration-300"
+                      key={pkg.id}
+                      role="radio"
+                      aria-checked={active}
+                      onClick={() => setSelectedPackage(active ? null : pkg.id)}
+                      className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 text-left w-full transition-all duration-300"
                       style={{
-                        backgroundColor: active
-                          ? 'rgba(124, 58, 237, 0.06)'
-                          : 'var(--color-surface)',
+                        backgroundColor: active ? 'rgba(124, 58, 237, 0.06)' : 'var(--color-surface)',
+                        border: `1px solid ${active ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                        borderRadius: 'var(--radius-sm)',
+                      }}
+                    >
+                      {/* Radio dot */}
+                      <span
+                        className="shrink-0 flex items-center justify-center"
+                        style={{
+                          width: 18,
+                          height: 18,
+                          minWidth: 18,
+                          borderRadius: '50%',
+                          border: `2px solid ${active ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                          marginTop: 2,
+                          transition: 'border-color 0.2s',
+                        }}
+                      >
+                        {active && (
+                          <span
+                            style={{
+                              width: 8,
+                              height: 8,
+                              borderRadius: '50%',
+                              backgroundColor: 'var(--color-primary)',
+                              display: 'block',
+                            }}
+                          />
+                        )}
+                      </span>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>
+                              {pkg.tier === 'B2B' ? 'Business B2B' : pkg.label}
+                            </span>
+                            <span
+                              className="font-semibold"
+                              style={{
+                                fontSize: '10px',
+                                letterSpacing: '0.07em',
+                                textTransform: 'uppercase',
+                                color: badge.color,
+                                backgroundColor: badge.bg,
+                                padding: '2px 7px',
+                                borderRadius: 4,
+                              }}
+                            >
+                              {pkg.tier === 'B2B' ? 'Call Support' : pkg.tier}
+                            </span>
+                          </div>
+                          <span
+                            className="font-mono text-sm shrink-0"
+                            style={{ color: active ? 'var(--color-accent)' : 'var(--color-muted)' }}
+                          >
+                            {formatPrice(getPkgPrice(pkg), currency)}
+                          </span>
+                        </div>
+                        <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
+                          {pkg.description}
+                        </p>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </FadeUp>
+
+            {/* ADD-ONS — checkbox group */}
+            <FadeUp delay={150}>
+              <h2
+                className="text-xs font-semibold tracking-widest uppercase mb-4"
+                style={{ color: 'var(--color-muted)' }}
+              >
+                Add-ons
+              </h2>
+              <div className="flex flex-col gap-3" role="group" aria-label="Select add-on services">
+                {CONFIG.addons.map((addon) => {
+                  const active = selectedAddons.has(addon.id)
+                  return (
+                    <button
+                      key={addon.id}
+                      onClick={() => toggleAddon(addon.id)}
+                      className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 text-left w-full transition-all duration-300"
+                      style={{
+                        backgroundColor: active ? 'rgba(124, 58, 237, 0.06)' : 'var(--color-surface)',
                         border: `1px solid ${active ? 'var(--color-primary)' : 'var(--color-border)'}`,
                         borderRadius: 'var(--radius-sm)',
                       }}
@@ -252,19 +371,19 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                         {active ? <CheckCircle2 size={18} /> : <Circle size={18} />}
                       </span>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2 flex-wrap">
+                        <div className="flex items-center justify-between gap-2">
                           <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>
-                            {service.label}
+                            {addon.label}
                           </span>
                           <span
                             className="font-mono text-sm shrink-0"
                             style={{ color: active ? 'var(--color-accent)' : 'var(--color-muted)' }}
                           >
-                            {formatPrice(getPrice(service), currency)}
+                            {formatPrice(getAddonPrice(addon), currency)}
                           </span>
                         </div>
-                        <p className="text-xs mt-1" style={{ color: 'var(--color-muted)' }}>
-                          {service.description}
+                        <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
+                          {addon.description}
                         </p>
                       </div>
                     </button>
@@ -273,7 +392,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
               </div>
             </FadeUp>
 
-            {/* Page stepper — only when a page-based service (website) is selected */}
+            {/* PAGE STEPPER — only when a package is selected */}
             {showPages && (
               <FadeUp delay={200}>
                 <h2
@@ -283,7 +402,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                   Number of pages
                 </h2>
                 <div
-                  className="flex items-center justify-between p-5"
+                  className="flex items-center justify-between p-4 sm:p-5"
                   style={{
                     backgroundColor: 'var(--color-surface)',
                     border: '1px solid var(--color-border)',
@@ -293,8 +412,10 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                   <button
                     onClick={() => setPages((p) => Math.max(1, p - 1))}
                     disabled={pages <= 1}
-                    className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200"
+                    className="flex items-center justify-center rounded-full transition-all duration-200"
                     style={{
+                      width: 44,
+                      height: 44,
                       backgroundColor: pages <= 1 ? 'transparent' : 'rgba(124, 58, 237, 0.1)',
                       border: '1px solid var(--color-border)',
                       color: pages <= 1 ? 'var(--color-muted)' : 'var(--color-primary)',
@@ -302,9 +423,8 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                     }}
                     aria-label="Remove a page"
                   >
-                    <Minus size={14} />
+                    <Minus size={16} />
                   </button>
-
                   <div className="text-center">
                     <span
                       className="font-display font-black"
@@ -316,12 +436,13 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                       {pages === 1 ? 'page' : 'pages'}
                     </span>
                   </div>
-
                   <button
                     onClick={() => setPages((p) => Math.min(CONFIG.maxPages, p + 1))}
                     disabled={pages >= CONFIG.maxPages}
-                    className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200"
+                    className="flex items-center justify-center rounded-full transition-all duration-200"
                     style={{
+                      width: 44,
+                      height: 44,
                       backgroundColor: pages >= CONFIG.maxPages ? 'transparent' : 'rgba(124, 58, 237, 0.1)',
                       border: `1px solid ${pages >= CONFIG.maxPages ? 'var(--color-border)' : 'var(--color-primary)'}`,
                       color: pages >= CONFIG.maxPages ? 'var(--color-muted)' : 'var(--color-primary)',
@@ -329,7 +450,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                     }}
                     aria-label="Add a page"
                   >
-                    <Plus size={14} />
+                    <Plus size={16} />
                   </button>
                 </div>
                 <p className="text-xs mt-2" style={{ color: 'var(--color-muted)' }}>
@@ -340,9 +461,9 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
           </div>
 
           {/* ── RIGHT: estimate card ── */}
-          <FadeUp delay={150}>
+          <FadeUp delay={200}>
             <div
-              className="sticky top-8 flex flex-col gap-6 p-8"
+              className="lg:sticky lg:top-24 flex flex-col gap-5 p-6 sm:p-8"
               style={{
                 backgroundColor: 'var(--color-surface)',
                 border: '1px solid var(--color-border)',
@@ -360,7 +481,10 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                 {hasSelection ? (
                   <div
                     className="font-display font-black leading-none"
-                    style={{ fontSize: 'var(--fs-3xl)', color: 'var(--color-text)' }}
+                    style={{
+                      fontSize: 'clamp(2rem, 8vw, var(--fs-3xl))',
+                      color: 'var(--color-text)',
+                    }}
                   >
                     {formatPrice(total, currency)}
                   </div>
@@ -369,7 +493,7 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                     className="font-display font-bold"
                     style={{ fontSize: 'var(--fs-xl)', color: 'var(--color-muted)' }}
                   >
-                    Select services
+                    Select a package
                   </div>
                 )}
                 <p className="text-xs mt-2" style={{ color: 'var(--color-muted)' }}>
@@ -395,22 +519,27 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                       Payment schedule
                     </span>
                     {[
-                      { label: 'Design', pct: CONFIG.split.design, amount: phaseDesign },
-                      { label: 'Build', pct: CONFIG.split.build, amount: phaseBuild },
-                      { label: 'Launch', pct: CONFIG.split.launch, amount: phaseLaunch },
+                      { label: 'Design', pct: 40, amount: phaseDesign },
+                      { label: 'Build', pct: 30, amount: phaseBuild },
+                      { label: 'Launch', pct: 30, amount: phaseLaunch },
                     ].map((phase) => (
-                      <div key={phase.label} className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
+                      <div key={phase.label} className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2 min-w-0">
                           <div
-                            className="w-1.5 h-1.5 rounded-full shrink-0"
-                            style={{ backgroundColor: 'var(--color-primary)' }}
+                            style={{
+                              width: 7,
+                              height: 7,
+                              minWidth: 7,
+                              borderRadius: '50%',
+                              backgroundColor: 'var(--color-primary)',
+                            }}
                           />
                           <span className="text-sm" style={{ color: 'var(--color-muted)' }}>
                             {phase.label} · {phase.pct}%
                           </span>
                         </div>
                         <span
-                          className="font-mono text-sm font-semibold"
+                          className="font-mono text-sm font-semibold shrink-0"
                           style={{ color: 'var(--color-text)' }}
                         >
                           {formatPrice(phase.amount, currency)}
@@ -418,10 +547,14 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                       </div>
                     ))}
                   </div>
-                  <div className="flex gap-0.5 mt-3 overflow-hidden" style={{ height: '4px', borderRadius: '2px' }}>
-                    <div style={{ width: `${CONFIG.split.design}%`, backgroundColor: 'var(--color-primary)', borderRadius: '2px 0 0 2px' }} />
-                    <div style={{ width: `${CONFIG.split.build}%`, backgroundColor: 'var(--color-accent)' }} />
-                    <div style={{ width: `${CONFIG.split.launch}%`, backgroundColor: 'rgba(167, 139, 250, 0.35)', borderRadius: '0 2px 2px 0' }} />
+                  {/* Split bar */}
+                  <div
+                    className="flex mt-3 overflow-hidden"
+                    style={{ height: '4px', borderRadius: '2px', gap: '2px' }}
+                  >
+                    <div style={{ width: '40%', backgroundColor: 'var(--color-primary)', borderRadius: '2px 0 0 2px' }} />
+                    <div style={{ width: '30%', backgroundColor: 'var(--color-accent)' }} />
+                    <div style={{ width: '30%', backgroundColor: 'rgba(167,139,250,0.35)', borderRadius: '0 2px 2px 0' }} />
                   </div>
                 </div>
               )}
@@ -429,16 +562,24 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
               {/* Line items */}
               {hasSelection && (
                 <div
-                  className="flex flex-col gap-2 pt-4"
+                  className="flex flex-col gap-2 pt-3"
                   style={{ borderTop: '1px solid var(--color-border)' }}
                 >
-                  {CONFIG.services
-                    .filter((s) => selected.has(s.id))
-                    .map((s) => (
-                      <div key={s.id} className="flex items-center justify-between text-sm">
-                        <span style={{ color: 'var(--color-muted)' }}>{s.label}</span>
+                  {activePkg && (
+                    <div className="flex items-center justify-between text-sm">
+                      <span style={{ color: 'var(--color-muted)' }}>{pkgDisplayName(activePkg)}</span>
+                      <span className="font-mono" style={{ color: 'var(--color-text)' }}>
+                        {formatPrice(pkgPrice, currency)}
+                      </span>
+                    </div>
+                  )}
+                  {CONFIG.addons
+                    .filter((a) => selectedAddons.has(a.id))
+                    .map((a) => (
+                      <div key={a.id} className="flex items-center justify-between text-sm">
+                        <span style={{ color: 'var(--color-muted)' }}>{a.label}</span>
                         <span className="font-mono" style={{ color: 'var(--color-text)' }}>
-                          {formatPrice(getPrice(s), currency)}
+                          {formatPrice(getAddonPrice(a), currency)}
                         </span>
                       </div>
                     ))}
@@ -509,9 +650,9 @@ export function QuotationBuilder({ onRequestQuote }: Props) {
                   e.currentTarget.style.backgroundColor = 'var(--color-primary)'
                   e.currentTarget.style.color = 'var(--color-primary-fg)'
                 }}
-                aria-label={hasSelection ? 'Request quote via WhatsApp' : 'Select at least one service'}
+                aria-label={hasSelection ? 'Request quote via WhatsApp' : 'Select a package to continue'}
               >
-                {hasSelection ? 'Request Quote via WhatsApp →' : 'Select at least one service'}
+                {hasSelection ? 'Request Quote via WhatsApp →' : 'Select a package to continue'}
               </button>
 
               {/* PDF download */}
