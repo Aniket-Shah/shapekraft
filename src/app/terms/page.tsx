@@ -2,16 +2,35 @@ import type { Metadata } from 'next'
 import { NavStickyMinimal } from '@/components/sections/NavStickyMinimal'
 import { SiteFooter } from '@/components/sections/SiteFooter'
 import { LegalPage } from '@/components/sections/LegalPage'
+import { SchemaOrg } from '@/components/SchemaOrg'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — ShapeKraft',
+  title: 'Terms of Service',
   description:
     'The terms and conditions that govern your use of ShapeKraft services and website.',
+  alternates: {
+    canonical: 'https://shapekraft.co/terms',
+  },
+  openGraph: {
+    title: 'Terms of Service — ShapeKraft',
+    description: 'The terms and conditions that govern your use of ShapeKraft services.',
+    url: 'https://shapekraft.co/terms',
+  },
+}
+
+const termsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shapekraft.co' },
+    { '@type': 'ListItem', position: 2, name: 'Terms of Service', item: 'https://shapekraft.co/terms' },
+  ],
 }
 
 export default function TermsPage() {
   return (
     <>
+      <SchemaOrg schema={termsSchema} />
       <NavStickyMinimal />
       <LegalPage title="Terms of Service" lastUpdated="June 2026">
         <h2>Acceptance of Terms</h2>

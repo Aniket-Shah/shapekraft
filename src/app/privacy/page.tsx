@@ -2,16 +2,35 @@ import type { Metadata } from 'next'
 import { NavStickyMinimal } from '@/components/sections/NavStickyMinimal'
 import { SiteFooter } from '@/components/sections/SiteFooter'
 import { LegalPage } from '@/components/sections/LegalPage'
+import { SchemaOrg } from '@/components/SchemaOrg'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — ShapeKraft',
+  title: 'Privacy Policy',
   description:
     'How ShapeKraft collects, uses, and protects your information when you use our website and services.',
+  alternates: {
+    canonical: 'https://shapekraft.co/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy — ShapeKraft',
+    description: 'How ShapeKraft collects, uses, and protects your information.',
+    url: 'https://shapekraft.co/privacy',
+  },
+}
+
+const privacySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shapekraft.co' },
+    { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: 'https://shapekraft.co/privacy' },
+  ],
 }
 
 export default function PrivacyPage() {
   return (
     <>
+      <SchemaOrg schema={privacySchema} />
       <NavStickyMinimal />
       <LegalPage title="Privacy Policy" lastUpdated="June 2026">
         <h2>Overview</h2>

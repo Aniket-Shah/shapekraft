@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Syne, Black_Ops_One } from 'next/font/google'
 import './globals.css'
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider'
@@ -25,27 +25,70 @@ const blackOpsOne = Black_Ops_One({
   display: 'swap',
 })
 
+export const viewport: Viewport = {
+  themeColor: '#080808',
+  colorScheme: 'dark',
+}
+
 export const metadata: Metadata = {
-  title: 'ShapeKraft — Digital Engineering Studio',
-  description:
-    'We build websites that perform. Fast, precise, and engineered to convert. Custom Next.js builds, AI automation, and performance optimisation.',
   metadataBase: new URL('https://shapekraft.co'),
+  title: {
+    template: '%s — ShapeKraft',
+    default: 'ShapeKraft — Digital Engineering Studio',
+  },
+  description:
+    'We build fast, conversion-focused websites. Custom Next.js builds, AI automation, performance optimisation, and webhook integrations for growing businesses.',
+  keywords: [
+    'web design',
+    'web development',
+    'Next.js agency',
+    'AI automation',
+    'performance optimisation',
+    'webhook integrations',
+    'digital agency India',
+    'website design India',
+    'ShapeKraft',
+  ],
+  authors: [{ name: 'ShapeKraft', url: 'https://shapekraft.co' }],
+  creator: 'ShapeKraft',
+  publisher: 'ShapeKraft',
+  alternates: {
+    canonical: 'https://shapekraft.co',
+  },
   openGraph: {
     title: 'ShapeKraft — Digital Engineering Studio',
     description:
-      'We build websites that perform. Fast, precise, and engineered to convert.',
+      'We build fast, conversion-focused websites. Custom Next.js builds, AI automation, and performance optimisation.',
     url: 'https://shapekraft.co',
     siteName: 'ShapeKraft',
     type: 'website',
+    locale: 'en_US',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'ShapeKraft — Digital Engineering Studio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'ShapeKraft — Digital Engineering Studio',
-    description: 'We build websites that perform. Fast, precise, and engineered to convert.',
+    description:
+      'We build fast, conversion-focused websites. Custom Next.js builds, AI automation, and performance optimisation.',
+    images: ['/opengraph-image'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
