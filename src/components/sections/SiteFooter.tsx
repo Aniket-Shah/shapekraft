@@ -11,6 +11,7 @@ const SERVICES_LINKS = [
 
 const COMPANY_LINKS = [
   { label: 'Process', href: '#process' },
+  { label: 'Get a Quote', href: '/quote' },
   { label: 'Contact', href: '#contact' },
 ]
 
