@@ -1,0 +1,5 @@
+Contact: mailto:hello@shapekraft.co
+Expires: 2027-06-26T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://shapekraft.co/.well-known/security.txt
+Policy: https://shapekraft.co/privacy
