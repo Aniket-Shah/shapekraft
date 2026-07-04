@@ -2,6 +2,7 @@
 import { FadeUp } from '@/components/motion/FadeUp'
 import { MagneticButton } from '@/components/motion/MagneticButton'
 import { useBrandEmail } from '@/lib/useBrandEmail'
+import { pushDataLayerEvent } from '@/lib/analytics'
 
 export function ContactBigCTA() {
   const email = useBrandEmail()
@@ -59,6 +60,7 @@ export function ContactBigCTA() {
           <MagneticButton strength={0.2} className="inline-block">
             <a
               href={`mailto:${email}`}
+              onClick={() => pushDataLayerEvent('contact_submitted')}
               className="group relative inline-flex items-center gap-3 px-12 py-6 rounded-full font-semibold text-lg transition-all duration-300 overflow-hidden"
               style={{
                 backgroundColor: 'var(--color-primary)',

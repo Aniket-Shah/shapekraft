@@ -71,9 +71,10 @@ export default function PrivacyPage() {
 
         <h2>Cookies and Analytics</h2>
         <p>
-          We use minimal, privacy-respecting analytics to understand how visitors interact with the
-          site. No cookies are used for advertising or cross-site tracking. The following third-party
-          services may process data as part of your visit:
+          We use analytics cookies to understand how visitors interact with the site. On your first
+          visit you can accept or reject these cookies via the consent banner; analytics cookies are
+          only set once you accept, and you can withdraw consent at any time by clearing your browser&apos;s
+          site data. The following third-party services may process data as part of your visit:
         </p>
         <table>
           <thead>
@@ -84,6 +85,11 @@ export default function PrivacyPage() {
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>Google Analytics (via Google Tag Manager)</td>
+              <td>Page views, traffic sources, and on-site behaviour</td>
+              <td>Anonymised/aggregated usage data, subject to your cookie consent choice</td>
+            </tr>
             <tr>
               <td>Vercel Analytics</td>
               <td>Page views and performance metrics</td>

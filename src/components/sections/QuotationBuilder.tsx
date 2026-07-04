@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Plus, Minus, CheckCircle2, Circle, Download, MessageSquare } from 'lucide-react'
 import { getMarket, getCurrency, formatPrice, type Currency } from '@/lib/market'
+import { pushDataLayerEvent } from '@/lib/analytics'
 import { FadeUp } from '@/components/motion/FadeUp'
 
 // ── CONFIG: all pricing lives here — do not scatter ─────────────────────────
@@ -254,6 +255,7 @@ export function QuotationBuilder() {
     doc.close()
     iframe.contentWindow?.focus()
     iframe.contentWindow?.print()
+    pushDataLayerEvent('quote_submitted')
     setTimeout(() => document.body.removeChild(iframe), 2000)
   }
 

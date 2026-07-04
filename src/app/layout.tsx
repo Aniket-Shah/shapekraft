@@ -3,6 +3,8 @@ import { Inter, Syne, Black_Ops_One } from 'next/font/google'
 import './globals.css'
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider'
 import { ClientEffects } from '@/components/providers/ClientEffects'
+import { CookieBanner } from '@/components/CookieBanner'
+import { AnalyticsScripts } from '@/components/AnalyticsScripts'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Analytics } from '@vercel/analytics/next'
 
@@ -96,6 +98,24 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${syne.variable} ${blackOpsOne.variable}`}>
+      <head>
+        {/* Consent Mode v2 default — must run before gtag.js/GTM so tags are gated from first load */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'wait_for_update': 500
+              });
+            `,
+          }}
+        />
+      </head>
       <body suppressHydrationWarning>
         {/* Skip to main content — accessibility */}
         <a
@@ -110,6 +130,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ClientEffects />
           {children}
         </SmoothScrollProvider>
+        <CookieBanner />
+        <AnalyticsScripts />
         <Analytics />
         <SpeedInsights />
       </body>
