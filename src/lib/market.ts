@@ -15,7 +15,8 @@ export function getMarket(hostname?: string): Market {
   if (!hostname && typeof window !== 'undefined') {
     hostname = window.location.hostname
   }
-  return DOMAIN_MAP[hostname ?? ''] ?? 'US'
+  const normalized = (hostname ?? '').replace(/^www\./, '')
+  return DOMAIN_MAP[normalized] ?? 'US'
 }
 
 export function getCurrency(market: Market): Currency {
