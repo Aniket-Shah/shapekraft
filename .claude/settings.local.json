@@ -60,7 +60,10 @@
       "Bash(sudo pkill -f \"playwright/mcp\")",
       "Bash(echo \"exit: $?\")",
       "Bash(pkill -f \"playwright/mcp\")",
-      "Bash(npx plugins *)"
+      "Bash(npx plugins *)",
+      "Bash(vercel --version)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }

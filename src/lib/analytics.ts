@@ -1,13 +1,13 @@
 import type { Market } from './market'
 
 export const GTM_ID: Record<Market, string> = {
-  IN: process.env.NEXT_PUBLIC_GTM_ID_IN ?? '',
-  US: process.env.NEXT_PUBLIC_GTM_ID_CO ?? '',
+  IN: process.env.GTM_ID_IN ?? '',
+  US: process.env.GTM_ID_CO ?? '',
 }
 
 export const GA_ID: Record<Market, string> = {
-  IN: process.env.NEXT_PUBLIC_GA_ID_IN ?? '',
-  US: process.env.NEXT_PUBLIC_GA_ID_CO ?? '',
+  IN: process.env.GA_ID_IN ?? '',
+  US: process.env.GA_ID_CO ?? '',
 }
 
 /** Pushes a custom event to the dataLayer for a GTM trigger to pick up. */
