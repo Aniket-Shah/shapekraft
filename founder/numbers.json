@@ -1,0 +1,29 @@
+{
+  "business": "ShapeKraft (US/global market, USD; solo or tiny studio, ESTIMATES: correct with real figures)",
+  "unit": "project",
+  "price": 740,
+  "variable": [
+    {"label": "Payment fees (about 3%)", "cost": 22},
+    {"label": "Domain + hosting passed through, first year", "cost": 20},
+    {"label": "Fonts, stock and assets", "cost": 15},
+    {"label": "AI / tooling usage per project", "cost": 8}
+  ],
+  "fixed_monthly": [
+    {"label": "Founder draw (ESTIMATE)", "cost": 1500},
+    {"label": "Software: Vercel, Figma, GitHub, AI tools", "cost": 120},
+    {"label": "Domains, email, workspace", "cost": 25},
+    {"label": "Accounting / compliance", "cost": 40},
+    {"label": "Marketing: ads and content", "cost": 150},
+    {"label": "Phone, internet, WhatsApp", "cost": 40}
+  ],
+  "startup": [
+    {"label": "Registration / legal setup", "cost": 300},
+    {"label": "Brand, domains, trademark check", "cost": 100},
+    {"label": "Launch ads", "cost": 200},
+    {"label": "Portfolio / case-study builds", "cost": 200}
+  ],
+  "days_per_month": 1,
+  "capacity_per_day": 8,
+  "plan_per_day": 6,
+  "ramp_per_day": [1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 6]
+}

@@ -1,3 +1,8 @@
 {
-  "enabledMcpjsonServers": ["playwright"]
+  "enabledMcpjsonServers": [
+    "playwright"
+  ],
+  "enabledPlugins": {
+    "founder-skill@founder-skill": true
+  }
 }
