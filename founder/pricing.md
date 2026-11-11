@@ -1,48 +1,65 @@
-# Pricing (12 Nov 2026)
+# Pricing (12 Nov 2026, updated after the buyer panel)
 
-**Status: a hypothesis to test, not proven.** No buyer panel has run, so there is no Van Westendorp range (`pricing-curve.md`). This price is set from what competitors charge (`competitors.md`), what the business needs (`cfo.md`, `numbers.json`) and the board's conditions (`board.md`). Simulated or real buyer answers should decide between the test prices below.
+**Status: tested on 20 simulated buyers, not on real ones.** Simulated price answers pick what to test; they are not proof. Inputs: `panel/results.md`, `pricing-curve.md`, `competitors.md`, `cfo.md`/`numbers.json`, `board.md`.
 
-## What changed and why
+## What the panel changed
 
-The board (3 FUND IF, 4.3/10) said the pitch prices make ShapeKraft a commodity, and that **the automation should carry the price, not the pages**. It also said to focus on one buyer for 90 days: **Indian B2B traders and distributors who need a catalogue + RFQ flow**. So pricing now leads with that offer. The generic site tiers stay on the website as secondary options.
+- **2 buy · 18 pass (10%)** at ₹60,000 + ₹5,000/mo (opening offer ₹45,000). Treat 10% as an upper bound.
+- **Both buyers are established distributors (20–50 staff), both "next-generation modernizers", both lost an order last month to a faster quote.** Micro firms (1–5 staff) and small trader-manufacturers bought **0 of 16**.
+- **The quote desk is what people value, not the website.** Several said a website alone won't bring buyers.
+- So the price question splits by segment: micro and small firms find it too expensive, while established distributors call ₹60,000 between "a bargain" and "getting expensive".
+
+### The range (Van Westendorp, setup fee, ₹)
+
+| | All 20 buyers | Established distributors only (4, thin) |
+|---|---:|---:|
+| Median "too cheap" | ₹10,000 | ₹15,000 |
+| Median "a bargain" | ₹20,000 | ₹35,000 |
+| Median "getting expensive" | ₹40,000 | ₹90,000 |
+| Median "too expensive" | ₹75,000 | ₹1,62,500 |
+| Acceptable range (PMC–PME) | **₹14,959 – ₹50,338** | not computed (too few) |
+
+At ₹60,000 the kit is **above** the whole panel's acceptable range, but **inside** what distributors say. That's a targeting decision, not just a price decision.
 
 ## 1. The price
 
-**"RFQ Launch Kit" (India, the headline offer): ₹60,000 setup + ₹5,000 a month.**
+**Keep ₹60,000 setup + ₹5,000/month, and sell it only to established distributors (roughly ₹10 crore+ turnover, 20–50 staff).** Founding 5 stays: ₹45,000 setup + first month free, until 31 Jan 2027.
 
-- What it includes: a fast catalogue site (up to 15 pages) + **RFQ → auto-quote** workflow (enquiry captured, quote drafted from the client's price list, sent on email/WhatsApp, logged) + enquiry alerts on WhatsApp. The monthly plan runs and maintains the automation, hosting, backups and 2 hours of changes.
-- **Against competitors:** Indian agencies charge about ₹50,000–₹2,00,000+ for a business site alone; automation agencies commonly charge $1,500–$12,000 per workflow. ₹60,000 for both sits at the low end of the agency range for the site and well below the automation range, which is right for a studio with one case study.
-- **Against what the business needs:** using the founder pack's cost estimates converted at an **assumed ₹85 per $1** (fixed costs about ₹1,59,000 a month, of which ₹1,27,500 is the *placeholder* founder draw), each ₹60,000 kit leaves about ₹54,500 after direct costs. **Break-even ≈ 3 kits a month** with the draw, or **under 1 a month** without it. Ten clients on the monthly plan bring ₹50,000 a month of recurring revenue, enough to cover all non-draw costs about 1.5 times over.
-  - At ₹35,000 (a site-only Growth package) break-even is about 5 a month with the draw. That's why the generic tier can't be the headline.
-- **Open question:** the ₹1,27,500 founder draw is a placeholder from the earlier CFO model. With a full-time salary, the real number the business must pay the founder decides everything; confirm it in `/founder-cfo`.
+- **Why not cut the price for everyone:** dropping to the panel-wide sweet spot (about ₹25,000–30,000) would serve buyers who mostly said they *don't need* it (7 of 18 passes were "need", 4 "habit"). Cheaper doesn't fix "my repeat buyers just call me".
+- **Against competitors:** above a catalogue specialist (₹39,999 at Marshalworks), below agencies (₹50,000–₹2,00,000+), and justified only by the done-for-you quote desk.
+- **Margin** (cost estimates converted at an assumed ₹85/$; placeholder founder draw ₹1,27,500/month): each ₹60,000 kit leaves about ₹54,500; break-even ≈ 3 kits/month with the draw, under 1/month without it. At ₹45,000 (founding) about ₹39,800 is left; break-even ≈ 4/month with the draw. **The placeholder draw is still the number that decides this; confirm it.**
 
-## 2. The ladder (India B2B)
+## 2. The ladder
 
-| Rung | What | Price | Reason to step up |
+| Rung | Who | What | Price |
 |---|---|---|---|
-| Good | **Catalogue Site**: up to 10 pages, enquiry → WhatsApp alert | ₹35,000 + optional ₹1,500/mo care | Gets them online and getting enquiries |
-| **Better (headline)** | **RFQ Launch Kit**: site + RFQ → auto-quote + monthly automation plan | **₹60,000 + ₹5,000/mo** | Quotes go out in minutes, not hours; nobody retypes RFQs |
-| Best | **Sales Desk**: Kit + CRM/ERP or Tally integration, proposal/deck templates, follow-up reminders | from ₹1,00,000 + ₹10,000/mo | The whole enquiry-to-order flow in one place |
+| **Quote Desk Pilot** (new, entry) | Any trader who wants proof | 14 days of the quote desk on **their own price list and real enquiries**, no website | **₹5,000, credited** to the kit if they continue |
+| **RFQ Launch Kit (headline)** | Established distributors | Catalogue site + quote desk + monthly plan | **₹60,000 + ₹5,000/mo** |
+| Sales Desk | Larger distributors | Kit + CRM/ERP/Tally integration, proposals, per-customer price rules | from ₹1,00,000 + ₹10,000/mo |
 
-**US/global (secondary, no outreach for 90 days):** keep the site tiers live on shapekraft.co for inbound only. Starter $750, Growth $1,500, Studio $3,000; automation from $1,500. At $900 the CFO tool shows break-even 3 projects/month and year 1 profit $17,580; at $1,500 break-even is 2/month and year 1 profit $46,380 (an upper bound; both at the assumed volume).
+The **Pilot** comes straight from the panel: 12 of 18 passes named a trial on their own price list or real enquiries as what would flip them, and 14 of 18 wanted proof from the existing client or a trader like them. A paid pilot (not free) filters out people who just want free work.
+
+**Micro and small firms:** don't pitch the kit. Offer the Catalogue Site (₹35,000) only if they ask; the panel says they don't feel the quoting pain.
 
 ## 3. The opening offer
 
-**Founding 5 (India B2B):** the first 5 RFQ Launch Kit clients get **₹15,000 off setup (₹45,000) and the first month of the plan free**, in exchange for a written case study with real numbers. **Ends 31 January 2027 or after 5 clients, whichever comes first.** The monthly price is never discounted, so buyers aren't trained to wait for deals.
+Founding 5: ₹45,000 setup + first month free, for a written case study. **Ends 31 Jan 2027 or 5 clients.** Pilot fee credited on top. The monthly price is never discounted.
 
-- No fake anchors: the site must not show a struck-through "was" price that was never charged. Show "Founding rate, 3 of 5 left, until 31 Jan" and the standard price as the price from client 6.
+**Add to every proposal** (what the panel asked for to overcome "what if you disappear"):
+- A written **ownership and handover clause**: the client owns the domain, hosting account, code and price-list data; full handover if ShapeKraft stops.
+- A **reference call** with the chemical-trading client (with their permission).
 
 ## 4. What to test with real buyers
 
-No panel range exists, so the two test prices come from the competitor range and the CFO's break-even:
+Two prices inside the distributor range:
+- **Test A: ₹60,000 + ₹5,000/mo**, and **Test B: ₹45,000 + ₹6,000/mo** (lower entry, slightly higher recurring).
+- **How:** both offered only after a Pilot. Alternate A/B by prospect; after 10 pilots, compare pilot→kit conversion × price. Log the four price questions on every call.
 
-- **Test A: ₹60,000 setup + ₹5,000/mo** vs **Test B: ₹75,000 setup + ₹5,000/mo** (Founding 5 discount applies to both).
-- **How:** alternate batches of 10 IndiaMART outreach messages; each batch quotes one price after the speed scan. Track reply → call → advance paid per price. After 20 calls, keep the price with the higher **advance-paid count × price**.
-- Also ask every prospect the four Van Westendorp questions on the call and log them as CSV for `pricing-curve.md`.
+## 5. Top price objections (verbatim, simulated buyers — research, not testimonials)
 
-## 5. Top price objections
-
-None recorded: the buyer panel hasn't run and no real objections are logged yet. Run `/founder-consumer --quick` or collect them from the first 10 calls; marketing needs the top three.
+1. **Trust (7):** *"I am not putting my price list and buyer enquiries on a system run by a small remote studio with one client to show."* (P005)
+2. **No need (7):** *"Most of my orders come from regular buyers who just call me, and I quote them from memory in two minutes."* (P003)
+3. **Prices change too often (raised across reasons):** *"my rates change with raw material every week, so I don't see why I should pay … for a system to draft what my sales boy types in two minutes."* (P002)
 
 ---
 *Projections from estimated inputs; not financial, legal or tax advice.*
