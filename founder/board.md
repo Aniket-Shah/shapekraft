@@ -1,39 +1,41 @@
-# Board: ShapeKraft (12 Nov 2026)
+# Board: ShapeKraft as a whole business (12 Nov 2026, round 2)
 
-> Three lenses applied to `idea.md` via `board/brief.md`, each memo written by a separate sub-agent that saw only the brief and one framework: the Offers lens, the Monopoly lens, the Product lens. These are summaries of public frameworks, not statements by the people behind them. Memos: `board/offers.md`, `board/monopoly.md`, `board/product.md`. Replaces the 4 Nov single-pass board.
+> Three lenses applied to `board/brief.md` (the whole studio, plus the competitor scan, the 20-buyer panel and the cost estimates). Each memo was written by a separate sub-agent that saw only the brief and one framework. These are summaries of public frameworks, not statements by the people behind them. Memos: `board/offers.md`, `board/monopoly.md`, `board/product.md`. Round 1 (on the RFQ niche only, 4.3/10) is in `board/round1-niche/`.
 
-**Vote: 3 FUND IF, 0 PASS. Average score 4.3 / 10** (Offers 5, Monopoly 3, Product 5).
+**Vote: 3 FUND IF, 0 PASS. Average score 3.7 / 10** (Offers 4, Monopoly 3, Product 4).
 
 | Lens | Score | Vote | One line |
 |---|---:|---|---|
-| Offers | 5 | FUND IF | Good offer shape; founding prices make it a commodity and the automation is the most underpriced part |
-| Monopoly | 3 | FUND IF | Commodity everywhere except one niche it could own: B2B RFQ → auto-quote |
-| Product | 5 | FUND IF | "Launch + Automate" is a real product hiding inside a menu; cut to it |
+| Offers | 4 | FUND IF | One strong offer (Quote Desk → RFQ Kit) buried under commodity site tiers; no proof yet |
+| Monopoly | 3 | FUND IF | A custom-website studio has nothing a copycat can't match; only a narrow niche could be owned |
+| Product | 4 | FUND IF | Real craft, but no one thing; the first five minutes break trust |
 
-## Risks more than one member raised (go first)
+The score went **down** from round 1 (4.3 → 3.7) because the whole studio is judged here, not just its best niche, and the panel showed demand is narrow.
 
-1. **It's a commodity as pitched.** Six packages, two markets, priced inside the Fiverr/freelancer range. Nothing a buyer can't get elsewhere, and the automation (the hardest-to-copy part) is priced at $700 / ₹18,000 against $1,500–$12,000 at automation agencies. *(Offers, Monopoly)*
-2. **No visible proof.** No published case study, Featured Work switched off, founder can't appear, and a name search returns "ShapeCraft". Likelihood of achievement is the weakest part of the value equation. *(Offers, Monopoly, Product)*
-3. **Focus vs capacity.** Two markets, six packages, five channels, on 15–20 hours a week with real hours per project unknown, while promising "live in 3 weeks". One late project breaks the guarantee and the trust. *(Offers, Product, Monopoly)*
+## Risks all three raised (go first)
+
+1. **No proof, and the first five minutes break trust.** One B2B client, no case study, Featured Work off, a name search returns "ShapeCraft", no visible founder. Trust was the top pass reason (7 of 18); 14 of 18 wanted proof.
+2. **Too many things, spread too thin.** Three site tiers in two currencies, the RFQ kit, a pilot, automation, two care plans, vertical demos and dropped products under one name, on 15–20 hours a week. The business can't describe itself in one sentence.
+3. **The site tiers are a commodity.** Priced inside the freelancer range against $10–39/month builders; the component library is a speed advantage buyers never see. Auto-quote technology is not a gap either.
 
 ## Where they disagree
 
-- **How bad it is.** Monopoly scores 3 (no durable advantage anywhere except a niche not yet proven); Offers and Product score 5 (the offer shape and the build quality are real).
-- **What to sell.** Product would keep "Launch + Automate" with one named default automation for any small business. Monopoly would go narrower: one vertical (B2B traders with RFQ flows) and turn the RFQ automation into a repeatable setup + monthly product. Offers sits between: one buyer, sell the outcome, reprice the automation toward agency rates.
-- **The guarantee.** Product accepts a technical guarantee (Lighthouse + enquiries delivered). Offers wants a result-based one alongside it (e.g. faster quotes, more enquiries).
+- **How much is salvageable:** Monopoly (3) sees no durable advantage until the quote desk becomes a reusable engine that improves with each client. Offers and Product (4) see one genuinely good offer and real craft.
+- **What happens to the site tiers:** Offers and Monopoly would keep them as quiet cash flow and referral work. Product would hide everything unrelated to the lead offer from the homepage.
+- **The core risk inside the niche:** Offers worries about proof; Product worries the quote desk itself fails when prices change daily or per customer.
 
-## Conditions (checklist for the rest of the pack)
+## Conditions (checklist)
 
-- [ ] **One market, one buyer, one offer for the next 90 days.** Strongest candidate on all three lenses: Indian B2B traders/distributors needing catalogue + RFQ. Generic Starter/Growth/Studio tiers move off the headline. *(all three; `/founder-marketing`, `/founder-offer`)*
-- [ ] **Name the default automation** (e.g. RFQ → auto-quote, or enquiry → WhatsApp + auto-reply) instead of "e.g." *(Product, Monopoly; `/founder-offer`)*
-- [ ] **Reprice the automation toward the agency range; sell the outcome, not the pages.** Test a setup + monthly model for the RFQ automation. *(Offers, Monopoly; `/founder-pricing`, `/founder-cfo`)*
-- [ ] **Publish the chemical-trading case study** with measured before/after numbers (speed, enquiries, quote time); switch Featured Work on. *(all three; `/founder-launch`)*
-- [ ] **Measure real hours on the next 2 projects**; keep "live in 3 weeks" only if the numbers hold. *(Offers, Product; `/founder-ops`, `/founder-cfo`)*
-- [ ] **Close 3 paying clients in the vertical through one channel**; record cost to acquire each. *(Monopoly; `/founder-launch`)*
-- [ ] **One lead intake queue** with a stated response time and a written delivery checklist. *(Product; `/founder-ops`)*
-- [ ] **Make founding scarcity real:** 5 slots, public counter, closing date. *(Offers; `/founder-pricing`)*
-- [ ] Open questions with no answer yet: market size of the vertical, cost to acquire a client, real hours per project, buyers' willingness to pay. *(`/founder-competitors`, `/founder-consumer`, `/founder-cfo`)*
+- [ ] **One sentence, one buyer, one lead offer:** Quote Desk Pilot → RFQ Launch Kit for established distributors (20–50 staff). Homepage says it in one line. *(all three)*
+- [ ] **Site tiers become background:** quiet cash flow / referrals, not positioning. Archive the vertical demos and unrelated products from public view. *(all three)*
+- [ ] **Publish one case study** from the chemical-trading client with a measured result; Featured Work on; fix the "ShapeCraft" search confusion. *(all three)*
+- [ ] **Run paid Quote Desk Pilots on real price lists, including price changes;** track how many drafts are approved without edits. *(Product, Monopoly)*
+- [ ] **Named guarantee** (e.g. pilot fee refunded if quotes aren't faster) + **ownership/handover clause**. *(Offers)*
+- [ ] **Measure hours per client and cost to acquire one**; set a capacity limit. *(all three; `/founder-cfo`, `/founder-ops`)*
+- [ ] **Name the durable advantage:** a reusable price-list-to-quote engine or category know-how that makes client 20 easier than client 1. *(Monopoly)*
+- [ ] **Re-test price against the distributor band** (₹35k bargain, ₹90k expensive) only after proof exists. *(Offers)*
+- [ ] Open questions: number of reachable distributors, cost to acquire, real hours per project, real founder draw, and what "1 million" means (₹ or $). *(`/founder-cfo`, real calls)*
 
 ## The strongest version of this business
 
-Not "custom websites for small businesses in two countries". The board sees **a studio that owns RFQ-to-quote for Indian B2B traders and distributors**: a fast catalogue site plus an RFQ → auto-quote workflow, sold as a setup fee plus a monthly care-and-automation plan, proven by the live chemical-trading site and sold through IndiaMART prospecting and accountant/GST partners. Each new client in the same vertical is faster to deliver than the last, which is the only route the board sees to an advantage that compounds. That is narrower than the pitch: it puts the US small-business tiers and the generic packages on hold, and it means the founding-rate discounts on the automation are the wrong lever — the automation should carry the price, not the pages.
+The board does not see a strong business in "ShapeKraft, a web studio for small businesses in India and the US". It sees **one strong product hiding inside it: a done-for-you quote desk that gets established B2B distributors' quotes out first, sold through a paid pilot on their own price list, with a website as part of the package rather than the product**. Built that way, each client could make the next one faster (the beginnings of an advantage), and the site work becomes a side income instead of the identity. That is a big change from the pitch: it means the homepage, the menu and the outreach all lead with the quote desk, and most of what ShapeKraft currently lists goes quiet until the pilots prove the quote desk works on real, changing prices.

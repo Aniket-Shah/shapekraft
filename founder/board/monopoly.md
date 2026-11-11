@@ -2,24 +2,26 @@
 Score: 3/10 | Vote: FUND IF
 
 ## What is strong
-- **There is a small market it could own.** The B2B line (traders, manufacturers, distributors that need catalogue/RFQ flows, proposals and an RFQ → auto-quote automation) is a narrower and less contested problem than "custom websites for small businesses". One live B2B chemical-trading site with RFQ forms is a real starting point in that niche.
-- **The beginnings of know-how that compounds.** An internal component library, plus repeat RFQ/quote automations for one type of buyer, could become a reusable vertical product that a generalist freelancer cannot match on speed.
-- **A defined distribution idea for the niche.** Prospecting B2B sellers on IndiaMART and partnering with accountants/GST consultants points at a specific, findable buyer group, not "everyone with a website".
+- **One small market can be named.** The simulated panel's only buyers were established distributors (20-50 staff) with a modernising younger owner who had lost an order to a slow quote. Small enough to own first.
+- **The gap is service, not technology.** Auto-quote tools already exist cheaply; a done-for-you quote desk on the trader's own WhatsApp and price list was not found in the scan. That is the closest thing to a secret here.
+- **A first reference sits in the niche:** a live B2B chemical-trading site with RFQ flows (Sep 2026).
+- **Low estimated direct cost per project**, so the business can survive while it narrows.
 
 ## What would kill it (the top 3, most dangerous first)
-1. **It is a commodity in a crowded market.** Every item on the price list is sold within reach of the same buyer by freelancers, agencies, marketplaces ($400–$1,200) and builders ($10–$39 a month). "Custom, fast, no templates" and a 90+ Lighthouse score are incremental, not ten times better, and nothing stops a copycat in month six. Spread across two countries and six packages, the business competes on price everywhere and owns nothing.
-2. **Distribution is unproven and capacity-capped.** Not yet known: conversion rate, cost to acquire a customer, and real hours per project. With 15–20 hours a week, no marketing budget and no published case studies (Featured Work is switched off), there is no visible path to the first 100 customers, and each one is sold by hand.
-3. **No durability or brand.** Delivery is founder-hours, so no economies of scale; there are no network effects; and a search for the name returns unrelated "ShapeCraft" results. In ten years nothing here holds a position unless the niche work becomes a product.
+1. **Commodity in a crowded market.** Custom sites compete with freelancers (₹10,000-80,000), agencies, marketplaces and $10-39/month builders. Nothing is ten times better; the component library is a speed advantage buyers never see. Three tiers in two currencies means competing everywhere and owning nowhere.
+2. **No distribution engine, no durability.** 15-20 hours a week, no marketing budget, no public founder, 9 LinkedIn followers, and the name loses its own search to "ShapeCraft". No network effect, scale economy or brand yet. An IndiaMART catalogue specialist already sells ₹39,999 sites and could add a quote desk within months.
+3. **Trust blocks the niche.** 7 of 18 simulated passes cited trust in a small remote studio; there are no published case studies and Featured Work is off.
 
 ## The questions I would ask the founder
-- Which single segment (for example Indian B2B chemical or industrial traders on IndiaMART) can you name, size and realistically win a large share of first? How many such businesses are there? (Open question: no market size yet.)
-- What is the secret: what do you know about how these traders handle RFQs and quotes that generic agencies do not?
-- What does one customer cost to acquire through IndiaMART outreach or a GST-consultant partner, and how many hours does a B2B build really take?
-- After five RFQ automations for the same kind of buyer, what is reusable enough to sell as a product or subscription rather than a project?
-- Why now: what has changed that makes this buyer ready to pay for automation today?
+- How many distributors fit the 20-50 staff, lost-a-deal profile in one city or category? (Unknown; this is the market to dominate.)
+- What does one distributor client cost to acquire, in hours and rupees? (Unknown.)
+- How do the first 100 customers arrive on 15-20 hours a week?
+- What does the quote desk learn per client that makes client 20 easier than client 1 and switching costly?
+- What stops the catalogue specialist copying it in month six?
+- Will the chemical-trading client go on record with a measured result?
 
 ## If FUND IF: the conditions
-1. Pick one vertical (B2B traders/distributors with RFQ flows, starting in India) and lead with it; demote the generic Starter/Growth/Studio packages to secondary.
-2. Publish the B2B chemical-trading case study with measured before/after results so the niche has proof.
-3. Close 3 paying clients in that vertical through a single channel and record cost to acquire and hours per project.
-4. Turn the RFQ → auto-quote workflow into a repeatable, priced product (setup plus monthly) that the next client gets faster and cheaper to deliver than the last.
+1. **Pick one market.** Lead with the quote desk for established distributors in one category or region; keep generic site packages as quiet cash flow, not positioning.
+2. **Publish proof** from the chemical-trading client with a measured result before scaling outreach.
+3. **Win paid Quote Desk Pilots** in that segment before February 2027, tracking acquisition cost and hours per client.
+4. **Name the durable advantage**: a reusable price-list-to-quote engine or category dataset that improves with every client. Without one, this stays a freelance practice.
