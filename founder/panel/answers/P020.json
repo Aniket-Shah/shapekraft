@@ -1,13 +1,13 @@
 {
   "id": "P020",
-  "buys": false,
-  "purchases_first_month": 0,
-  "reason_code": "trust",
-  "reason": "My quotes are my business. I'm not handing my price list and my buyers' enquiries to a remote studio that has one chemical website to show and is offering discounts for case studies. Rs 5,000 every month on top of 60,000 for something my son can do in Excel and WhatsApp is also not small for me.",
-  "objection": "If this small studio shuts down or stops answering the phone after six months, who runs my quote desk and who has my price list? Then I am stuck paying monthly for a system nobody maintains.",
-  "would_change_my_mind": "Let me talk to that chemical-trading client and see their quote desk working on real IndiaMART enquiries, and put it in writing that the code and my data are handed to me if you close. Then I will still get two other quotes and bargain the setup down.",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "need",
+  "reason": "Rs 5,000 with money back if it fails is nothing for me to test, and my quotes really do get delayed when rates move and I am retyping prices by hand. I will do the pilot, but the Rs 60,000 setup I will not pay as quoted, I will bring two other quotes and bargain hard.",
+  "objection": "Small studio, one reference client. If this fellow takes a job somewhere or shuts down, who fixes the desk when IndiaMART changes something and my quotes stop going? Handing over code is useless to me, I am not a programmer.",
+  "would_change_my_mind": "Setup brought down to around Rs 35,000-40,000 with the reference call actually done, and a named backup person or firm who will maintain it if ShapeKraft stops.",
   "price_too_cheap": 10000,
   "price_cheap": 25000,
-  "price_expensive": 45000,
-  "price_too_expensive": 75000
+  "price_expensive": 50000,
+  "price_too_expensive": 80000
 }

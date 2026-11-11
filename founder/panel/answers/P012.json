@@ -3,11 +3,11 @@
   "buys": true,
   "purchases_first_month": 1,
   "reason_code": "need",
-  "reason": "I lost an order last month only because someone else quoted first, so the quote desk is what I'm paying for, not the website. At Rs 45,000 plus Rs 5,000 a month it's small money for us, and since nothing goes out without my approval the downside is limited. I'd take the opening offer, but only after I see a live demo on our own price list.",
-  "objection": "Our chemical prices change with the market every week, and a lot of quotes depend on quantity, packing and freight. I doubt a small remote studio with one chemical client can make drafts accurate enough that I don't end up rewriting every one, and if they go quiet after launch my team goes straight back to WhatsApp and Excel.",
+  "reason": "I lost an order last month only because someone else quoted first, so speed of quoting is a real problem for us. Rs 5,000 for a 14-day pilot on our own price list with money back is a small bet, and I can show my father actual quotes before we commit to the Rs 60,000.",
+  "objection": "Our chemical rates move almost daily and many enquiries are vague (grade, packing, freight, credit terms), so I doubt a draft from an Excel sheet will be right 7 times out of 10. I also worry whether it really pulls IndiaMART leads reliably, and I don't want our customer-specific pricing sitting with a small outside firm.",
   "would_change_my_mind": "",
-  "price_too_cheap": 15000,
-  "price_cheap": 35000,
+  "price_too_cheap": 10000,
+  "price_cheap": 30000,
   "price_expensive": 90000,
   "price_too_expensive": 175000
 }

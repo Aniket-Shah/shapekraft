@@ -1,0 +1,13 @@
+{
+  "id": "P019",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "IndiaMART already gives me a catalogue and the enquiries, and my CA will ask why I am paying Rs 45-60 thousand plus Rs 5,000 every month for a second website. Yes, I lost one order last month for quoting late, but I can fix that by quoting faster from my phone, not by hiring a remote studio I have never met.",
+  "objection": "A small remote studio with one chemical client. If they shut down or stop answering, my price list and my quotes are stuck with them, and I keep paying Rs 5,000 a month whatever happens.",
+  "would_change_my_mind": "Show me a trading firm like mine where the quote went out first and won the order, let me talk to that owner, and let me try the quote desk on my own IndiaMART enquiries for a month before I pay any setup.",
+  "price_too_cheap": 5000,
+  "price_cheap": 15000,
+  "price_expensive": 30000,
+  "price_too_expensive": 50000
+}

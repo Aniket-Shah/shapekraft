@@ -1,13 +1,13 @@
 {
   "id": "P013",
-  "buys": false,
-  "purchases_first_month": 0,
-  "reason_code": "trust",
-  "reason": "My quotes are my business, and I am not wiring my price list and buyer enquiries into a system run by a tiny remote studio with one chemical client to its name. On top of that, Rs 60,000 plus Rs 5,000 every month is more than the two local web guys I would get quotes from charge, and I can still type a quote on WhatsApp myself in ten minutes.",
-  "objection": "Who maintains it if this small studio disappears? If they shut down or stop answering, my quote desk dies and I am locked into a monthly fee for something I cannot fix myself.",
-  "would_change_my_mind": "Talking to that chemical-trading client myself and seeing their quote desk actually work, plus a written handover clause giving me the code and the price-list setup if ShapeKraft stops, and setup brought down to around Rs 30,000.",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "need",
+  "reason": "Rs 5,000 with money back if it can't price 7 in 10 quotes off my own Excel is a small bet, and quoting by hand eats my evenings every time rates move. I'll try the pilot, but I'm not promising the Rs 60,000 until I see it work on my real enquiries.",
+  "objection": "Rs 60,000 plus Rs 5,000 every month is a lot for what is still a WhatsApp-and-Excel tool, and my rates change all the time, so I doubt it keeps up. Also, who looks after it if this small studio closes? The handover in writing helps, but who will actually run the code then?",
+  "would_change_my_mind": "If the pilot quotes come out wrong when raw material rates change mid-week, or the reference call with the chemical trader is weak, I stop after the pilot. If they come out right, I'll still push for the Rs 45,000 founding price or lower before I pay for setup.",
   "price_too_cheap": 10000,
   "price_cheap": 25000,
-  "price_expensive": 45000,
-  "price_too_expensive": 75000
+  "price_expensive": 50000,
+  "price_too_expensive": 80000
 }

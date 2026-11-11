@@ -1,13 +1,13 @@
 {
   "id": "P009",
-  "buys": false,
-  "purchases_first_month": 0,
+  "buys": true,
+  "purchases_first_month": 1,
   "reason_code": "need",
-  "reason": "Most of my business is repeat buyers who call me directly, and my rates move daily and differ by customer, so a quote drafted from a fixed price list would be wrong more often than right. The website part is fine, but I am not paying Rs 60,000 plus Rs 5,000 a month for a quote desk I would end up rewriting every time.",
-  "objection": "My prices change every day and depend on the customer, so an automatic quote from a price list will be wrong, and who updates it daily? Two hours of changes a month is not going to cover that.",
-  "would_change_my_mind": "Seeing it work live on my own enquiries for two weeks, with per-customer pricing and a way for me to update rates from WhatsApp in seconds, so the drafts are actually right.",
-  "price_too_cheap": 10000,
-  "price_cheap": 25000,
-  "price_expensive": 50000,
-  "price_too_expensive": 90000
+  "reason": "I'd take the Rs 5,000 pilot, but only the pilot. It's small money for us, I get it back if the quotes come out wrong, and I've been pushing the family to stop typing IndiaMART quotes by hand. I'm not committing to the Rs 60,000 desk until I see it handle our real rates.",
+  "objection": "My prices change every day and differ for each customer, and most of my business is repeat buyers who just phone me. I doubt a price list can get 7 in 10 quotes right, and even if it does, it only covers the new enquiries, not the calls that bring in most of our money.",
+  "would_change_my_mind": "",
+  "price_too_cheap": 15000,
+  "price_cheap": 30000,
+  "price_expensive": 75000,
+  "price_too_expensive": 150000
 }

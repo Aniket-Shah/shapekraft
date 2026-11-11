@@ -3,11 +3,11 @@
   "buys": false,
   "purchases_first_month": 0,
   "reason_code": "habit",
-  "reason": "IndiaMART already gives me a catalogue and the enquiries, and I reply from my phone fine. The money is not the problem for a firm my size, but I don't see why I should pay a small remote studio to fix something that is working for me.",
-  "objection": "My rates change with the market and every buyer gets a different price depending on quantity and relationship, so I don't trust a quote drafted from a price list. And who are these people? One chemical website in 2026 is not a track record, and if they shut down I am stuck again like with my nephew's site.",
-  "would_change_my_mind": "Someone in my own trade whom I know telling me it got them more orders or saved real time, plus a free trial on my live IndiaMART enquiries for a month before I pay any setup.",
-  "price_too_cheap": 15000,
-  "price_cheap": 30000,
-  "price_expensive": 75000,
-  "price_too_expensive": 150000
+  "reason": "IndiaMART already gives me my catalogue and my enquiries, and I quote from my phone the way I have for years. Rs 5,000 is nothing to me, but the time to sit and hand my price list to someone new, and change how my staff work, is the real cost, and I don't see the problem being big enough.",
+  "objection": "My price list and my top-customer rates are my business. I'm not handing that Excel to a small outfit I've never heard of, and in chemicals the rates move every day, so I doubt a machine gets 7 out of 10 quotes right without me fixing them.",
+  "would_change_my_mind": "Another distributor in my line that I know personally telling me they use it and it saves them hours every day, plus seeing a correct quote made from my own list right in front of me before I hand anything over.",
+  "price_too_cheap": 10000,
+  "price_cheap": 25000,
+  "price_expensive": 60000,
+  "price_too_expensive": 100000
 }

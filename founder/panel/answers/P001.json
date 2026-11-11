@@ -3,11 +3,11 @@
   "buys": false,
   "purchases_first_month": 0,
   "reason_code": "trust",
-  "reason": "I already paid a developer and a portal and got almost nothing back, so Rs 60,000 plus Rs 5,000 every month to a small remote studio I have never met, with only one past client, is not something I will risk. My enquiries are manageable by hand right now.",
-  "objection": "One chemical company website in 2026 is not proof. How do I know the quotes it drafts will be correct, and that you will still be around in a year when I am paying Rs 5,000 a month?",
-  "would_change_my_mind": "Talking directly to that chemical-trading client and seeing the quote desk work on my own price list with my real IndiaMART enquiries before I pay more than a small amount.",
+  "reason": "Rs 5,000 is small money, but I've heard 'money back if it doesn't work' before and then spent weeks chasing a refund. Some developer I don't know saying a WhatsApp bot will quote my chemicals right? I'll wait and see.",
+  "objection": "My rates change every day and half my quotes depend on the customer, the quantity and freight. I don't believe a system gets 7 out of 10 right without me fixing them, and if it fails I'm the one who wasted two weeks loading my price list and explaining everything.",
+  "would_change_my_mind": "Speaking directly to that chemical trading company owner and seeing it draft a correct quote from my own price list on a real enquiry before I pay anything.",
   "price_too_cheap": 10000,
-  "price_cheap": 20000,
-  "price_expensive": 35000,
-  "price_too_expensive": 60000
+  "price_cheap": 25000,
+  "price_expensive": 45000,
+  "price_too_expensive": 75000
 }
