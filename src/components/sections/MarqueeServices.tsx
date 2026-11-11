@@ -15,7 +15,7 @@ export function MarqueeServices() {
   const dot = (
     <span
       className="inline-block mx-6 w-1.5 h-1.5 rounded-full align-middle"
-      style={{ backgroundColor: 'var(--color-primary)', opacity: 0.7 }}
+      style={{ backgroundColor: 'var(--color-text)', opacity: 0.6 }}
       aria-hidden="true"
     />
   )
@@ -23,7 +23,7 @@ export function MarqueeServices() {
   return (
     <section
       aria-label="Services marquee"
-      className="py-6 border-y overflow-hidden"
+      className="py-6 border-y overflow-hidden theme-teal"
       style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
     >
       <Marquee speed={38}>

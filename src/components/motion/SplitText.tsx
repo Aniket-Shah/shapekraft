@@ -1,5 +1,6 @@
 'use client'
 import { useRef, useEffect } from 'react'
+import { whenReady } from '@/lib/ready'
 
 interface Props {
   text: string
@@ -25,6 +26,7 @@ export function SplitText({
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const run = async () => {
+      await whenReady()
       const { gsap } = await import('gsap')
       const { ScrollTrigger } = await import('gsap/ScrollTrigger')
       gsap.registerPlugin(ScrollTrigger)

@@ -18,7 +18,7 @@ export function ContactBigCTA() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,58,237,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(11,100,108,0.08) 0%, transparent 70%)',
         }}
         aria-hidden="true"
       />
@@ -30,7 +30,7 @@ export function ContactBigCTA() {
         <FadeUp>
           <span
             className="text-xs font-semibold tracking-widest uppercase block mb-6"
-            style={{ color: 'var(--color-primary)' }}
+            style={{ color: 'var(--color-primary-ink)' }}
           >
             Ready to build?
           </span>
@@ -43,7 +43,7 @@ export function ContactBigCTA() {
             style={{ fontSize: 'clamp(2.5rem, 10vw, 8rem)', color: 'var(--color-text)' }}
           >
             <span className="block">START A</span>
-            <span className="block" style={{ color: 'var(--color-primary)' }}>PROJECT</span>
+            <span className="block" style={{ color: 'var(--color-accent)' }}>PROJECT</span>
           </h2>
         </FadeUp>
 
@@ -68,7 +68,7 @@ export function ContactBigCTA() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--color-accent)'
-                e.currentTarget.style.color = 'var(--color-bg)'
+                e.currentTarget.style.color = 'var(--color-primary-fg)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--color-primary)'

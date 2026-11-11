@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useRef } from 'react'
 import { FadeUp } from '@/components/motion/FadeUp'
 
 interface Step {
@@ -35,9 +36,45 @@ const STEPS: Step[] = [
 ]
 
 export function ProcessSteps() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const barRef = useRef<HTMLDivElement>(null)
+
+  // Progress line fills as the section scrolls through the viewport.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (barRef.current) barRef.current.style.transform = 'scaleX(1)'
+      return
+    }
+    let ctx: { revert: () => void } | undefined
+    let cancelled = false
+    ;(async () => {
+      const { gsap } = await import('gsap')
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+      if (cancelled) return
+      gsap.registerPlugin(ScrollTrigger)
+      ctx = gsap.context(() => {
+        gsap.fromTo(
+          barRef.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top 60%', end: 'bottom 75%', scrub: true },
+          },
+        )
+      }, sectionRef)
+    })()
+    return () => {
+      cancelled = true
+      ctx?.revert()
+    }
+  }, [])
+
   return (
     <section
+      ref={sectionRef}
       id="process"
+      className="theme-cream"
       aria-labelledby="process-heading"
       style={{ padding: 'clamp(3rem, 8vw, var(--s-24)) var(--gutter)' }}
     >
@@ -46,7 +83,7 @@ export function ProcessSteps() {
         <FadeUp>
           <span
             className="text-xs font-semibold tracking-widest uppercase block mb-3"
-            style={{ color: 'var(--color-primary)' }}
+            style={{ color: 'var(--color-primary-ink)' }}
           >
             How we work
           </span>
@@ -59,6 +96,15 @@ export function ProcessSteps() {
           </h2>
         </FadeUp>
 
+        {/* Scroll progress line */}
+        <div className="relative mb-6" style={{ height: 2, backgroundColor: 'var(--color-border)' }} aria-hidden="true">
+          <div
+            ref={barRef}
+            className="absolute inset-0"
+            style={{ backgroundColor: 'var(--color-primary)', transformOrigin: 'left', transform: 'scaleX(0)' }}
+          />
+        </div>
+
         {/* Steps */}
         <ol
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px"
@@ -70,6 +116,7 @@ export function ProcessSteps() {
           {STEPS.map((step, i) => (
             <FadeUp key={step.number} delay={i * 100} className="h-full">
               <li
+                data-spotlight
                 className="h-full p-8 flex flex-col gap-6 transition-colors duration-300"
                 style={{ backgroundColor: 'var(--color-bg)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
@@ -79,7 +126,7 @@ export function ProcessSteps() {
                 <div className="flex items-center justify-between">
                   <span
                     className="font-mono text-xs font-bold tracking-widest"
-                    style={{ color: 'var(--color-primary)' }}
+                    style={{ color: 'var(--color-primary-ink)' }}
                   >
                     {step.number}
                   </span>

@@ -31,12 +31,12 @@ export default function NotFound() {
           }}
         />
 
-        {/* Purple glow orb */}
+        {/* Teal glow orb */}
         <div
           aria-hidden
           className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 65%)',
+            background: 'radial-gradient(circle, rgba(11,100,108,0.18) 0%, transparent 65%)',
           }}
         />
 
@@ -47,7 +47,7 @@ export default function NotFound() {
             className="font-display font-black leading-none select-none"
             style={{
               fontSize: 'clamp(5rem, 20vw, 14rem)',
-              background: 'linear-gradient(135deg, #7C3AED 0%, #A78BFA 55%, #7C3AED 100%)',
+              background: 'linear-gradient(135deg, #063A3F 0%, #0B646C 55%, #063A3F 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

@@ -1,12 +1,40 @@
 'use client'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { SplitText } from '@/components/motion/SplitText'
 import { FadeUp } from '@/components/motion/FadeUp'
 import { MagneticButton } from '@/components/motion/MagneticButton'
 
 export function HeroBigStatement() {
+  const heroRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const blobRef = useRef<HTMLDivElement>(null)
+
+  // Scroll-scrubbed parallax: content drifts up + fades, blob drifts down.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let ctx: { revert: () => void } | undefined
+    let cancelled = false
+    ;(async () => {
+      const { gsap } = await import('gsap')
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+      if (cancelled) return
+      gsap.registerPlugin(ScrollTrigger)
+      ctx = gsap.context(() => {
+        const scrub = { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true }
+        gsap.to(contentRef.current, { yPercent: -14, opacity: 0.1, ease: 'none', scrollTrigger: scrub })
+        gsap.to(blobRef.current, { yPercent: 70, scale: 1.4, ease: 'none', scrollTrigger: scrub })
+      }, heroRef)
+    })()
+    return () => {
+      cancelled = true
+      ctx?.revert()
+    }
+  }, [])
+
   return (
     <section
+      ref={heroRef}
       id="hero"
       className="relative flex flex-col justify-center min-h-screen overflow-hidden"
       style={{
@@ -19,15 +47,16 @@ export function HeroBigStatement() {
 
       {/* Accent gradient blob */}
       <div
+        ref={blobRef}
         className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(11,100,108,0.12) 0%, transparent 70%)',
           filter: 'blur(60px)',
         }}
         aria-hidden="true"
       />
 
-      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', width: '100%' }}>
+      <div ref={contentRef} style={{ maxWidth: 'var(--max-w)', margin: '0 auto', width: '100%' }}>
         {/* Eyebrow */}
         <FadeUp delay={100}>
           <div className="flex items-center gap-3 mb-8">
@@ -66,7 +95,7 @@ export function HeroBigStatement() {
             delay={0.55}
             className="block"
           />
-          <span className="block" style={{ color: 'var(--color-primary)' }}>
+          <span className="block" style={{ color: 'var(--color-accent)' }}>
             <SplitText
               text="engineer them."
               trigger="mount"
@@ -104,7 +133,7 @@ export function HeroBigStatement() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--color-accent)'
-                  e.currentTarget.style.color = 'var(--color-bg)'
+                  e.currentTarget.style.color = 'var(--color-primary-fg)'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--color-primary)'

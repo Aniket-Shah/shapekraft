@@ -44,7 +44,7 @@ export function NavStickyMinimal() {
         style={{
           zIndex: 'var(--z-nav)' as string,
           borderColor: scrolled ? 'var(--color-border)' : 'transparent',
-          backgroundColor: scrolled ? 'rgba(8, 8, 8, 0.92)' : 'transparent',
+          backgroundColor: scrolled ? 'rgba(233, 116, 81, 0.92)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
           transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
         }}
@@ -77,7 +77,7 @@ export function NavStickyMinimal() {
               <Link
                 key={href}
                 href={href}
-                className="text-sm font-medium transition-colors duration-200"
+                className="link-underline text-sm font-medium transition-colors duration-200"
                 style={{ color: 'var(--color-muted)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}

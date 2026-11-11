@@ -1,6 +1,7 @@
 'use client'
 import { useRef } from 'react'
 import { useInView } from '@/lib/scroll'
+import { useSiteReady } from '@/lib/ready'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -11,7 +12,9 @@ interface Props {
 
 export function FadeUp({ children, delay = 0, className }: Props) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref)
+  const seen = useInView(ref)
+  const ready = useSiteReady()
+  const inView = seen && ready
 
   return (
     <div

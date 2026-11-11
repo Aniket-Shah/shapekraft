@@ -1,17 +1,68 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Brand colors ── */
-  --color-primary:    #7C3AED;
-  --color-primary-fg: #ffffff;
-  --color-bg:         #080808;
-  --color-surface:    #111111;
-  --color-text:       #f0f0f0;
-  --color-muted:      #6a6a6a;
-  --color-border:     #222222;
-  --color-accent:     #A78BFA;
-  --color-error:      #cc0000;
-  --color-success:    #00aa44;
+  /* ════════════════════════════════════════════════════════
+     BRAND PALETTE — 60 / 30 / 10
+     60%  Burnt Sienna  (dominant: page, hero, nav, footer)
+     30%  Cream Linen   (secondary: content bands, cards)
+     10%  Royal Teal    (accent: CTAs, strips, highlights)
+     Text: Obsidian Black (tone-shades)
+     ════════════════════════════════════════════════════════ */
+
+  /* Burnt Sienna — 60% (base 500) */
+  --color-sienna-50:  #FEF4F0;
+  --color-sienna-100: #FBE5DC;
+  --color-sienna-200: #F7CBBA;
+  --color-sienna-300: #F2AB90;
+  --color-sienna-400: #EE9070;
+  --color-sienna-500: #E97451;
+  --color-sienna-600: #C95E3E;
+  --color-sienna-700: #A54A31;
+  --color-sienna-800: #7C3826;
+  --color-sienna-900: #52251A;
+
+  /* Cream Linen — 30% (base 200) */
+  --color-cream-50:  #FFFDF9;
+  --color-cream-100: #FDF8F0;
+  --color-cream-200: #FAF0E6;
+  --color-cream-300: #F3E4D2;
+  --color-cream-400: #E8D3BA;
+  --color-cream-500: #D6BA9A;
+  --color-cream-600: #B89A78;
+  --color-cream-700: #8E7457;
+
+  /* Royal Teal — 10% (base 600) */
+  --color-teal-50:  #E6F4F5;
+  --color-teal-100: #C2E3E6;
+  --color-teal-200: #8CC8CD;
+  --color-teal-300: #52A8AF;
+  --color-teal-400: #2A8890;
+  --color-teal-500: #0E7C86;
+  --color-teal-600: #0B646C;
+  --color-teal-700: #084D53;
+  --color-teal-800: #063A3F;
+  --color-teal-900: #04282B;
+
+  /* Obsidian Black — text (base 900) */
+  --color-obsidian-400: #7A7A85;
+  --color-obsidian-500: #55555F;
+  --color-obsidian-600: #3B3B44;
+  --color-obsidian-700: #26262D;
+  --color-obsidian-800: #17171C;
+  --color-obsidian-900: #0B0B0F;
+
+  /* ── Semantic tokens (default context = Burnt Sienna) ── */
+  --color-primary:     var(--color-teal-600);   /* buttons, fills */
+  --color-primary-fg:  var(--color-cream-50);   /* text on teal */
+  --color-primary-ink: var(--color-teal-900);   /* teal-toned text on sienna (AA) */
+  --color-bg:          var(--color-sienna-500);
+  --color-surface:     var(--color-cream-100);
+  --color-text:        var(--color-obsidian-900);
+  --color-muted:       var(--color-obsidian-700);
+  --color-border:      var(--color-sienna-700);
+  --color-accent:      var(--color-teal-700);   /* hover / focus */
+  --color-error:       #A8201A;
+  --color-success:     #1F7A45;
 
   /* ── Fonts ── */
   --font-sans:    var(--font-inter), system-ui, sans-serif;
@@ -69,6 +120,31 @@
   --z-modal:  200;
   --z-cursor: 999;
   --z-toast:  9999;
+}
+
+/* ── Colour contexts (60/30/10) ──
+   Default page context is Burnt Sienna. Add one of these classes to a
+   section to re-map the semantic tokens for everything inside it. */
+.theme-cream {
+  --color-bg:          var(--color-cream-200);
+  --color-surface:     var(--color-cream-50);
+  --color-text:        var(--color-obsidian-900);
+  --color-muted:       var(--color-obsidian-500);
+  --color-border:      var(--color-cream-400);
+  --color-primary-ink: var(--color-teal-600);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.theme-teal {
+  --color-bg:          var(--color-teal-600);
+  --color-surface:     var(--color-teal-500);
+  --color-text:        var(--color-cream-50);
+  --color-muted:       var(--color-cream-200);
+  --color-border:      var(--color-teal-400);
+  --color-primary-ink: var(--color-cream-50);
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 /* ── Base reset ── */
@@ -159,4 +235,81 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-muted);
+}
+
+/* ════════════════════════════════════════════════════════
+   MOTION & MICRO-INTERACTIONS
+   ════════════════════════════════════════════════════════ */
+
+/* Intro: hidden instantly for returning visitors (set by inline head script) */
+html[data-seen] .preloader { display: none; }
+
+/* Custom cursor */
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  transition: transform var(--d-fast) var(--ease-out);
+}
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent);
+  opacity: 0.55;
+  transition:
+    transform var(--d-base) var(--ease-out),
+    background-color var(--d-base) var(--ease-out),
+    opacity var(--d-base) var(--ease-out);
+}
+[data-hover='true'] > .cursor-dot { transform: scale(0); }
+[data-hover='true'] > .cursor-ring {
+  transform: scale(1.9);
+  background-color: rgba(11, 100, 108, 0.14);
+  opacity: 1;
+}
+[data-down='true'] > .cursor-ring { transform: scale(0.8); }
+[data-hover='true'][data-down='true'] > .cursor-ring { transform: scale(1.4); }
+
+/* Link underline that wipes in from the left and out to the right */
+.link-underline { position: relative; }
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--d-base) var(--ease-out);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Cursor-following spotlight on cards (position fed by ClientEffects) */
+[data-spotlight] { position: relative; isolation: isolate; }
+[data-spotlight]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--d-base) var(--ease-out);
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(11, 100, 108, 0.16),
+    transparent 60%
+  );
+}
+[data-spotlight]:hover::before { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-ring, .cursor-dot, .link-underline::after { transition: none; }
 }

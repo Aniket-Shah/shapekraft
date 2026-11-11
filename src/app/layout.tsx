@@ -29,7 +29,7 @@ const blackOpsOne = Black_Ops_One({
 })
 
 export const viewport: Viewport = {
-  themeColor: '#080808',
+  themeColor: '#E97451',
   colorScheme: 'dark',
 }
 
@@ -97,8 +97,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${syne.variable} ${blackOpsOne.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${syne.variable} ${blackOpsOne.variable}`}>
       <head>
+        {/* Skip the intro for returning visitors before first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("sk-intro-seen")==="1")document.documentElement.dataset.seen="1"}catch(e){}`,
+          }}
+        />
         {/* Consent Mode v2 default — must run before gtag.js/GTM so tags are gated from first load */}
         <script
           dangerouslySetInnerHTML={{

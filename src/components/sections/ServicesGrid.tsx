@@ -65,7 +65,7 @@ export function ServicesGrid() {
             <div>
               <span
                 className="text-xs font-semibold tracking-widest uppercase block mb-3"
-                style={{ color: 'var(--color-primary)' }}
+                style={{ color: 'var(--color-primary-ink)' }}
               >
                 What we do
               </span>
@@ -95,6 +95,7 @@ export function ServicesGrid() {
             <FadeUp key={service.number} delay={i * 80} className="h-full">
               <article
                 role="listitem"
+                data-spotlight
                 className={cn('h-full cursor-pointer p-8 md:p-10 flex flex-col gap-5 transition-colors duration-300 border-b md:border-b-0')}
                 style={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)' }}
                 onClick={() => setExpanded(expanded === i ? null : i)}
@@ -108,7 +109,7 @@ export function ServicesGrid() {
                 <div className="flex items-center justify-between">
                   <span
                     className="font-mono text-xs tracking-widest"
-                    style={{ color: 'var(--color-primary)' }}
+                    style={{ color: 'var(--color-primary-ink)' }}
                   >
                     {service.number}
                   </span>
@@ -118,7 +119,7 @@ export function ServicesGrid() {
                       borderColor:
                         expanded === i ? 'var(--color-primary)' : 'var(--color-border)',
                       color:
-                        expanded === i ? 'var(--color-primary)' : 'var(--color-muted)',
+                        expanded === i ? 'var(--color-primary-ink)' : 'var(--color-muted)',
                       transform: expanded === i ? 'rotate(45deg)' : 'none',
                     }}
                     aria-expanded={expanded === i}
@@ -183,9 +184,9 @@ export function ServicesGrid() {
                           key={tag}
                           className="px-3 py-1 text-xs font-medium"
                           style={{
-                            backgroundColor: 'rgba(124,58,237,0.08)',
-                            color: 'var(--color-accent)',
-                            border: '1px solid rgba(124,58,237,0.2)',
+                            backgroundColor: 'rgba(11,100,108,0.08)',
+                            color: 'var(--color-primary-ink)',
+                            border: '1px solid rgba(11,100,108,0.2)',
                           }}
                         >
                           {tag}

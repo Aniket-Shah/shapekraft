@@ -1,5 +1,6 @@
 'use client'
 import { FadeUp } from '@/components/motion/FadeUp'
+import { ScrollWords } from '@/components/motion/ScrollWords'
 
 const FACTS = [
   ['Studio',   'Global · Remote'],
@@ -10,6 +11,7 @@ const FACTS = [
 export function AboutStrip() {
   return (
     <section
+      className="theme-cream"
       style={{
         padding: 'clamp(2.5rem, 7vw, var(--s-16)) var(--gutter)',
         borderBottom: '1px solid var(--color-border)',
@@ -24,24 +26,22 @@ export function AboutStrip() {
             <FadeUp>
               <span
                 className="text-xs font-semibold tracking-widest uppercase"
-                style={{ color: 'var(--color-primary)' }}
+                style={{ color: 'var(--color-primary-ink)' }}
               >
                 About
               </span>
             </FadeUp>
 
-            <FadeUp delay={100}>
-              <h2
-                id="about-heading"
-                className="font-display font-black leading-tight tracking-tight"
-                style={{ fontSize: 'var(--fs-3xl)', color: 'var(--color-text)' }}
-              >
-                We don&apos;t take every project.{' '}
-                We take the{' '}
-                <span style={{ color: 'var(--color-primary)' }}>right</span>{' '}
-                ones. Then we engineer them to win.
-              </h2>
-            </FadeUp>
+            <ScrollWords
+              id="about-heading"
+              className="font-display font-black leading-tight tracking-tight"
+              style={{ fontSize: 'var(--fs-3xl)', color: 'var(--color-text)' }}
+              parts={[
+                { text: "We don't take every project. We take the" },
+                { text: "right", accent: true },
+                { text: "ones. Then we engineer them to win." },
+              ]}
+            />
           </div>
 
           {/* Meta */}

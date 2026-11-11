@@ -12,7 +12,7 @@ export default function OGImage() {
         style={{
           width: '1200px',
           height: '630px',
-          background: '#080808',
+          background: '#E97451',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'flex-end',
@@ -28,13 +28,13 @@ export default function OGImage() {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+              'linear-gradient(rgba(11,11,15,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(11,11,15,0.06) 1px, transparent 1px)',
             backgroundSize: '80px 80px',
             display: 'flex',
           }}
         />
 
-        {/* Purple glow blob */}
+        {/* Cream glow blob */}
         <div
           style={{
             position: 'absolute',
@@ -43,8 +43,8 @@ export default function OGImage() {
             width: 560,
             height: 560,
             borderRadius: '50%',
-            background: '#7C3AED',
-            opacity: 0.18,
+            background: '#FAF0E6',
+            opacity: 0.45,
             display: 'flex',
             filter: 'blur(80px)',
           }}
@@ -66,7 +66,7 @@ export default function OGImage() {
             style={{
               position: 'absolute',
               inset: 0,
-              border: '2px solid rgba(255,255,255,0.9)',
+              border: '2px solid rgba(11,11,15,0.95)',
               transform: 'rotate(45deg)',
               display: 'flex',
             }}
@@ -78,7 +78,7 @@ export default function OGImage() {
               left: 0,
               right: 0,
               height: 2,
-              background: 'rgba(255,255,255,0.9)',
+              background: 'rgba(11,11,15,0.95)',
               marginTop: -1,
               display: 'flex',
             }}
@@ -90,7 +90,7 @@ export default function OGImage() {
               top: 0,
               bottom: 0,
               width: 2,
-              background: 'rgba(255,255,255,0.9)',
+              background: 'rgba(11,11,15,0.95)',
               marginLeft: -1,
               display: 'flex',
             }}
@@ -100,7 +100,7 @@ export default function OGImage() {
         {/* Wordmark */}
         <div
           style={{
-            color: '#f0f0f0',
+            color: '#0B0B0F',
             fontSize: 86,
             fontWeight: 900,
             letterSpacing: '-3px',
@@ -115,7 +115,7 @@ export default function OGImage() {
         {/* Tagline */}
         <div
           style={{
-            color: '#6a6a6a',
+            color: '#26262D',
             fontSize: 28,
             fontWeight: 400,
             letterSpacing: '0.04em',
@@ -127,9 +127,9 @@ export default function OGImage() {
           <span>Digital Engineering Studio</span>
           <span
             style={{
-              background: 'rgba(124,58,237,0.2)',
-              border: '1px solid rgba(124,58,237,0.4)',
-              color: '#A78BFA',
+              background: '#0B646C',
+              border: '1px solid #084D53',
+              color: '#FFFDF9',
               fontSize: 18,
               fontWeight: 500,
               padding: '4px 16px',
@@ -150,7 +150,7 @@ export default function OGImage() {
             left: 0,
             right: 0,
             height: 4,
-            background: 'linear-gradient(90deg, #7C3AED 0%, #A78BFA 100%)',
+            background: 'linear-gradient(90deg, #0B646C 0%, #FAF0E6 100%)',
             display: 'flex',
           }}
         />

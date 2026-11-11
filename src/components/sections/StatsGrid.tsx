@@ -53,6 +53,7 @@ function AnimatedStat({ stat }: { stat: Stat }) {
   return (
     <div
       ref={ref}
+      data-spotlight
       className="flex flex-col justify-between p-8 md:p-10 transition-colors duration-300"
       style={{ backgroundColor: 'var(--color-bg)' }}
       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
@@ -63,7 +64,7 @@ function AnimatedStat({ stat }: { stat: Stat }) {
         style={{ fontSize: 'clamp(1.75rem, 6.5vw, 5rem)', color: 'var(--color-text)' }}
       >
         {stat.prefix}{count}{stat.suffix}
-        <span style={{ color: 'var(--color-primary)' }}>.</span>
+        <span style={{ color: 'var(--color-primary-ink)' }}>.</span>
       </span>
       <div>
         <p className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>
@@ -83,7 +84,7 @@ export function StatsGrid() {
   return (
     <section
       aria-label="Agency statistics"
-      className="border-y"
+      className="border-y theme-cream"
       style={{ borderColor: 'var(--color-border)', padding: 'var(--s-4) var(--gutter)' }}
     >
       <div

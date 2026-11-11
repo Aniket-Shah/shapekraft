@@ -41,6 +41,29 @@ export function HugeTextScroll() {
             }
           )
         })
+
+        // Scroll-velocity skew: rows lean into fast scrolling, then settle.
+        const targets = linesRef.current.filter(Boolean) as HTMLDivElement[]
+        const setSkew = gsap.quickSetter(targets, 'skewX', 'deg') as (v: number) => void
+        const proxy = { skew: 0 }
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            const skew = gsap.utils.clamp(-9, 9, self.getVelocity() / -260)
+            if (Math.abs(skew) > Math.abs(proxy.skew)) {
+              proxy.skew = skew
+              gsap.to(proxy, {
+                skew: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                overwrite: true,
+                onUpdate: () => setSkew(proxy.skew),
+              })
+            }
+          },
+        })
       }, containerRef)
 
       return () => ctx.revert()
@@ -76,14 +99,14 @@ export function HugeTextScroll() {
                 style={{
                   fontSize: 'clamp(3.5rem, 8.5vw, 8rem)',
                   color: row.isAccent
-                    ? 'var(--color-primary)'
+                    ? 'var(--color-accent)'
                     : i % 2 === 0
                       ? 'transparent'
-                      : 'rgba(255,255,255,0.05)',
+                      : 'rgba(11,11,15,0.08)',
                   WebkitTextStroke: row.isAccent
                     ? 'none'
                     : i % 2 === 0
-                      ? '1px rgba(255,255,255,0.2)'
+                      ? '1px rgba(11,11,15,0.35)'
                       : 'none',
                 }}
                 aria-hidden="true"

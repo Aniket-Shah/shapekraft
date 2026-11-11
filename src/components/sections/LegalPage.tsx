@@ -71,14 +71,14 @@ export function LegalPage({ title, lastUpdated, children }: Props) {
           color: var(--color-border);
         }
         .legal-prose a {
-          color: var(--color-accent);
+          color: var(--color-primary-ink);
           text-decoration: underline;
           text-decoration-color: transparent;
           text-underline-offset: 3px;
           transition: text-decoration-color 0.2s;
         }
         .legal-prose a:hover {
-          text-decoration-color: var(--color-accent);
+          text-decoration-color: var(--color-primary-ink);
         }
         .legal-prose a:focus-visible {
           outline: 2px solid var(--color-accent);

@@ -44,7 +44,7 @@ export function FeaturedWork() {
             <div>
               <span
                 className="text-xs font-semibold tracking-widest uppercase block mb-3"
-                style={{ color: 'var(--color-primary)' }}
+                style={{ color: 'var(--color-primary-ink)' }}
               >
                 Selected work
               </span>

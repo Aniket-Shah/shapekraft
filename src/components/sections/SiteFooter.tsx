@@ -66,9 +66,9 @@ export function SiteFooter() {
             <a
               href={`mailto:${email}`}
               className="text-sm font-medium w-fit transition-colors duration-200"
-              style={{ color: 'var(--color-accent)' }}
+              style={{ color: 'var(--color-primary-ink)' }}
               onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-accent)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-primary-ink)')}
             >
               {email}
             </a>
@@ -87,7 +87,7 @@ export function SiteFooter() {
                 <Link
                   key={label}
                   href={href}
-                  className="text-sm transition-colors duration-200"
+                  className="link-underline w-fit text-sm transition-colors duration-200"
                   style={{ color: 'var(--color-muted)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                   onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
@@ -111,7 +111,7 @@ export function SiteFooter() {
                 <Link
                   key={label}
                   href={href}
-                  className="text-sm transition-colors duration-200"
+                  className="link-underline w-fit text-sm transition-colors duration-200"
                   style={{ color: 'var(--color-muted)' }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                   onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
@@ -141,7 +141,7 @@ export function SiteFooter() {
               <Link
                 key={label}
                 href={href}
-                className="text-xs transition-colors duration-200"
+                className="link-underline text-xs transition-colors duration-200"
                 style={{ color: 'var(--color-muted)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-muted)')}
