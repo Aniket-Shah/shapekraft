@@ -6,18 +6,20 @@ import { pushDataLayerEvent } from '@/lib/analytics'
 import { FadeUp } from '@/components/motion/FadeUp'
 
 // ── CONFIG: all pricing lives here — do not scatter ─────────────────────────
-// Founding Client rates (Nov 2026): quoted to the first clients in each market
-// in exchange for a case study + testimonial. `list*` is the anchor price shown
-// struck-through. When founding slots run out, set foundingRates.active = false
-// and the list prices become the quoted prices. See Notion → Pricing Plan v2.
+// Prices per founder/pricing.md (12 Nov 2026). `list*` = the standard price quoted
+// on the site. `price*` = an optional founding rate, only shown when
+// foundingRates.active is true; it is labelled as a founding rate with an end
+// date, never as a struck-through "was" price (no fake anchors).
+// The Founding 5 offer for the RFQ Launch Kit is quoted in conversation.
 export const CONFIG = {
   whatsapp: {
     IN: '+919999999999', // UPDATE: your India WhatsApp number
     US: '+14155550000',  // UPDATE: your US/global WhatsApp number
   },
   foundingRates: {
-    active: true,
+    active: false,
     slotsLeft: 5, // UPDATE as founding slots fill
+    endsLabel: '31 Jan 2027',
   },
   packages: [
     {
@@ -56,12 +58,12 @@ export const CONFIG = {
     {
       id: 'b2b',
       tier: 'B2B',
-      label: 'Business B2B',
-      description: 'Discovery calls, catalog and RFQ flows, proposals and decks, plus 3 months of care included. Priced by scope, from ₹75,000 / $4,000.',
+      label: 'RFQ Launch Kit (B2B)',
+      description: 'For traders and distributors: a catalogue site plus RFQ → auto-quote, so quotes go out on email/WhatsApp in minutes. Needs the ₹5,000/month automation plan. Outside India, priced on a call.',
       includedPages: 0,
-      priceINR: 0,
+      priceINR: 60_000,
       priceUSD: 0,
-      listINR: 0,
+      listINR: 60_000,
       listUSD: 0,
     },
   ],
@@ -97,7 +99,7 @@ export const CONFIG = {
   carePlans: [
     { id: 'none', label: 'No care plan', description: 'You manage hosting and updates yourself.', priceINR: 0, priceUSD: 0 },
     { id: 'essential', label: 'Essential care', description: 'Hosting, backups, updates, uptime and form monitoring.', priceINR: 1_500, priceUSD: 99 },
-    { id: 'growth', label: 'Growth care', description: 'Essential + 2 hrs of changes a month, monthly speed/SEO report, 24h response.', priceINR: 5_000, priceUSD: 299 },
+    { id: 'growth', label: 'Growth care / automation plan', description: 'Essential + runs your automations, 2 hrs of changes a month, monthly speed/SEO report, 24h response.', priceINR: 5_000, priceUSD: 299 },
   ],
   // Extra pages beyond the package's included pages
   pageRate: { INR: 2_000, USD: 40 },
@@ -164,7 +166,8 @@ export function QuotationBuilder() {
   const listOf = (item: Priced) => (currency === 'INR' ? item.listINR : item.listUSD)
   const getPkgPrice = (p: (typeof CONFIG.packages)[number]) => priceOf(p)
   const getAddonPrice = (a: (typeof CONFIG.addons)[number]) => priceOf(a)
-  const showList = (item: Priced) => founding && listOf(item) > priceOf(item)
+  // Founding rate shown next to the standard price, never as a struck-through "was" price
+  const showFounding = (item: Priced) => founding && listOf(item) > (currency === 'INR' ? item.priceINR : item.priceUSD)
 
   const activePkg = CONFIG.packages.find((p) => p.id === selectedPackage) ?? null
   const includedPages = activePkg?.includedPages ?? CONFIG.basePages
@@ -267,7 +270,7 @@ export function QuotationBuilder() {
     const totalDisplay = isB2B && total === 0 ? 'Custom' : formatPrice(total, currency)
 
     const pkgRow = activePkg
-      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td>${isB2B ? 'On call' : formatPrice(getPkgPrice(activePkg), currency)}</td></tr>`
+      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td>${pkgPrice === 0 ? 'On call' : formatPrice(pkgPrice, currency)}</td></tr>`
       : ''
     const addonRows = CONFIG.addons
       .filter((a) => selectedAddons.has(a.id))
@@ -428,7 +431,7 @@ export function QuotationBuilder() {
                 borderRadius: 'var(--radius-full)',
               }}
             >
-              Founding client rates · {CONFIG.foundingRates.slotsLeft} slots left · in exchange for a case study
+              Founding client rates · {CONFIG.foundingRates.slotsLeft} of 5 left · until {CONFIG.foundingRates.endsLabel} · in exchange for a case study
             </p>
           )}
         </FadeUp>
@@ -516,12 +519,14 @@ export function QuotationBuilder() {
                             className="font-mono text-sm shrink-0"
                             style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-muted)' }}
                           >
-                            {pkg.id === 'b2b' ? 'Custom' : (
+                            {getPkgPrice(pkg) === 0 ? 'Custom' : (
                               <>
-                                {showList(pkg) && (
-                                  <s className="mr-1.5" style={{ opacity: 0.6 }}>{formatPrice(listOf(pkg), currency)}</s>
-                                )}
                                 {formatPrice(getPkgPrice(pkg), currency)}
+                                {showFounding(pkg) && (
+                                  <span className="block text-xs" style={{ opacity: 0.75 }}>
+                                    founding rate · standard {formatPrice(listOf(pkg), currency)}
+                                  </span>
+                                )}
                               </>
                             )}
                           </span>
@@ -574,10 +579,12 @@ export function QuotationBuilder() {
                             className="font-mono text-sm shrink-0"
                             style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-muted)' }}
                           >
-                            {showList(addon) && (
-                              <s className="mr-1.5" style={{ opacity: 0.6 }}>{formatPrice(listOf(addon), currency)}</s>
-                            )}
                             {formatPrice(getAddonPrice(addon), currency)}
+                            {showFounding(addon) && (
+                              <span className="block text-xs" style={{ opacity: 0.75 }}>
+                                founding rate · standard {formatPrice(listOf(addon), currency)}
+                              </span>
+                            )}
                           </span>
                         </div>
                         <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
@@ -825,7 +832,7 @@ export function QuotationBuilder() {
                     <div className="flex items-center justify-between text-sm">
                       <span style={{ color: 'var(--color-muted)' }}>{pkgDisplayName(activePkg)}</span>
                       <span className="font-mono" style={{ color: 'var(--color-text)' }}>
-                        {isB2B ? 'On call' : formatPrice(pkgPrice, currency)}
+                        {pkgPrice === 0 ? 'On call' : formatPrice(pkgPrice, currency)}
                       </span>
                     </div>
                   )}
