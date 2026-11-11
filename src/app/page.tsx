@@ -23,7 +23,16 @@ const homeSchema = [
     '@type': 'Organization',
     '@id': 'https://shapekraft.co/#organization',
     name: 'ShapeKraft',
+    alternateName: 'ShapeKraft Studio',
     url: 'https://shapekraft.co',
+    description:
+      'ShapeKraft is a remote web engineering studio that builds fast, custom Next.js websites and wires AI automation and integrations into them.',
+    disambiguatingDescription:
+      'Web design, development and AI automation studio. Not related to ShapeCraft 3D-modelling software, games or manufacturing companies.',
+    slogan: 'Engineered, not just designed.',
+    foundingDate: '2025',
+    // TODO: add the LinkedIn company page, GitHub org and Google Business Profile URLs once live
+    sameAs: [],
     logo: {
       '@type': 'ImageObject',
       url: 'https://shapekraft.co/icon.svg',
@@ -72,23 +81,23 @@ const homeSchema = [
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Basic Website',
-            description: 'A clean, fast site that looks great on every device.',
+            name: 'Starter Website',
+            description: 'Five custom pages, fast on every device, contact form wired to your inbox, SEO basics.',
           },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Pro Website',
-            description: 'Multiple sections, smooth animations, conversion-focused layout.',
+            name: 'Growth Website',
+            description: 'Up to ten pages, CMS/blog, animations, analytics and lead capture to email, WhatsApp or CRM.',
           },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Advanced Website',
+            name: 'Studio Website',
             description: 'Built from scratch to match your brand exactly.',
           },
         },
@@ -104,7 +113,7 @@ const homeSchema = [
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'AI Automation & Agents',
+            name: 'AI Automation Workflow',
             description: 'Hook AI into your product to save time on repetitive tasks.',
           },
         },
@@ -120,7 +129,7 @@ const homeSchema = [
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Webhook & Integrations',
+            name: 'Integrations',
             description:
               'Connect the tools you already use — forms, CRMs, Slack, Notion, Zapier, and more.',
           },

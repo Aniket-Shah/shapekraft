@@ -6,78 +6,122 @@ import { pushDataLayerEvent } from '@/lib/analytics'
 import { FadeUp } from '@/components/motion/FadeUp'
 
 // ── CONFIG: all pricing lives here — do not scatter ─────────────────────────
+// Founding Client rates (Nov 2026): quoted to the first clients in each market
+// in exchange for a case study + testimonial. `list*` is the anchor price shown
+// struck-through. When founding slots run out, set foundingRates.active = false
+// and the list prices become the quoted prices. See Notion → Pricing Plan v2.
 export const CONFIG = {
   whatsapp: {
     IN: '+919999999999', // UPDATE: your India WhatsApp number
     US: '+14155550000',  // UPDATE: your US/global WhatsApp number
   },
+  foundingRates: {
+    active: true,
+    slotsLeft: 5, // UPDATE as founding slots fill
+  },
   packages: [
     {
       id: 'basic',
-      tier: 'Basic',
-      label: 'Basic Website',
-      description: 'A clean, fast site that looks great on every device. Includes a contact form and the basics to get found on Google.',
-      priceINR: 8_000,
-      priceUSD: 110,
+      tier: 'Starter',
+      label: 'Starter Website',
+      description: '5 custom pages, fast on every device, a contact form wired to your inbox, and the SEO basics. 90+ Lighthouse.',
+      includedPages: 5,
+      priceINR: 12_000,
+      priceUSD: 450,
+      listINR: 15_000,
+      listUSD: 750,
     },
     {
       id: 'pro',
-      tier: 'Pro',
-      label: 'Pro Website',
-      description: 'Multiple sections, smooth animations, a blog or portfolio you can update yourself, and better SEO out of the box.',
+      tier: 'Growth',
+      label: 'Growth Website',
+      description: 'Up to 10 pages, smooth animations, a blog or portfolio you update yourself, analytics, and enquiries sent straight to email, WhatsApp or your CRM.',
+      includedPages: 10,
       priceINR: 25_000,
-      priceUSD: 350,
+      priceUSD: 900,
+      listINR: 35_000,
+      listUSD: 1_500,
     },
     {
       id: 'advanced',
-      tier: 'Advanced',
-      label: 'Advanced Website',
-      description: 'Built from scratch to match your brand exactly — your own design system, custom interactions, no templates.',
-      priceINR: 40_000,
-      priceUSD: 550,
+      tier: 'Studio',
+      label: 'Studio Website',
+      description: 'Up to 15 pages built from scratch to your brand: your own design system, custom interactions, and a performance guarantee.',
+      includedPages: 15,
+      priceINR: 45_000,
+      priceUSD: 1_800,
+      listINR: 60_000,
+      listUSD: 3_000,
     },
     {
       id: 'b2b',
       tier: 'B2B',
       label: 'Business B2B',
-      description: 'We hop on calls, understand your business, build the site, and handle proposals, decks, and AMC. Pricing depends on scope.',
+      description: 'Discovery calls, catalog and RFQ flows, proposals and decks, plus 3 months of care included. Priced by scope, from ₹75,000 / $4,000.',
+      includedPages: 0,
       priceINR: 0,
       priceUSD: 0,
+      listINR: 0,
+      listUSD: 0,
     },
   ],
   addons: [
     {
       id: 'ai',
-      label: 'AI Automation & Agents',
-      description: 'Hook AI into your product — automate the repetitive stuff, build smart workflows, stop doing things manually.',
-      priceINR: 25_000,
-      priceUSD: 350,
+      label: 'AI Automation (first workflow)',
+      description: 'One workflow that saves you hours: RFQ → auto-quote, enquiry → CRM/WhatsApp, or invoice and document extraction.',
+      priceINR: 18_000,
+      priceUSD: 700,
+      listINR: 30_000,
+      listUSD: 1_500,
     },
     {
       id: 'performance',
       label: 'Performance Optimisation',
       description: 'Make your site noticeably faster. Better Google scores, lower bounce rate, happier users.',
       priceINR: 10_000,
-      priceUSD: 150,
+      priceUSD: 300,
+      listINR: 10_000,
+      listUSD: 750,
     },
     {
       id: 'webhook',
-      label: 'Webhook & Integrations',
-      description: 'Connect the tools you already use — CRMs, payment gateways, email, anything. They talk to each other so you don\'t have to.',
+      label: 'Integrations',
+      description: 'Connect the tools you already use — CRMs, payment gateways, email, Slack, Notion. They talk to each other so you don\'t have to.',
       priceINR: 10_000,
-      priceUSD: 150,
+      priceUSD: 300,
+      listINR: 10_000,
+      listUSD: 500,
     },
   ],
-  pageRate: { INR: 2_000, USD: 30 },
+  carePlans: [
+    { id: 'none', label: 'No care plan', description: 'You manage hosting and updates yourself.', priceINR: 0, priceUSD: 0 },
+    { id: 'essential', label: 'Essential care', description: 'Hosting, backups, updates, uptime and form monitoring.', priceINR: 1_500, priceUSD: 99 },
+    { id: 'growth', label: 'Growth care', description: 'Essential + 2 hrs of changes a month, monthly speed/SEO report, 24h response.', priceINR: 5_000, priceUSD: 299 },
+  ],
+  // Extra pages beyond the package's included pages
+  pageRate: { INR: 2_000, USD: 40 },
   basePages: 5,
   maxPages: 50,
   split: { design: 40, build: 30, launch: 30 },
 } as const
 
+type Priced = { priceINR: number; priceUSD: number; listINR: number; listUSD: number }
+
+/** Escape user-entered text before it goes into the printable HTML estimate. */
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 const TIER_BADGE: Record<string, { color: string; bg: string }> = {
-  Basic:    { color: 'var(--color-muted)',   bg: 'rgba(11,11,15,0.06)' },
-  Pro:      { color: 'var(--color-primary-ink)', bg: 'rgba(11,100,108,0.10)' },
-  Advanced: { color: 'var(--color-accent)',  bg: 'rgba(11,100,108,0.15)' },
+  Starter:  { color: 'var(--color-muted)',   bg: 'rgba(11,11,15,0.06)' },
+  Growth:   { color: 'var(--color-primary-ink)', bg: 'rgba(11,100,108,0.10)' },
+  Studio:   { color: 'var(--color-accent)',  bg: 'rgba(11,100,108,0.15)' },
   B2B:      { color: 'var(--color-text)',    bg: 'rgba(11,11,15,0.08)' },
 }
 
@@ -88,6 +132,12 @@ export function QuotationBuilder() {
   const [pages, setPages] = useState<number>(CONFIG.basePages)
   const [negotiationNote, setNegotiationNote] = useState('')
   const [showNegotiation, setShowNegotiation] = useState(false)
+  const [carePlan, setCarePlan] = useState<string>('none')
+  const [leadName, setLeadName] = useState('')
+  const [leadContact, setLeadContact] = useState('')
+  const [showLeadForm, setShowLeadForm] = useState(false)
+  const [leadError, setLeadError] = useState('')
+  const [leadSending, setLeadSending] = useState(false)
 
   useEffect(() => {
     const host = window.location.hostname
@@ -104,18 +154,37 @@ export function QuotationBuilder() {
   // B2B scope is discussed on call — no page count applies
   const showPages = selectedPackage !== null && selectedPackage !== 'b2b'
 
-  const getPkgPrice = (p: (typeof CONFIG.packages)[number]) =>
-    currency === 'INR' ? p.priceINR : p.priceUSD
-  const getAddonPrice = (a: (typeof CONFIG.addons)[number]) =>
-    currency === 'INR' ? a.priceINR : a.priceUSD
+  const founding = CONFIG.foundingRates.active
+
+  // Quoted price: founding rate while founding slots are open, list price after.
+  const priceOf = (item: Priced) =>
+    founding
+      ? currency === 'INR' ? item.priceINR : item.priceUSD
+      : currency === 'INR' ? item.listINR : item.listUSD
+  const listOf = (item: Priced) => (currency === 'INR' ? item.listINR : item.listUSD)
+  const getPkgPrice = (p: (typeof CONFIG.packages)[number]) => priceOf(p)
+  const getAddonPrice = (a: (typeof CONFIG.addons)[number]) => priceOf(a)
+  const showList = (item: Priced) => founding && listOf(item) > priceOf(item)
 
   const activePkg = CONFIG.packages.find((p) => p.id === selectedPackage) ?? null
+  const includedPages = activePkg?.includedPages ?? CONFIG.basePages
+  const extraPages = showPages ? Math.max(0, pages - includedPages) : 0
   const pkgPrice = activePkg ? getPkgPrice(activePkg) : 0
   const addonTotal = CONFIG.addons
     .filter((a) => selectedAddons.has(a.id))
     .reduce((sum, a) => sum + getAddonPrice(a), 0)
-  const pageTotal = showPages ? pages * CONFIG.pageRate[currency] : 0
+  const pageTotal = extraPages * CONFIG.pageRate[currency]
   const total = pkgPrice + addonTotal + pageTotal
+
+  const activeCare = CONFIG.carePlans.find((c) => c.id === carePlan) ?? CONFIG.carePlans[0]
+  const carePrice = currency === 'INR' ? activeCare.priceINR : activeCare.priceUSD
+
+  // Start the page stepper at the package's included pages
+  function selectPackage(id: string | null) {
+    setSelectedPackage(id)
+    const pkg = CONFIG.packages.find((p) => p.id === id)
+    if (pkg && pkg.includedPages > 0) setPages(pkg.includedPages)
+  }
 
   const phaseDesign = Math.round((total * CONFIG.split.design) / 100)
   const phaseBuild = Math.round((total * CONFIG.split.build) / 100)
@@ -135,9 +204,65 @@ export function QuotationBuilder() {
 
   const isB2B = selectedPackage === 'b2b'
 
+  // Step 1: the Download button opens the lead form instead of printing straight away.
   function handlePDF() {
     if (!hasSelection) return
+    setShowLeadForm(true)
+    setLeadError('')
+  }
 
+  // Step 2: capture the lead, then print the estimate.
+  async function submitLeadAndPrint(e: React.FormEvent) {
+    e.preventDefault()
+    const name = leadName.trim()
+    const contact = leadContact.trim()
+    const looksLikeEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
+    const looksLikePhone = /^\+?[\d\s()-]{8,}$/.test(contact)
+    if (!name) { setLeadError('Please add your name.'); return }
+    if (!looksLikeEmail && !looksLikePhone) {
+      setLeadError('Please add a valid email or WhatsApp number.')
+      return
+    }
+    setLeadError('')
+    setLeadSending(true)
+
+    const summary = {
+      name,
+      contact,
+      currency,
+      package: activePkg?.label ?? null,
+      pages: showPages ? pages : null,
+      extraPages,
+      addons: CONFIG.addons.filter((a) => selectedAddons.has(a.id)).map((a) => a.label),
+      carePlan: activeCare.id === 'none' ? null : activeCare.label,
+      carePlanMonthly: carePrice,
+      total: isB2B && total === 0 ? 'Custom' : formatPrice(total, currency),
+      foundingRate: founding,
+      note: negotiationNote.trim() || null,
+      page: typeof window !== 'undefined' ? window.location.href : null,
+    }
+
+    try {
+      // Fire-and-forget with a short timeout: a slow lead relay must never block the PDF.
+      const controller = new AbortController()
+      const timer = setTimeout(() => controller.abort(), 4000)
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(summary),
+        signal: controller.signal,
+      }).catch(() => undefined)
+      clearTimeout(timer)
+    } finally {
+      setLeadSending(false)
+    }
+
+    pushDataLayerEvent('generate_lead')
+    setShowLeadForm(false)
+    printEstimate(name)
+  }
+
+  function printEstimate(preparedFor: string) {
     const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
     const totalDisplay = isB2B && total === 0 ? 'Custom' : formatPrice(total, currency)
 
@@ -149,10 +274,16 @@ export function QuotationBuilder() {
       .map((a) => `<tr><td>${a.label}</td><td>${formatPrice(getAddonPrice(a), currency)}</td></tr>`)
       .join('')
     const pageRow = showPages
-      ? `<tr><td>${pages} page${pages !== 1 ? 's' : ''} × ${formatPrice(CONFIG.pageRate[currency], currency)}</td><td>${formatPrice(pageTotal, currency)}</td></tr>`
+      ? `<tr><td>${pages} page${pages !== 1 ? 's' : ''} (${includedPages} included${extraPages > 0 ? `, ${extraPages} extra × ${formatPrice(CONFIG.pageRate[currency], currency)}` : ''})</td><td>${extraPages > 0 ? formatPrice(pageTotal, currency) : 'Included'}</td></tr>`
+      : ''
+    const careRow = activeCare.id !== 'none'
+      ? `<tr><td>${activeCare.label} (after launch)</td><td>${formatPrice(carePrice, currency)}/month</td></tr>`
       : ''
     const noteBlock = negotiationNote.trim()
-      ? `<div class="section">Notes / Budget</div><div class="notes">${negotiationNote.trim()}</div>`
+      ? `<div class="section">Notes / Budget</div><div class="notes">${escapeHtml(negotiationNote.trim())}</div>`
+      : ''
+    const foundingNote = founding && !(isB2B && total === 0)
+      ? ' · Founding client rate, in exchange for a case study + testimonial'
       : ''
     const scheduleBlock = total > 0 ? `
       <div class="section">Payment Schedule</div>
@@ -226,14 +357,14 @@ export function QuotationBuilder() {
   </div>
 
   <div class="doc-label">Project Estimate</div>
-  <div class="doc-date">${date}</div>
+  <div class="doc-date">${date} · Prepared for ${escapeHtml(preparedFor)}</div>
 
   <div class="section">Services</div>
-  <table>${pkgRow}${addonRows}${pageRow}</table>
+  <table>${pkgRow}${addonRows}${pageRow}${careRow}</table>
 
   <div class="total-wrap">
     <div class="total-amount${isB2B && total === 0 ? ' custom' : ''}">${totalDisplay}</div>
-    <div class="total-note">${isB2B && total === 0 ? 'B2B pricing discussed on call · AMC &amp; scope included' : 'Estimate only · final quote confirmed after discovery call'}</div>
+    <div class="total-note">${isB2B && total === 0 ? 'B2B pricing discussed on call · AMC &amp; scope included' : `Estimate only · final quote confirmed after discovery call${foundingNote}`}</div>
   </div>
 
   ${scheduleBlock}
@@ -285,8 +416,21 @@ export function QuotationBuilder() {
             Build your quote
           </h1>
           <p style={{ color: 'var(--color-muted)', fontSize: 'var(--fs-lg)', maxWidth: '520px' }}>
-            Pick what you need, see the price right away. No forms, no sales calls, no waiting.
+            Pick what you need, see the price right away. No sales calls, no waiting.
           </p>
+          {founding && (
+            <p
+              className="mt-4 inline-block text-sm font-medium px-3 py-1.5"
+              style={{
+                color: 'var(--color-primary-ink)',
+                backgroundColor: 'rgba(11,100,108,0.08)',
+                border: '1px solid rgba(11,100,108,0.2)',
+                borderRadius: 'var(--radius-full)',
+              }}
+            >
+              Founding client rates · {CONFIG.foundingRates.slotsLeft} slots left · in exchange for a case study
+            </p>
+          )}
         </FadeUp>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
@@ -305,13 +449,13 @@ export function QuotationBuilder() {
               <div className="flex flex-col gap-3" role="radiogroup" aria-label="Choose a website package">
                 {CONFIG.packages.map((pkg) => {
                   const active = selectedPackage === pkg.id
-                  const badge = TIER_BADGE[pkg.tier] ?? TIER_BADGE.Basic
+                  const badge = TIER_BADGE[pkg.tier] ?? TIER_BADGE.Starter
                   return (
                     <button
                       key={pkg.id}
                       role="radio"
                       aria-checked={active}
-                      onClick={() => setSelectedPackage(active ? null : pkg.id)}
+                      onClick={() => selectPackage(active ? null : pkg.id)}
                       className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 text-left w-full transition-all duration-300"
                       style={{
                         backgroundColor: active ? 'rgba(11,100,108, 0.06)' : 'var(--color-surface)',
@@ -372,7 +516,14 @@ export function QuotationBuilder() {
                             className="font-mono text-sm shrink-0"
                             style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-muted)' }}
                           >
-                            {pkg.id === 'b2b' ? 'Custom' : formatPrice(getPkgPrice(pkg), currency)}
+                            {pkg.id === 'b2b' ? 'Custom' : (
+                              <>
+                                {showList(pkg) && (
+                                  <s className="mr-1.5" style={{ opacity: 0.6 }}>{formatPrice(listOf(pkg), currency)}</s>
+                                )}
+                                {formatPrice(getPkgPrice(pkg), currency)}
+                              </>
+                            )}
                           </span>
                         </div>
                         <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
@@ -423,6 +574,9 @@ export function QuotationBuilder() {
                             className="font-mono text-sm shrink-0"
                             style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-muted)' }}
                           >
+                            {showList(addon) && (
+                              <s className="mr-1.5" style={{ opacity: 0.6 }}>{formatPrice(listOf(addon), currency)}</s>
+                            )}
                             {formatPrice(getAddonPrice(addon), currency)}
                           </span>
                         </div>
@@ -498,8 +652,63 @@ export function QuotationBuilder() {
                   </button>
                 </div>
                 <p className="text-xs mt-2" style={{ color: 'var(--color-muted)' }}>
-                  Per page: {formatPrice(CONFIG.pageRate[currency], currency)}
+                  {includedPages} pages included · each extra page {formatPrice(CONFIG.pageRate[currency], currency)}
                 </p>
+              </FadeUp>
+            )}
+
+            {/* CARE PLAN — monthly, after launch */}
+            {hasSelection && (
+              <FadeUp delay={250}>
+                <h2
+                  className="text-xs font-semibold tracking-widest uppercase mb-4"
+                  style={{ color: 'var(--color-muted)' }}
+                >
+                  Care after launch (monthly)
+                </h2>
+                <div className="flex flex-col gap-3" role="radiogroup" aria-label="Choose a care plan">
+                  {CONFIG.carePlans.map((plan) => {
+                    const active = carePlan === plan.id
+                    const price = currency === 'INR' ? plan.priceINR : plan.priceUSD
+                    return (
+                      <button
+                        key={plan.id}
+                        role="radio"
+                        aria-checked={active}
+                        onClick={() => setCarePlan(plan.id)}
+                        className="flex items-start gap-3 sm:gap-4 p-4 text-left w-full transition-all duration-300"
+                        style={{
+                          backgroundColor: active ? 'rgba(11,100,108, 0.06)' : 'var(--color-surface)',
+                          border: `1px solid ${active ? 'var(--color-primary)' : 'var(--color-border)'}`,
+                          borderRadius: 'var(--radius-sm)',
+                        }}
+                      >
+                        <span
+                          className="mt-0.5 shrink-0"
+                          style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-border)' }}
+                        >
+                          {active ? <CheckCircle2 size={18} /> : <Circle size={18} />}
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>
+                              {plan.label}
+                            </span>
+                            <span
+                              className="font-mono text-sm shrink-0"
+                              style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-muted)' }}
+                            >
+                              {price > 0 ? `${formatPrice(price, currency)}/mo` : '—'}
+                            </span>
+                          </div>
+                          <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
+                            {plan.description}
+                          </p>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
               </FadeUp>
             )}
           </div>
@@ -633,11 +842,21 @@ export function QuotationBuilder() {
                   {showPages && (
                     <div className="flex items-center justify-between text-sm">
                       <span style={{ color: 'var(--color-muted)' }}>
-                        {pages} {pages === 1 ? 'page' : 'pages'} ×{' '}
-                        {formatPrice(CONFIG.pageRate[currency], currency)}
+                        {pages} {pages === 1 ? 'page' : 'pages'}
+                        {extraPages > 0
+                          ? ` (${extraPages} extra × ${formatPrice(CONFIG.pageRate[currency], currency)})`
+                          : ' (included)'}
                       </span>
                       <span className="font-mono" style={{ color: 'var(--color-text)' }}>
-                        {formatPrice(pageTotal, currency)}
+                        {extraPages > 0 ? formatPrice(pageTotal, currency) : 'Included'}
+                      </span>
+                    </div>
+                  )}
+                  {activeCare.id !== 'none' && (
+                    <div className="flex items-center justify-between text-sm">
+                      <span style={{ color: 'var(--color-muted)' }}>{activeCare.label} (after launch)</span>
+                      <span className="font-mono" style={{ color: 'var(--color-text)' }}>
+                        {formatPrice(carePrice, currency)}/mo
                       </span>
                     </div>
                   )}
@@ -676,8 +895,71 @@ export function QuotationBuilder() {
                 </div>
               )}
 
+              {/* Lead capture — shown after the visitor asks for the PDF */}
+              {showLeadForm && hasSelection && (
+                <form onSubmit={submitLeadAndPrint} className="flex flex-col gap-3" noValidate>
+                  <p className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>
+                    Where should we send your estimate?
+                  </p>
+                  <label className="flex flex-col gap-1 text-xs" style={{ color: 'var(--color-muted)' }}>
+                    Your name
+                    <input
+                      type="text"
+                      autoComplete="name"
+                      value={leadName}
+                      onChange={(e) => setLeadName(e.target.value)}
+                      className="w-full p-3 text-sm"
+                      style={{
+                        backgroundColor: 'var(--color-bg)',
+                        border: '1px solid var(--color-border)',
+                        borderRadius: 'var(--radius-sm)',
+                        color: 'var(--color-text)',
+                      }}
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1 text-xs" style={{ color: 'var(--color-muted)' }}>
+                    Email or WhatsApp number
+                    <input
+                      type="text"
+                      inputMode="email"
+                      autoComplete="email"
+                      value={leadContact}
+                      onChange={(e) => setLeadContact(e.target.value)}
+                      className="w-full p-3 text-sm"
+                      style={{
+                        backgroundColor: 'var(--color-bg)',
+                        border: '1px solid var(--color-border)',
+                        borderRadius: 'var(--radius-sm)',
+                        color: 'var(--color-text)',
+                      }}
+                    />
+                  </label>
+                  {leadError && (
+                    <p role="alert" className="text-xs" style={{ color: 'var(--color-text)' }}>
+                      {leadError}
+                    </p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={leadSending}
+                    className="flex items-center justify-center gap-2 w-full py-4 font-semibold text-base transition-all duration-300"
+                    style={{
+                      backgroundColor: 'var(--color-primary)',
+                      color: 'var(--color-primary-fg)',
+                      borderRadius: 'var(--radius-full)',
+                      cursor: leadSending ? 'wait' : 'pointer',
+                    }}
+                  >
+                    <Download size={16} /> {leadSending ? 'Preparing…' : 'Get my PDF estimate'}
+                  </button>
+                  <p className="text-xs" style={{ color: 'var(--color-muted)' }}>
+                    We&apos;ll follow up once, within one business day. No spam.
+                  </p>
+                </form>
+              )}
+
               {/* Primary: Download PDF */}
-              <button
+              {!showLeadForm && <button
                 onClick={handlePDF}
                 disabled={!hasSelection}
                 className="flex items-center justify-center gap-2 w-full py-4 font-semibold text-base transition-all duration-300"
@@ -704,7 +986,7 @@ export function QuotationBuilder() {
                 ) : (
                   'Select a package to continue'
                 )}
-              </button>
+              </button>}
 
               {/* Secondary: Contact */}
               {hasSelection && (

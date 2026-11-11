@@ -1,0 +1,30 @@
+# ShapeKraft
+
+> ShapeKraft is a remote web engineering studio (founded 2025) that builds fast, custom websites in Next.js, React and TypeScript, and wires AI automation and integrations into them for small and growing businesses and B2B teams in India and worldwide. Not to be confused with "ShapeCraft" 3D-modelling tools, games or manufacturers.
+
+Tagline: Engineered, not just designed.
+
+## Services
+
+- Website design and development: custom Next.js / React / TypeScript sites, no templates, 90+ Lighthouse on mobile.
+- AI automation: workflows such as RFQ to auto-quote, enquiry to CRM or WhatsApp, and invoice or document extraction.
+- Integrations: CRMs, payment gateways, email, Slack, Notion, Zapier and webhooks.
+- Performance optimisation: Core Web Vitals audits and fixes for existing sites.
+- Care plans: hosting, backups, updates, monitoring and monthly changes after launch.
+
+## Who it is for
+
+- Small and growing businesses that want a custom, fast site rather than a template.
+- B2B companies (traders, manufacturers, distributors) that need catalogue and RFQ flows, proposals and ongoing maintenance.
+
+## Pages
+
+- [Home](https://shapekraft.co/): services, process and contact
+- [Instant quote](https://shapekraft.co/quote): live pricing builder in INR (India) or USD (worldwide)
+- [Privacy policy](https://shapekraft.co/privacy)
+- [Terms](https://shapekraft.co/terms)
+
+## Contact
+
+- Worldwide: hello@shapekraft.co (https://shapekraft.co)
+- India: hello@shapekraft.in (https://shapekraft.in)
