@@ -1,0 +1,89 @@
+{
+ "n": 20,
+ "seed": 886378,
+ "customer": {
+  "business": "ShapeKraft RFQ Launch Kit: a catalogue website plus an enquiry-to-quote desk, set up and run monthly for Indian B2B traders and distributors",
+  "target": "Owners of Indian B2B trading and distribution firms (chemicals, industrial supplies, packaging, textiles) who get buyer enquiries (RFQs) by IndiaMART, phone and WhatsApp and send quotes by hand",
+  "where": "India, mainly industrial and trading hubs in Maharashtra and Gujarat; all money amounts are in Indian rupees (INR), not dollars",
+  "age": [
+   28,
+   58
+  ],
+  "segments": [
+   {
+    "name": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+    "share": 0.45,
+    "income": [
+     5000000,
+     20000000
+    ]
+   },
+   {
+    "name": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+    "share": 0.35,
+    "income": [
+     20000000,
+     100000000
+    ]
+   },
+   {
+    "name": "Owner or director of an established distributor, 20-50 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+    "share": 0.2,
+    "income": [
+     100000000,
+     500000000
+    ]
+   }
+  ],
+  "behaviours": [
+   {
+    "name": "IndiaMART-dependent",
+    "share": 0.25,
+    "how": "Pays for an IndiaMART membership and gets most new enquiries from it; replies from the phone app."
+   },
+   {
+    "name": "Phone-and-WhatsApp old school",
+    "share": 0.2,
+    "how": "Quotes from memory or an Excel price list over calls and WhatsApp; most business is repeat buyers."
+   },
+   {
+    "name": "Burned before",
+    "share": 0.15,
+    "how": "Paid a web developer or a portal before and got little back; suspicious of digital promises."
+   },
+   {
+    "name": "Hard negotiator",
+    "share": 0.15,
+    "how": "Bargains on every purchase and compares at least three quotes before paying anyone."
+   },
+   {
+    "name": "Next-generation modernizer",
+    "share": 0.15,
+    "how": "A son, daughter or young partner pushing the family firm to go digital; reads up on tools."
+   },
+   {
+    "name": "Asks the CA first",
+    "share": 0.1,
+    "how": "Runs any spend above a few thousand rupees past their chartered accountant."
+   }
+  ],
+  "objections": [
+   "IndiaMART already gives me a catalogue and enquiries",
+   "Rs 60,000 plus Rs 5,000 every month is a lot for a website",
+   "My prices change daily and by customer, an automatic quote will be wrong",
+   "I paid for leads before and they were fake, why trust another digital promise",
+   "My staff and I can reply on WhatsApp ourselves",
+   "Who maintains it if this small studio disappears",
+   "A website alone will not bring buyers"
+  ],
+  "habits": [
+   "you check new enquiries on your phone first thing every morning",
+   "your price list is an Excel file that changes when raw material rates move",
+   "most of your orders come from repeat buyers who call you directly",
+   "you get somewhere between 5 and 40 new enquiries a week",
+   "your nephew built your current website years ago and nobody updates it",
+   "you lost an order last month because another supplier quoted first"
+  ]
+ },
+ "pitch": "ShapeKraft Quote-First Desk (all prices in Indian rupees, plus 18% GST)\n\n- What it does: when a buyer sends an enquiry (on IndiaMART, WhatsApp, email or your website), a quote is drafted from your own price list and sent to you on WhatsApp within minutes. You check it and send it in one tap. Nothing goes out without your approval. You update today's rates by sending a WhatsApp message, and you can set special prices for your top customers.\n- Start with a 14-day pilot for Rs 5,000: we load your real Excel price list and connect your real enquiries. If fewer than 7 in 10 drafted quotes go out without you changing the price, you get the Rs 5,000 back.\n- If the pilot works, the full desk with a fast catalogue website is Rs 60,000 setup plus Rs 5,000 a month (hosting, keeping the desk running, rate updates, 2 hours of changes). The pilot fee is deducted from the setup. Pay 40% to start, 30% at build, 30% at launch.\n- After launch, if the desk stops drafting at least 8 in 10 quotes without price changes, you pay no monthly fee until it does.\n- In writing: you own the domain, the website code, the hosting account and your price-list data. If ShapeKraft ever stops, everything is handed over to you.\n- Proof: you can see a quote drafted from your own price list before paying anything more than the pilot, and ask for a reference call with the chemical-trading company whose website and enquiry forms ShapeKraft built in 2026 (if they agree).\n- Founding offer: the first 5 distributors who continue after the pilot pay Rs 45,000 setup instead of Rs 60,000, in exchange for a short published case study. Ends 31 January 2027."
+}

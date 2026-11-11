@@ -1,0 +1,13 @@
+{
+  "id": "P001",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I already paid a developer and a portal and got almost nothing back, so Rs 60,000 plus Rs 5,000 every month to a small remote studio I have never met, with only one past client, is not something I will risk. My enquiries are manageable by hand right now.",
+  "objection": "One chemical company website in 2026 is not proof. How do I know the quotes it drafts will be correct, and that you will still be around in a year when I am paying Rs 5,000 a month?",
+  "would_change_my_mind": "Talking directly to that chemical-trading client and seeing the quote desk work on my own price list with my real IndiaMART enquiries before I pay more than a small amount.",
+  "price_too_cheap": 10000,
+  "price_cheap": 20000,
+  "price_expensive": 35000,
+  "price_too_expensive": 60000
+}

@@ -1,0 +1,13 @@
+{
+  "id": "P004",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "price",
+  "reason": "The Rs 5,000 pilot is fine, but I know where it leads: Rs 60,000 plus Rs 5,000 every month plus GST is more than a lakh in the first year, and that is a big bite out of what a small firm like mine actually keeps. I already pay IndiaMART, and I can type a quote on my phone in a few minutes myself.",
+  "objection": "My rates change every day and every buyer bargains on the phone anyway, so a drafted quote doesn't win me the order. What I need is more good buyers, and a website and quote desk will not bring them to me.",
+  "would_change_my_mind": "Setup under Rs 25,000 with a small monthly fee, and proof from a trader like me that faster quotes actually turned into more orders, not just faster replies.",
+  "price_too_cheap": 8000,
+  "price_cheap": 18000,
+  "price_expensive": 30000,
+  "price_too_expensive": 45000
+}

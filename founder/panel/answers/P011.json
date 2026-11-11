@@ -1,0 +1,13 @@
+{
+  "id": "P011",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "Most of my business is repeat buyers who already know my rates, and I send quotes on WhatsApp from memory in two minutes. IndiaMART already gives me the catalogue and enquiries, so a Rs 60,000 desk plus Rs 5,000 every month is solving a problem I don't really feel.",
+  "objection": "My rates change with the market and depend on the party, quantity and credit terms, half of which is in my head and not in the Excel. I don't believe a draft will get the price right 7 times out of 10, and I don't have time to sit and teach a new system.",
+  "would_change_my_mind": "If you show me, for free on my phone, a few real quotes drafted from my own Excel for this week's IndiaMART enquiries with the right prices, and the chemical trader on the reference call tells me it actually won them orders.",
+  "price_too_cheap": 10000,
+  "price_cheap": 20000,
+  "price_expensive": 40000,
+  "price_too_expensive": 75000
+}

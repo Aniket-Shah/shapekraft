@@ -1,0 +1,13 @@
+{
+  "id": "P018",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "convenience",
+  "reason": "I'll try the Rs 5,000 pilot because it gets my money back if it doesn't work, and slow quoting by hand on 20-30 enquiries a week does lose me orders. But that's all I'm committing to. The Rs 60,000 plus Rs 5,000 a month only happens if my CA agrees and the pilot numbers are real.",
+  "objection": "My rates change with the market and I give different prices depending on the party, the quantity and the credit terms. I don't believe software can get 7 out of 10 quotes right without me changing them. I'm also not comfortable handing my full price list to an outside small agency.",
+  "would_change_my_mind": "If the pilot quotes come out wrong or need too much fixing, I stop after 14 days and take the refund. If they are right and the reference call checks out, I'd pay the founding Rs 45,000 setup.",
+  "price_too_cheap": 10000,
+  "price_cheap": 25000,
+  "price_expensive": 50000,
+  "price_too_expensive": 90000
+}

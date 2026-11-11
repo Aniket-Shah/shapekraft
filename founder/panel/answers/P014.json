@@ -1,0 +1,13 @@
+{
+  "id": "P014",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "IndiaMART already gives me my catalogue and my enquiries, and I quote from my phone the way I have for years. Rs 5,000 is nothing to me, but the time to sit and hand my price list to someone new, and change how my staff work, is the real cost, and I don't see the problem being big enough.",
+  "objection": "My price list and my top-customer rates are my business. I'm not handing that Excel to a small outfit I've never heard of, and in chemicals the rates move every day, so I doubt a machine gets 7 out of 10 quotes right without me fixing them.",
+  "would_change_my_mind": "Another distributor in my line that I know personally telling me they use it and it saves them hours every day, plus seeing a correct quote made from my own list right in front of me before I hand anything over.",
+  "price_too_cheap": 10000,
+  "price_cheap": 25000,
+  "price_expensive": 60000,
+  "price_too_expensive": 100000
+}

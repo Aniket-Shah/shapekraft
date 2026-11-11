@@ -1,0 +1,13 @@
+{
+  "id": "P006",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "need",
+  "reason": "I lost an order last month just because someone else quoted first, and Rs 5,000 with a money-back condition is nothing for a firm our size. I'd do the pilot to prove to my father that quoting fast actually wins orders, but I'm only committing to the pilot, not the Rs 60,000 yet.",
+  "objection": "IndiaMART already gives me a catalogue and enquiries, so the website part feels like paying twice, and our rates change daily and vary by customer and quantity, so I doubt a small outfit's system will draft prices my team doesn't have to fix. I also don't know what happens to my price list if they fold.",
+  "would_change_my_mind": "If the pilot drafts come back wrong on prices more than a few times in the first week, I stop and take the refund. To go to full setup I'd need to talk to the chemical-trading reference and see it handle our quantity-slab pricing.",
+  "price_too_cheap": 15000,
+  "price_cheap": 35000,
+  "price_expensive": 90000,
+  "price_too_expensive": 150000
+}

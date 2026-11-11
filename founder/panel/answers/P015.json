@@ -1,0 +1,13 @@
+{
+  "id": "P015",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "price",
+  "reason": "Rs 5,000 for two weeks on my own Excel and my own IndiaMART enquiries is small enough to gamble, and nothing goes to a buyer without my tap. I will pay for the pilot only, not the Rs 60,000 package, until I see it work on my rates.",
+  "objection": "I have paid a developer and a portal before and got nothing, so I don't trust that the Rs 5,000 refund will actually come back, and after the pilot Rs 60,000 plus Rs 5,000 every month is a lot when I mostly need quotes, not a fancy website. Also I am not happy giving my price list to an outsider.",
+  "would_change_my_mind": "Seeing one real quote drafted from my own price list before I pay even the Rs 5,000, plus talking to the chemical trader they worked for about whether they were honest with money.",
+  "price_too_cheap": 10000,
+  "price_cheap": 25000,
+  "price_expensive": 45000,
+  "price_too_expensive": 75000
+}

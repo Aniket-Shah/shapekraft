@@ -1,0 +1,13 @@
+{
+  "id": "P005",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "need",
+  "reason": "Rs 5,000 refundable is nothing for my firm, and if it really drafts quotes from my Excel rates while I'm on the road, my boys stop sitting on IndiaMART enquiries for half a day. I'll try the pilot, but I'm not promising the Rs 60,000 yet.",
+  "objection": "Owning the code on paper is fine, but if this small studio disappears, who actually keeps the drafting desk running and my rates updated? My staff can't maintain software, and I don't want to be stuck mid-season with no quotes going out.",
+  "would_change_my_mind": "A reference call with that chemical-trading client plus a named backup person or firm who can run the desk if ShapeKraft stops; without that I stop after the pilot.",
+  "price_too_cheap": 10000,
+  "price_cheap": 30000,
+  "price_expensive": 60000,
+  "price_too_expensive": 100000
+}

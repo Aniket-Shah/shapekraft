@@ -1,0 +1,13 @@
+{
+  "id": "P002",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My staff and I already send quotes on WhatsApp, and our rates change with raw material prices, so I don't see why I should pay Rs 60,000 plus Rs 5,000 every month for something we do ourselves. The Rs 5,000 pilot is cheap, but I don't pay anyone before comparing at least three quotes, and I'm not going to go looking for two more vendors for a problem I'm not sure I have.",
+  "objection": "Our pricing is not a clean list. It depends on quantity, the buyer, freight and today's raw material rate, so I doubt a system will get 7 in 10 prices right. And after the pilot it is a big setup fee plus a monthly charge that never ends.",
+  "would_change_my_mind": "Seeing it draft correct quotes on my own last month's enquiries for free, plus a setup fee under Rs 25,000, or a call with a trader in my line who says it brought in more orders.",
+  "price_too_cheap": 8000,
+  "price_cheap": 20000,
+  "price_expensive": 40000,
+  "price_too_expensive": 65000
+}

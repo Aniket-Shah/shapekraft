@@ -1,0 +1,13 @@
+{
+  "id": "P020",
+  "buys": true,
+  "purchases_first_month": 1,
+  "reason_code": "need",
+  "reason": "Rs 5,000 with money back if it fails is nothing for me to test, and my quotes really do get delayed when rates move and I am retyping prices by hand. I will do the pilot, but the Rs 60,000 setup I will not pay as quoted, I will bring two other quotes and bargain hard.",
+  "objection": "Small studio, one reference client. If this fellow takes a job somewhere or shuts down, who fixes the desk when IndiaMART changes something and my quotes stop going? Handing over code is useless to me, I am not a programmer.",
+  "would_change_my_mind": "Setup brought down to around Rs 35,000-40,000 with the reference call actually done, and a named backup person or firm who will maintain it if ShapeKraft stops.",
+  "price_too_cheap": 10000,
+  "price_cheap": 25000,
+  "price_expensive": 50000,
+  "price_too_expensive": 80000
+}

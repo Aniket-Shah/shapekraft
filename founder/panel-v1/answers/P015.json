@@ -1,0 +1,13 @@
+{
+  "id": "P015",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I already paid a developer and a portal before and got almost nothing back, so Rs 60,000 plus Rs 5,000 every month to a small remote studio with one website to its name is too big a bet on a promise. My quotes go out fine by hand from my Excel sheet, even if it is slow.",
+  "objection": "Who is going to keep my price list correct every time raw material rates move? If the quote desk sends a wrong rate, or the studio disappears after taking 40%, I am the one who loses money and face with the buyer.",
+  "would_change_my_mind": "Let me try the quote desk on my own Excel price list for a month first, before paying for any website, and let me talk to that chemical-trading client to hear if it actually brought them orders.",
+  "price_too_cheap": 10000,
+  "price_cheap": 20000,
+  "price_expensive": 35000,
+  "price_too_expensive": 60000
+}

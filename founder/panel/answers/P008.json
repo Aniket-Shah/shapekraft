@@ -1,0 +1,13 @@
+{
+  "id": "P008",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "need",
+  "reason": "Most of my business is repeat buyers who just call me, and I already answer IndiaMART enquiries from my phone. I don't send so many quotes that drafting them is my problem, so Rs 60,000 plus Rs 5,000 every month for a website and a desk is money I don't need to spend.",
+  "objection": "My rates change and my regular parties get their own prices on the phone. I don't believe a system will get my price right 7 times out of 10, and after the pilot I am stuck paying Rs 5,000 every month forever for something IndiaMART already gives me.",
+  "would_change_my_mind": "If a trader in my own line showed me that this got him more IndiaMART orders than he was losing because he replied late, with real numbers, and the monthly fee was much lower.",
+  "price_too_cheap": 10000,
+  "price_cheap": 20000,
+  "price_expensive": 35000,
+  "price_too_expensive": 60000
+}

@@ -1,0 +1,13 @@
+{
+  "id": "P016",
+  "buys": false,
+  "purchases_first_month": 0,
+  "reason_code": "habit",
+  "reason": "Most of my business is repeat buyers who call me, and I quote them from memory in 30 seconds after asking how much they need and when they'll pay. My rates move every day and the price depends on the party, so I don't see a machine drafting it better than I do, and Rs 60,000 plus 5,000 a month is real money for a firm my size.",
+  "objection": "My price list is half in my head, not in a clean Excel, and the price changes with quantity, credit days and who is asking. I don't believe 7 in 10 quotes will come out right, and I don't have time to sit and teach a system my rates for two weeks.",
+  "would_change_my_mind": "Another trader in my line, someone I can actually call, telling me it got him new orders from IndiaMART enquiries he used to miss, and you doing all the price-list setup yourself without taking my time.",
+  "price_too_cheap": 10000,
+  "price_cheap": 20000,
+  "price_expensive": 40000,
+  "price_too_expensive": 75000
+}

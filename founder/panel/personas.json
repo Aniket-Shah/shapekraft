@@ -1,0 +1,222 @@
+[
+ {
+  "id": "P001",
+  "name": "Zara",
+  "age": 28,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 11313000,
+  "behaviour": "Burned before",
+  "behaviour_how": "Paid a web developer or a portal before and got little back; suspicious of digital promises.",
+  "objection": "I paid for leads before and they were fake, why trust another digital promise",
+  "habit": "you get somewhere between 5 and 40 new enquiries a week"
+ },
+ {
+  "id": "P002",
+  "name": "Elena",
+  "age": 43,
+  "segment": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 48925000,
+  "behaviour": "Hard negotiator",
+  "behaviour_how": "Bargains on every purchase and compares at least three quotes before paying anyone.",
+  "objection": "My staff and I can reply on WhatsApp ourselves",
+  "habit": "your price list is an Excel file that changes when raw material rates move"
+ },
+ {
+  "id": "P003",
+  "name": "Harper",
+  "age": 40,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 13918000,
+  "behaviour": "Phone-and-WhatsApp old school",
+  "behaviour_how": "Quotes from memory or an Excel price list over calls and WhatsApp; most business is repeat buyers.",
+  "objection": "IndiaMART already gives me a catalogue and enquiries",
+  "habit": "most of your orders come from repeat buyers who call you directly"
+ },
+ {
+  "id": "P004",
+  "name": "Andre",
+  "age": 46,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 7341000,
+  "behaviour": "IndiaMART-dependent",
+  "behaviour_how": "Pays for an IndiaMART membership and gets most new enquiries from it; replies from the phone app.",
+  "objection": "A website alone will not bring buyers",
+  "habit": "you get somewhere between 5 and 40 new enquiries a week"
+ },
+ {
+  "id": "P005",
+  "name": "Sol",
+  "age": 37,
+  "segment": "Owner or director of an established distributor, 20-50 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 211484000,
+  "behaviour": "IndiaMART-dependent",
+  "behaviour_how": "Pays for an IndiaMART membership and gets most new enquiries from it; replies from the phone app.",
+  "objection": "Who maintains it if this small studio disappears",
+  "habit": "you get somewhere between 5 and 40 new enquiries a week"
+ },
+ {
+  "id": "P006",
+  "name": "Ben",
+  "age": 35,
+  "segment": "Owner or director of an established distributor, 20-50 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 193441000,
+  "behaviour": "Next-generation modernizer",
+  "behaviour_how": "A son, daughter or young partner pushing the family firm to go digital; reads up on tools.",
+  "objection": "IndiaMART already gives me a catalogue and enquiries",
+  "habit": "you lost an order last month because another supplier quoted first"
+ },
+ {
+  "id": "P007",
+  "name": "Yusuf",
+  "age": 55,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 10923000,
+  "behaviour": "Phone-and-WhatsApp old school",
+  "behaviour_how": "Quotes from memory or an Excel price list over calls and WhatsApp; most business is repeat buyers.",
+  "objection": "Who maintains it if this small studio disappears",
+  "habit": "your nephew built your current website years ago and nobody updates it"
+ },
+ {
+  "id": "P008",
+  "name": "Idris",
+  "age": 46,
+  "segment": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 84758000,
+  "behaviour": "IndiaMART-dependent",
+  "behaviour_how": "Pays for an IndiaMART membership and gets most new enquiries from it; replies from the phone app.",
+  "objection": "Rs 60,000 plus Rs 5,000 every month is a lot for a website",
+  "habit": "most of your orders come from repeat buyers who call you directly"
+ },
+ {
+  "id": "P009",
+  "name": "Pablo",
+  "age": 45,
+  "segment": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 64163000,
+  "behaviour": "Next-generation modernizer",
+  "behaviour_how": "A son, daughter or young partner pushing the family firm to go digital; reads up on tools.",
+  "objection": "My prices change daily and by customer, an automatic quote will be wrong",
+  "habit": "most of your orders come from repeat buyers who call you directly"
+ },
+ {
+  "id": "P010",
+  "name": "Sara",
+  "age": 37,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 13731000,
+  "behaviour": "Burned before",
+  "behaviour_how": "Paid a web developer or a portal before and got little back; suspicious of digital promises.",
+  "objection": "A website alone will not bring buyers",
+  "habit": "you get somewhere between 5 and 40 new enquiries a week"
+ },
+ {
+  "id": "P011",
+  "name": "Tariq",
+  "age": 34,
+  "segment": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 56129000,
+  "behaviour": "Phone-and-WhatsApp old school",
+  "behaviour_how": "Quotes from memory or an Excel price list over calls and WhatsApp; most business is repeat buyers.",
+  "objection": "IndiaMART already gives me a catalogue and enquiries",
+  "habit": "you check new enquiries on your phone first thing every morning"
+ },
+ {
+  "id": "P012",
+  "name": "Zoe",
+  "age": 34,
+  "segment": "Owner or director of an established distributor, 20-50 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 338762000,
+  "behaviour": "Next-generation modernizer",
+  "behaviour_how": "A son, daughter or young partner pushing the family firm to go digital; reads up on tools.",
+  "objection": "A website alone will not bring buyers",
+  "habit": "you lost an order last month because another supplier quoted first"
+ },
+ {
+  "id": "P013",
+  "name": "Rhys",
+  "age": 31,
+  "segment": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 34244000,
+  "behaviour": "Hard negotiator",
+  "behaviour_how": "Bargains on every purchase and compares at least three quotes before paying anyone.",
+  "objection": "Who maintains it if this small studio disappears",
+  "habit": "your price list is an Excel file that changes when raw material rates move"
+ },
+ {
+  "id": "P014",
+  "name": "Felix",
+  "age": 54,
+  "segment": "Owner or director of an established distributor, 20-50 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 328984000,
+  "behaviour": "IndiaMART-dependent",
+  "behaviour_how": "Pays for an IndiaMART membership and gets most new enquiries from it; replies from the phone app.",
+  "objection": "IndiaMART already gives me a catalogue and enquiries",
+  "habit": "your nephew built your current website years ago and nobody updates it"
+ },
+ {
+  "id": "P015",
+  "name": "Farah",
+  "age": 30,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 13072000,
+  "behaviour": "Burned before",
+  "behaviour_how": "Paid a web developer or a portal before and got little back; suspicious of digital promises.",
+  "objection": "Rs 60,000 plus Rs 5,000 every month is a lot for a website",
+  "habit": "your price list is an Excel file that changes when raw material rates move"
+ },
+ {
+  "id": "P016",
+  "name": "Noah",
+  "age": 37,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 17275000,
+  "behaviour": "Phone-and-WhatsApp old school",
+  "behaviour_how": "Quotes from memory or an Excel price list over calls and WhatsApp; most business is repeat buyers.",
+  "objection": "A website alone will not bring buyers",
+  "habit": "you get somewhere between 5 and 40 new enquiries a week"
+ },
+ {
+  "id": "P017",
+  "name": "Min",
+  "age": 53,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 17705000,
+  "behaviour": "IndiaMART-dependent",
+  "behaviour_how": "Pays for an IndiaMART membership and gets most new enquiries from it; replies from the phone app.",
+  "objection": "My prices change daily and by customer, an automatic quote will be wrong",
+  "habit": "your nephew built your current website years ago and nobody updates it"
+ },
+ {
+  "id": "P018",
+  "name": "Quinn",
+  "age": 37,
+  "segment": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 41096000,
+  "behaviour": "Asks the CA first",
+  "behaviour_how": "Runs any spend above a few thousand rupees past their chartered accountant.",
+  "objection": "A website alone will not bring buyers",
+  "habit": "you get somewhere between 5 and 40 new enquiries a week"
+ },
+ {
+  "id": "P019",
+  "name": "Raj",
+  "age": 55,
+  "segment": "Owner of a micro trading firm, 1-5 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 19891000,
+  "behaviour": "Asks the CA first",
+  "behaviour_how": "Runs any spend above a few thousand rupees past their chartered accountant.",
+  "objection": "IndiaMART already gives me a catalogue and enquiries",
+  "habit": "you lost an order last month because another supplier quoted first"
+ },
+ {
+  "id": "P020",
+  "name": "Caleb",
+  "age": 47,
+  "segment": "Owner of a small trader-manufacturer, 5-20 staff (NOTE: the yearly figure below is the firm's annual turnover in Indian rupees, not dollars)",
+  "income": 30517000,
+  "behaviour": "Hard negotiator",
+  "behaviour_how": "Bargains on every purchase and compares at least three quotes before paying anyone.",
+  "objection": "Who maintains it if this small studio disappears",
+  "habit": "your price list is an Excel file that changes when raw material rates move"
+ }
+]

@@ -1,35 +1,41 @@
-# What the board said
+# Board: ShapeKraft as a whole business (12 Nov 2026, round 2)
 
-> Three lenses applied to [idea.md](idea.md), each reading the idea through one published framework (the Offers lens, the Monopoly lens, the Product lens). Written by the chair in one pass, not by separate sub-agents, so the three views are less independent than a full run. These are summaries of public frameworks, not statements by the people behind them.
+> Three lenses applied to `board/brief.md` (the whole studio, plus the competitor scan, the 20-buyer panel and the cost estimates). Each memo was written by a separate sub-agent that saw only the brief and one framework. These are summaries of public frameworks, not statements by the people behind them. Memos: `board/offers.md`, `board/monopoly.md`, `board/product.md`. Round 1 (on the RFQ niche only, 4.3/10) is in `board/round1-niche/`.
 
-**Vote: 2 FUND IF, 1 PASS. Average score 5.7 / 10.**
+**Vote: 3 FUND IF, 0 PASS. Average score 3.7 / 10** (Offers 4, Monopoly 3, Product 4).
 
-| Lens | Score | Vote |
-|---|---:|---|
-| Offers (value equation: outcome, likelihood, time, effort) | 6 | FUND IF |
-| Monopoly (a niche you can dominate, a secret, durability) | 4 | PASS |
-| Product (focus, craft end to end, simplicity) | 7 | FUND IF |
+| Lens | Score | Vote | One line |
+|---|---:|---|---|
+| Offers | 4 | FUND IF | One strong offer (Quote Desk → RFQ Kit) buried under commodity site tiers; no proof yet |
+| Monopoly | 3 | FUND IF | A custom-website studio has nothing a copycat can't match; only a narrow niche could be owned |
+| Product | 4 | FUND IF | Real craft, but no one thing; the first five minutes break trust |
 
-## Risks more than one lens raised (go first)
+The score went **down** from round 1 (4.3 → 3.7) because the whole studio is judged here, not just its best niche, and the panel showed demand is narrow.
 
-1. **The price tells the wrong story.** Packages start at $110 and top out at $550 in USD, while public sources put US freelancer small-business sites at roughly $500 to $5,000 and agencies far higher ([competitors.md](competitors.md)). A "no templates, pure craft" studio priced below the cheapest freelancer reads as a template shop, and it leaves no room to deliver the engineering the brand promises. Raised by the Offers and Product lenses.
-2. **No proof yet.** The site shows "3+ projects shipped" and a switched-off Featured Work section. A buyer has nothing to check the promise against. Raised by the Offers and Monopoly lenses.
-3. **"Custom websites" is a crowded market with no moat.** Freelancers, agencies and no-code builders (Framer, Webflow, Wix) all compete for the same buyer. Raised by the Monopoly and Offers lenses.
+## Risks all three raised (go first)
+
+1. **No proof, and the first five minutes break trust.** One B2B client, no case study, Featured Work off, a name search returns "ShapeCraft", no visible founder. Trust was the top pass reason (7 of 18); 14 of 18 wanted proof.
+2. **Too many things, spread too thin.** Three site tiers in two currencies, the RFQ kit, a pilot, automation, two care plans, vertical demos and dropped products under one name, on 15–20 hours a week. The business can't describe itself in one sentence.
+3. **The site tiers are a commodity.** Priced inside the freelancer range against $10–39/month builders; the component library is a speed advantage buyers never see. Auto-quote technology is not a gap either.
 
 ## Where they disagree
 
-- **Monopoly says pass; the other two say fund if.** The Monopoly lens sees no durable advantage in building websites. The Product lens sees real craft in the site itself, and the Offers lens sees an upsell path (AI automation, integrations) that is harder to copy. The business is fundable only if it narrows to where those advantages live.
+- **How much is salvageable:** Monopoly (3) sees no durable advantage until the quote desk becomes a reusable engine that improves with each client. Offers and Product (4) see one genuinely good offer and real craft.
+- **What happens to the site tiers:** Offers and Monopoly would keep them as quiet cash flow and referral work. Product would hide everything unrelated to the lead offer from the homepage.
+- **The core risk inside the niche:** Offers worries about proof; Product worries the quote desk itself fails when prices change daily or per customer.
 
-## Conditions (checklist for the rest of the pack)
+## Conditions (checklist)
 
-- [ ] **Price test:** test at least one higher US price ladder with real buyers (e.g. $750 / $1,500 / $3,000); the CFO shows break-even drops from 3 to 2 projects a month at $1,500. (`/founder-consumer`, `/founder-pricing`)
-- [ ] **Niche:** pick one buyer to dominate (for example: B2B teams that need a site plus automation and integrations) and lead with it. (`/founder-competitors`, `/founder-marketing`)
-- [ ] **Proof:** publish 2 to 3 case studies with measured results (Lighthouse, LCP, leads), and switch Featured Work back on. (`/founder-launch`)
-- [ ] **Offer:** make the AI automation and integrations line the headline offer rather than an add-on, with a guarantee the CFO can afford. (`/founder-offer`)
-- [ ] **Capacity and money:** confirm real capacity (assumed 8 projects/month) and the founder draw (assumed $1,500/month). (`/founder-cfo`, `/founder-ops`)
-- [x] Each project earns money before fixed costs (91% contribution at the assumed price).
-- [x] Break-even (3 projects/month) is within assumed capacity (8).
+- [ ] **One sentence, one buyer, one lead offer:** Quote Desk Pilot → RFQ Launch Kit for established distributors (20–50 staff). Homepage says it in one line. *(all three)*
+- [ ] **Site tiers become background:** quiet cash flow / referrals, not positioning. Archive the vertical demos and unrelated products from public view. *(all three)*
+- [ ] **Publish one case study** from the chemical-trading client with a measured result; Featured Work on; fix the "ShapeCraft" search confusion. *(all three)*
+- [ ] **Run paid Quote Desk Pilots on real price lists, including price changes;** track how many drafts are approved without edits. *(Product, Monopoly)*
+- [ ] **Named guarantee** (e.g. pilot fee refunded if quotes aren't faster) + **ownership/handover clause**. *(Offers)*
+- [ ] **Measure hours per client and cost to acquire one**; set a capacity limit. *(all three; `/founder-cfo`, `/founder-ops`)*
+- [ ] **Name the durable advantage:** a reusable price-list-to-quote engine or category know-how that makes client 20 easier than client 1. *(Monopoly)*
+- [ ] **Re-test price against the distributor band** (₹35k bargain, ₹90k expensive) only after proof exists. *(Offers)*
+- [ ] Open questions: number of reachable distributors, cost to acquire, real hours per project, real founder draw, and what "1 million" means (₹ or $). *(`/founder-cfo`, real calls)*
 
 ## The strongest version of this business
 
-Not "a cheap custom website." Instead: **a small engineering studio for B2B and growing companies that ships a fast, custom site and wires AI automation and integrations into it**, priced at the level freelancers and boutique agencies actually charge (about $1,500 to $3,000 to start in the US, with the current Indian rupee prices kept for the India market), proven by three measured case studies. That differs from the pitch: it drops the volume-and-price game of $110 sites and leans on the part the board thinks is hardest to copy.
+The board does not see a strong business in "ShapeKraft, a web studio for small businesses in India and the US". It sees **one strong product hiding inside it: a done-for-you quote desk that gets established B2B distributors' quotes out first, sold through a paid pilot on their own price list, with a website as part of the package rather than the product**. Built that way, each client could make the next one faster (the beginnings of an advantage), and the site work becomes a side income instead of the identity. That is a big change from the pitch: it means the homepage, the menu and the outreach all lead with the quote desk, and most of what ShapeKraft currently lists goes quiet until the pilots prove the quote desk works on real, changing prices.
