@@ -8,7 +8,7 @@ export interface Faq {
 
 const COST_INDIA: Faq = {
   q: 'How much does a website cost in India?',
-  a: 'Our custom websites start at ₹15,000 for a 5-page Starter site. The Growth website (10 pages) is ₹35,000 and the Studio website (15 pages) is ₹60,000. Extra pages are ₹2,000 each. The website cost calculator on our quote page gives you an exact estimate in under a minute.',
+  a: 'A 5-page Starter website is ₹15,000. A Catalogue Site for traders and manufacturers (up to 10 pages, every enquiry sent to your WhatsApp) is ₹35,000. The RFQ Launch Kit, a catalogue site plus a quote desk that drafts quotes from your own price list, is ₹60,000 plus ₹5,000 a month. Extra pages are ₹2,000 each. The website cost calculator on our quote page gives you an exact estimate in under a minute.',
 }
 
 const COST_USD: Faq = {
@@ -18,7 +18,7 @@ const COST_USD: Faq = {
 
 const PAYMENT: Faq = {
   q: 'How is payment split?',
-  a: 'Every project is paid in three milestones: 40% at the start for design, 30% when the build is ready for review, and 30% at launch. You see and approve each stage before the next payment.',
+  a: 'Every project is paid in three milestones: 40% at the start for design, 30% when the build is ready for review, and 30% at launch. You see and approve each stage before the next payment. The ₹5,000 Quote Desk Pilot is paid upfront.',
 }
 
 const TEMPLATES: Faq = {
@@ -43,11 +43,16 @@ const AI: Faq = {
 
 const RFQ: Faq = {
   q: 'What is the RFQ Launch Kit for B2B traders?',
-  a: 'It is built for traders and distributors who quote prices on request. You get a catalogue website plus a request-for-quote system that drafts quotes from your own price list, so replies go out on email or WhatsApp in minutes instead of hours. It is ₹60,000 in India, with a ₹5,000 monthly automation plan.',
+  a: 'It is built for traders and distributors who quote prices on request. Enquiries from IndiaMART, WhatsApp, email and your website become quotes drafted from your own price list, sent to you on WhatsApp to approve in one tap. It is ₹60,000 setup plus a ₹5,000 monthly automation plan. Our first 5 clients (until 31 January 2027) pay ₹45,000 setup with the first month free, in exchange for a written case study. For CRM, ERP or Tally integration, the Sales Desk starts at ₹1,00,000 plus ₹10,000 a month.',
 }
 
-export const HOME_FAQS: Faq[] = [COST_INDIA, COST_USD, TEMPLATES, PAYMENT, OWNERSHIP, AFTER_LAUNCH, AI, RFQ]
-export const QUOTE_FAQS: Faq[] = [COST_INDIA, COST_USD, PAYMENT, AFTER_LAUNCH, RFQ]
+const PILOT: Faq = {
+  q: 'Can I try the quote desk before paying for the full kit?',
+  a: 'Yes. The Quote Desk Pilot runs for 14 days on your own price list and your real enquiries, for ₹5,000. If you continue with the RFQ Launch Kit, the ₹5,000 is deducted from the setup price.',
+}
+
+export const HOME_FAQS: Faq[] = [COST_INDIA, COST_USD, RFQ, PILOT, TEMPLATES, PAYMENT, OWNERSHIP, AFTER_LAUNCH, AI]
+export const QUOTE_FAQS: Faq[] = [COST_INDIA, COST_USD, RFQ, PILOT, PAYMENT, AFTER_LAUNCH]
 
 export function faqSchema(items: Faq[]) {
   return {
