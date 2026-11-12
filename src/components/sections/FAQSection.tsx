@@ -27,8 +27,14 @@ export function FAQSection({ items, showQuoteLink = true }: Props) {
         </span>
         <h2
           id="faq-heading"
-          className="font-display font-black tracking-tight mb-8 md:mb-12"
-          style={{ fontSize: 'var(--fs-3xl)', color: 'var(--color-text)' }}
+          className="font-display font-black tracking-tight leading-tight mb-8 md:mb-12"
+          // The display face is very wide: scale with the viewport so long words
+          // like "ownership" fit on a phone instead of running off the screen.
+          style={{
+            fontSize: 'clamp(1.75rem, 7vw, var(--fs-3xl))',
+            color: 'var(--color-text)',
+            overflowWrap: 'break-word',
+          }}
         >
           Website cost, payment &amp; ownership
         </h2>
