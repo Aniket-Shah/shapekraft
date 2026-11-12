@@ -30,17 +30,17 @@ const blackOpsOne = Black_Ops_One({
 
 export const viewport: Viewport = {
   themeColor: '#E97451',
-  colorScheme: 'dark',
+  colorScheme: 'light',
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shapekraft.co'),
+  metadataBase: new URL('https://www.shapekraft.co'),
   title: {
     template: '%s — ShapeKraft',
-    default: 'ShapeKraft — Digital Engineering Studio',
+    default: 'ShapeKraft — Web Design, Development & AI Automation Studio',
   },
   description:
-    'We build fast, conversion-focused websites. Custom Next.js builds, AI automation, performance optimisation, and webhook integrations for growing businesses.',
+    'Fast custom websites, AI automation and integrations for growing businesses and B2B teams in India and worldwide. Next.js builds, no templates.',
   keywords: [
     'web design',
     'web development',
@@ -52,17 +52,17 @@ export const metadata: Metadata = {
     'website design India',
     'ShapeKraft',
   ],
-  authors: [{ name: 'ShapeKraft', url: 'https://shapekraft.co' }],
+  authors: [{ name: 'ShapeKraft', url: 'https://www.shapekraft.co' }],
   creator: 'ShapeKraft',
   publisher: 'ShapeKraft',
   alternates: {
-    canonical: 'https://shapekraft.co',
+    canonical: 'https://www.shapekraft.co',
   },
   openGraph: {
     title: 'ShapeKraft — Digital Engineering Studio',
     description:
       'We build fast, conversion-focused websites. Custom Next.js builds, AI automation, and performance optimisation.',
-    url: 'https://shapekraft.co',
+    url: 'https://www.shapekraft.co',
     siteName: 'ShapeKraft',
     type: 'website',
     locale: 'en_US',
@@ -121,6 +121,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        {/* Without JavaScript the intro overlay never leaves and animated text stays at opacity 0.
+            Show the page as plain content instead. */}
+        <noscript>
+          <style>{`.preloader{display:none!important}.char,[data-fade-up]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
       </head>
       <body suppressHydrationWarning>
         {/* Skip to main content — accessibility */}

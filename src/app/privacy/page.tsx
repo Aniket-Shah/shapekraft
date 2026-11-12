@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   description:
     'How ShapeKraft collects, uses, and protects your information when you use our website and services.',
   alternates: {
-    canonical: 'https://shapekraft.co/privacy',
+    canonical: 'https://www.shapekraft.co/privacy',
   },
   openGraph: {
     title: 'Privacy Policy — ShapeKraft',
     description: 'How ShapeKraft collects, uses, and protects your information.',
-    url: 'https://shapekraft.co/privacy',
+    url: 'https://www.shapekraft.co/privacy',
   },
 }
 
@@ -22,8 +22,8 @@ const privacySchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shapekraft.co' },
-    { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: 'https://shapekraft.co/privacy' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.shapekraft.co' },
+    { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: 'https://www.shapekraft.co/privacy' },
   ],
 }
 
