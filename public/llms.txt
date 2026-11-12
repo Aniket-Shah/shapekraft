@@ -19,12 +19,12 @@ Tagline: Engineered, not just designed.
 
 ## Pages
 
-- [Home](https://shapekraft.co/): services, process and contact
-- [Instant quote](https://shapekraft.co/quote): live pricing builder in INR (India) or USD (worldwide)
-- [Privacy policy](https://shapekraft.co/privacy)
-- [Terms](https://shapekraft.co/terms)
+- [Home](https://www.shapekraft.co/): services, process and contact
+- [Instant quote](https://www.shapekraft.co/quote): live pricing builder in INR (India) or USD (worldwide)
+- [Privacy policy](https://www.shapekraft.co/privacy)
+- [Terms](https://www.shapekraft.co/terms)
 
 ## Contact
 
-- Worldwide: hello@shapekraft.co (https://shapekraft.co)
-- India: hello@shapekraft.in (https://shapekraft.in)
+- Worldwide: hello@shapekraft.co (https://www.shapekraft.co)
+- India: hello@shapekraft.in (https://www.shapekraft.in)

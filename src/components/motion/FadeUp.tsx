@@ -19,6 +19,7 @@ export function FadeUp({ children, delay = 0, className }: Props) {
   return (
     <div
       ref={ref}
+      data-fade-up=""
       className={cn('transition-all duration-700', className)}
       style={{
         opacity: inView ? 1 : 0,

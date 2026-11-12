@@ -12,19 +12,16 @@ import { SiteFooter }        from '@/components/sections/SiteFooter'
 import { SchemaOrg }         from '@/components/SchemaOrg'
 
 export const metadata: Metadata = {
-  alternates: {
-    canonical: 'https://shapekraft.co',
-  },
 }
 
 const homeSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://shapekraft.co/#organization',
+    '@id': 'https://www.shapekraft.co/#organization',
     name: 'ShapeKraft',
     alternateName: 'ShapeKraft Studio',
-    url: 'https://shapekraft.co',
+    url: 'https://www.shapekraft.co',
     description:
       'ShapeKraft is a remote web engineering studio that builds fast, custom Next.js websites and wires AI automation and integrations into them.',
     disambiguatingDescription:
@@ -35,9 +32,9 @@ const homeSchema = [
     sameAs: [],
     logo: {
       '@type': 'ImageObject',
-      url: 'https://shapekraft.co/icon.svg',
-      width: 32,
-      height: 32,
+      url: 'https://www.shapekraft.co/apple-icon',
+      width: 180,
+      height: 180,
     },
     contactPoint: {
       '@type': 'ContactPoint',
@@ -49,17 +46,17 @@ const homeSchema = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': 'https://shapekraft.co/#website',
-    url: 'https://shapekraft.co',
+    '@id': 'https://www.shapekraft.co/#website',
+    url: 'https://www.shapekraft.co',
     name: 'ShapeKraft',
-    publisher: { '@id': 'https://shapekraft.co/#organization' },
+    publisher: { '@id': 'https://www.shapekraft.co/#organization' },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    '@id': 'https://shapekraft.co/#business',
+    '@id': 'https://www.shapekraft.co/#business',
     name: 'ShapeKraft',
-    url: 'https://shapekraft.co',
+    url: 'https://www.shapekraft.co',
     description:
       'Web design, development, AI automation, performance optimisation, and webhook integrations for growing businesses.',
     email: 'hello@shapekraft.co',
