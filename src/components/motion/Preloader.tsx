@@ -41,8 +41,9 @@ export function Preloader() {
       markReady()
       setDone(true)
     }
-    // Failsafe: never trap the user behind the intro.
-    const failsafe = window.setTimeout(finish, 6000)
+    // Failsafe: never trap the user behind the intro. Whole intro ≈ 1.6s (was ≈ 2.9s)
+    // because the hero headline (the LCP element) can't paint until it ends.
+    const failsafe = window.setTimeout(finish, 3000)
 
     ;(async () => {
       const { gsap } = await import('gsap')
@@ -66,12 +67,12 @@ export function Preloader() {
       })
       tl = timeline
       timeline
-        .to(paths, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', stagger: 0.08 }, 0)
+        .to(paths, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.inOut', stagger: 0.05 }, 0)
         .to(
           obj,
           {
             v: 100,
-            duration: 1.5,
+            duration: 0.8,
             ease: 'power2.inOut',
             onUpdate: () => {
               if (counter) counter.textContent = String(Math.round(obj.v)).padStart(3, '0')
@@ -81,10 +82,10 @@ export function Preloader() {
         )
         .to(
           el.querySelectorAll('[data-fade]'),
-          { opacity: 0, y: -24, duration: 0.45, ease: 'power2.in', stagger: 0.05 },
-          '+=0.15',
+          { opacity: 0, y: -24, duration: 0.3, ease: 'power2.in', stagger: 0.04 },
+          '+=0.05',
         )
-        .to(el, { yPercent: -100, duration: 0.95, ease: 'power4.inOut' }, '>-0.05')
+        .to(el, { yPercent: -100, duration: 0.6, ease: 'power4.inOut' }, '>-0.05')
     })()
 
     return () => {
@@ -119,7 +120,7 @@ export function Preloader() {
     >
       <div data-fade className="flex items-center justify-between text-xs font-semibold tracking-widest uppercase">
         <span>ShapeKraft</span>
-        <span>Digital Engineering Studio</span>
+        <span>Web Design &amp; Development Studio</span>
       </div>
 
       <div data-fade className="flex items-center justify-center">

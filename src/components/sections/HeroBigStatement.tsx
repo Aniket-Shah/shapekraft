@@ -69,7 +69,7 @@ export function HeroBigStatement() {
               className="text-xs font-semibold tracking-widest uppercase"
               style={{ color: 'var(--color-muted)' }}
             >
-              Digital Engineering Studio
+              {'Web Design & Development Studio · India & Worldwide'}
             </span>
           </div>
         </FadeUp>
@@ -82,32 +82,32 @@ export function HeroBigStatement() {
           <SplitText
             text="We don't design"
             trigger="mount"
-            stagger={0.03}
-            duration={1.0}
-            delay={0.3}
+            stagger={0.02}
+            duration={0.7}
+            delay={0.05}
             className="block"
           />
           <SplitText
             text="websites. We"
             trigger="mount"
-            stagger={0.03}
-            duration={1.0}
-            delay={0.55}
+            stagger={0.02}
+            duration={0.7}
+            delay={0.15}
             className="block"
           />
           <span className="block" style={{ color: 'var(--color-accent)' }}>
             <SplitText
               text="engineer them."
               trigger="mount"
-              stagger={0.03}
-              duration={1.0}
-              delay={0.8}
+              stagger={0.02}
+              duration={0.7}
+              delay={0.25}
             />
           </span>
         </h1>
 
         {/* Subline */}
-        <FadeUp delay={1400}>
+        <FadeUp delay={600}>
           <p
             className="mt-8 max-w-lg leading-relaxed"
             style={{
@@ -121,7 +121,7 @@ export function HeroBigStatement() {
         </FadeUp>
 
         {/* CTAs */}
-        <FadeUp delay={1600}>
+        <FadeUp delay={700}>
           <div className="flex flex-wrap items-center gap-4 mt-10">
             <MagneticButton>
               <Link
@@ -165,7 +165,7 @@ export function HeroBigStatement() {
         </FadeUp>
 
         {/* Scroll indicator */}
-        <FadeUp delay={2000}>
+        <FadeUp delay={900}>
           <div className="flex items-center gap-3 mt-10 md:mt-20">
             <div
               className="relative flex items-center justify-center"

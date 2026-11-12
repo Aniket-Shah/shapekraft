@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.shapekraft.co',
   },
   openGraph: {
-    title: 'ShapeKraft — Digital Engineering Studio',
+    title: 'ShapeKraft — Web Design, Development & AI Automation Studio',
     description:
       'We build fast, conversion-focused websites. Custom Next.js builds, AI automation, and performance optimisation.',
     url: 'https://www.shapekraft.co',
@@ -71,13 +71,13 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'ShapeKraft — Digital Engineering Studio',
+        alt: 'ShapeKraft — Web Design, Development & AI Automation Studio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ShapeKraft — Digital Engineering Studio',
+    title: 'ShapeKraft — Web Design, Development & AI Automation Studio',
     description:
       'We build fast, conversion-focused websites. Custom Next.js builds, AI automation, and performance optimisation.',
     images: ['/opengraph-image'],
