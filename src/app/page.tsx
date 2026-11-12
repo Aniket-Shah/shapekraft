@@ -10,6 +10,8 @@ import { ProcessSteps }      from '@/components/sections/ProcessSteps'
 import { ContactBigCTA }     from '@/components/sections/ContactBigCTA'
 import { SiteFooter }        from '@/components/sections/SiteFooter'
 import { SchemaOrg }         from '@/components/SchemaOrg'
+import { FAQSection }        from '@/components/sections/FAQSection'
+import { HOME_FAQS }         from '@/lib/faq'
 
 export const metadata: Metadata = {
 }
@@ -151,6 +153,7 @@ export default function HomePage() {
         <ServicesGrid />
         <StatsGrid />
         <ProcessSteps />
+        <FAQSection items={HOME_FAQS} />
         <ContactBigCTA />
       </main>
 

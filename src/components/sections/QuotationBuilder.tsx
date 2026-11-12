@@ -6,32 +6,110 @@ import { pushDataLayerEvent } from '@/lib/analytics'
 import { FadeUp } from '@/components/motion/FadeUp'
 
 // ── CONFIG: all pricing lives here — do not scatter ─────────────────────────
-// Prices per founder/pricing.md (12 Nov 2026). `list*` = the standard price quoted
-// on the site. `price*` = an optional founding rate, only shown when
-// foundingRates.active is true; it is labelled as a founding rate with an end
-// date, never as a struck-through "was" price (no fake anchors).
-// The Founding 5 offer for the RFQ Launch Kit is quoted in conversation.
+// Source: Notion "Founder Pack v2 — Board, Pricing, Marketing, Brand (12 Nov)".
+// India (INR) leads with the B2B ladder: Pilot → Catalogue Site → RFQ Launch
+// Kit (headline) → Sales Desk; the Starter site stays as a quiet side option.
+// US/global (USD) keeps the Starter / Growth / Studio site tiers (inbound only).
+// No struck-through "was" prices anywhere (no fake anchors). The only discount
+// is the real Founding 5 offer on the RFQ Launch Kit, shown as a labelled note.
+// If you change a price here, update src/lib/faq.ts too.
+type MarketCurrency = 'INR' | 'USD'
+
+interface Package {
+  id: string
+  tier: 'Pilot' | 'Starter' | 'Growth' | 'Studio' | 'B2B'
+  label: string
+  description: string
+  includedPages: number // 0 = page count not priced (scope agreed on a call)
+  listINR: number
+  listUSD: number // 0 = priced on a call
+  markets: MarketCurrency[]
+  /** Monthly plan that comes with the package (required), instead of the optional care plan. */
+  monthly?: { label: string; INR: number; USD: number }
+  fromPrice?: boolean // show "from ₹X"
+  badge?: string
+  foundingNote?: string
+  noExtras?: boolean // no add-ons, care plan or payment split (the pilot)
+}
+
+interface Addon {
+  id: string
+  label: string
+  description: string
+  listINR: number
+  listUSD: number
+  /** Package ids this add-on is already part of. */
+  hideFor?: string[]
+}
+
 export const CONFIG = {
   whatsapp: {
     IN: '+919999999999', // UPDATE: your India WhatsApp number
     US: '+14155550000',  // UPDATE: your US/global WhatsApp number
   },
-  foundingRates: {
-    active: false,
-    slotsLeft: 5, // UPDATE as founding slots fill
+  founding: {
+    slotsLeft: 5, // UPDATE as founding slots fill; remove foundingNote at 0
     endsLabel: '31 Jan 2027',
   },
   packages: [
+    // ── India: B2B ladder ──
+    {
+      id: 'pilot',
+      tier: 'Pilot',
+      label: 'Quote Desk Pilot (14 days)',
+      description: 'Try the quote desk for 14 days on your own price list and real enquiries before you commit. The ₹5,000 is deducted from the RFQ Launch Kit if you continue.',
+      includedPages: 0,
+      listINR: 5_000,
+      listUSD: 0,
+      markets: ['INR'],
+      badge: 'Start here',
+      noExtras: true,
+    },
+    {
+      id: 'catalogue',
+      tier: 'Growth',
+      label: 'Catalogue Site',
+      description: 'Up to 10 pages: your products and categories, fast on every device, with every enquiry sent straight to your WhatsApp.',
+      includedPages: 10,
+      listINR: 35_000,
+      listUSD: 0,
+      markets: ['INR'],
+    },
+    {
+      id: 'b2b',
+      tier: 'B2B',
+      label: 'RFQ Launch Kit',
+      description: 'For traders and distributors: a catalogue site plus a quote desk. Enquiries from IndiaMART, WhatsApp, email and your site become quotes drafted from your own price list, sent to you on WhatsApp to approve in one tap.',
+      includedPages: 0,
+      listINR: 60_000,
+      listUSD: 0,
+      markets: ['INR', 'USD'],
+      monthly: { label: 'Automation plan (runs the quote desk)', INR: 5_000, USD: 0 },
+      badge: 'Recommended',
+      foundingNote: 'Founding 5: ₹45,000 setup + first month free, in exchange for a written case study',
+    },
+    {
+      id: 'salesdesk',
+      tier: 'B2B',
+      label: 'Sales Desk',
+      description: 'Everything in the RFQ Launch Kit, plus CRM, ERP or Tally integration and ready-to-send proposals.',
+      includedPages: 0,
+      listINR: 1_00_000,
+      listUSD: 0,
+      markets: ['INR'],
+      monthly: { label: 'Sales Desk plan', INR: 10_000, USD: 0 },
+      fromPrice: true,
+    },
+    // ── Website tiers (USD main ladder; Starter also in INR) ──
     {
       id: 'basic',
       tier: 'Starter',
       label: 'Starter Website',
       description: '5 custom pages, fast on every device, a contact form wired to your inbox, and the SEO basics. 90+ Lighthouse.',
       includedPages: 5,
-      priceINR: 12_000,
-      priceUSD: 450,
       listINR: 15_000,
       listUSD: 750,
+      markets: ['INR', 'USD'],
     },
     {
       id: 'pro',
@@ -39,10 +117,9 @@ export const CONFIG = {
       label: 'Growth Website',
       description: 'Up to 10 pages, smooth animations, a blog or portfolio you update yourself, analytics, and enquiries sent straight to email, WhatsApp or your CRM.',
       includedPages: 10,
-      priceINR: 25_000,
-      priceUSD: 900,
       listINR: 35_000,
       listUSD: 1_500,
+      markets: ['USD'],
     },
     {
       id: 'advanced',
@@ -50,39 +127,24 @@ export const CONFIG = {
       label: 'Studio Website',
       description: 'Up to 15 pages built from scratch to your brand: your own design system, custom interactions, and a performance guarantee.',
       includedPages: 15,
-      priceINR: 45_000,
-      priceUSD: 1_800,
       listINR: 60_000,
       listUSD: 3_000,
+      markets: ['USD'],
     },
-    {
-      id: 'b2b',
-      tier: 'B2B',
-      label: 'RFQ Launch Kit (B2B)',
-      description: 'For traders and distributors: a catalogue site plus RFQ → auto-quote, so quotes go out on email/WhatsApp in minutes. Needs the ₹5,000/month automation plan. Outside India, priced on a call.',
-      includedPages: 0,
-      priceINR: 60_000,
-      priceUSD: 0,
-      listINR: 60_000,
-      listUSD: 0,
-    },
-  ],
+  ] as Package[],
   addons: [
     {
       id: 'ai',
       label: 'AI Automation (first workflow)',
       description: 'One workflow that saves you hours: RFQ → auto-quote, enquiry → CRM/WhatsApp, or invoice and document extraction.',
-      priceINR: 18_000,
-      priceUSD: 700,
       listINR: 30_000,
       listUSD: 1_500,
+      hideFor: ['b2b', 'salesdesk'],
     },
     {
       id: 'performance',
       label: 'Performance Optimisation',
       description: 'Make your site noticeably faster. Better Google scores, lower bounce rate, happier users.',
-      priceINR: 10_000,
-      priceUSD: 300,
       listINR: 10_000,
       listUSD: 750,
     },
@@ -90,25 +152,24 @@ export const CONFIG = {
       id: 'webhook',
       label: 'Integrations',
       description: 'Connect the tools you already use — CRMs, payment gateways, email, Slack, Notion. They talk to each other so you don\'t have to.',
-      priceINR: 10_000,
-      priceUSD: 300,
       listINR: 10_000,
       listUSD: 500,
+      hideFor: ['salesdesk'],
     },
-  ],
+  ] as Addon[],
   carePlans: [
     { id: 'none', label: 'No care plan', description: 'You manage hosting and updates yourself.', priceINR: 0, priceUSD: 0 },
     { id: 'essential', label: 'Essential care', description: 'Hosting, backups, updates, uptime and form monitoring.', priceINR: 1_500, priceUSD: 99 },
-    { id: 'growth', label: 'Growth care / automation plan', description: 'Essential + runs your automations, 2 hrs of changes a month, monthly speed/SEO report, 24h response.', priceINR: 5_000, priceUSD: 299 },
+    { id: 'growth', label: 'Growth care', description: 'Essential + 2 hrs of changes a month, monthly speed/SEO report, 24h response.', priceINR: 5_000, priceUSD: 299 },
   ],
   // Extra pages beyond the package's included pages
   pageRate: { INR: 2_000, USD: 40 },
   basePages: 5,
   maxPages: 50,
   split: { design: 40, build: 30, launch: 30 },
-} as const
+}
 
-type Priced = { priceINR: number; priceUSD: number; listINR: number; listUSD: number }
+type Priced = { listINR: number; listUSD: number }
 
 /** Escape user-entered text before it goes into the printable HTML estimate. */
 function escapeHtml(value: string): string {
@@ -124,7 +185,8 @@ const TIER_BADGE: Record<string, { color: string; bg: string }> = {
   Starter:  { color: 'var(--color-muted)',   bg: 'rgba(11,11,15,0.06)' },
   Growth:   { color: 'var(--color-primary-ink)', bg: 'rgba(11,100,108,0.10)' },
   Studio:   { color: 'var(--color-accent)',  bg: 'rgba(11,100,108,0.15)' },
-  B2B:      { color: 'var(--color-text)',    bg: 'rgba(11,11,15,0.08)' },
+  B2B:      { color: 'var(--color-primary-ink)', bg: 'rgba(11,100,108,0.12)' },
+  Pilot:    { color: 'var(--color-text)',    bg: 'rgba(11,11,15,0.08)' },
 }
 
 export function QuotationBuilder() {
@@ -143,6 +205,8 @@ export function QuotationBuilder() {
 
   useEffect(() => {
     const host = window.location.hostname
+    // .in visitors get INR straight away; the IP lookup can still switch it.
+    if (getMarket(host) === 'IN') setCurrency('INR')
     fetch('https://api.country.is/')
       .then((r) => r.json())
       .then((data: { ip: string; country: string }) => {
@@ -153,34 +217,46 @@ export function QuotationBuilder() {
       })
   }, [])
 
-  // B2B scope is discussed on call — no page count applies
-  const showPages = selectedPackage !== null && selectedPackage !== 'b2b'
+  const visiblePackages = CONFIG.packages.filter((p) => p.markets.includes(currency))
 
-  const founding = CONFIG.foundingRates.active
+  // Keep the selection valid for the market; INR defaults to the headline kit.
+  useEffect(() => {
+    if (!CONFIG.packages.find((p) => p.id === selectedPackage && p.markets.includes(currency))) {
+      selectPackage(currency === 'INR' ? 'b2b' : 'basic')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currency])
 
-  // Quoted price: founding rate while founding slots are open, list price after.
-  const priceOf = (item: Priced) =>
-    founding
-      ? currency === 'INR' ? item.priceINR : item.priceUSD
-      : currency === 'INR' ? item.listINR : item.listUSD
-  const listOf = (item: Priced) => (currency === 'INR' ? item.listINR : item.listUSD)
-  const getPkgPrice = (p: (typeof CONFIG.packages)[number]) => priceOf(p)
-  const getAddonPrice = (a: (typeof CONFIG.addons)[number]) => priceOf(a)
-  // Founding rate shown next to the standard price, never as a struck-through "was" price
-  const showFounding = (item: Priced) => founding && listOf(item) > (currency === 'INR' ? item.priceINR : item.priceUSD)
+  const priceOf = (item: Priced) => (currency === 'INR' ? item.listINR : item.listUSD)
+  const getPkgPrice = (p: Package) => priceOf(p)
+  const getAddonPrice = (a: Addon) => priceOf(a)
+  const pkgPriceLabel = (p: Package) =>
+    getPkgPrice(p) === 0 ? 'On call' : `${p.fromPrice ? 'from ' : ''}${formatPrice(getPkgPrice(p), currency)}`
 
   const activePkg = CONFIG.packages.find((p) => p.id === selectedPackage) ?? null
+  // Scope agreed on a call for packages without an included page count
+  const showPages = activePkg !== null && activePkg.includedPages > 0
+  const isPilot = !!activePkg?.noExtras
+  const visibleAddons = isPilot ? [] : CONFIG.addons.filter((a) => !a.hideFor?.includes(selectedPackage ?? ''))
   const includedPages = activePkg?.includedPages ?? CONFIG.basePages
   const extraPages = showPages ? Math.max(0, pages - includedPages) : 0
   const pkgPrice = activePkg ? getPkgPrice(activePkg) : 0
-  const addonTotal = CONFIG.addons
-    .filter((a) => selectedAddons.has(a.id))
+  const chosenAddons = visibleAddons.filter((a) => selectedAddons.has(a.id))
+  const addonTotal = chosenAddons
     .reduce((sum, a) => sum + getAddonPrice(a), 0)
   const pageTotal = extraPages * CONFIG.pageRate[currency]
   const total = pkgPrice + addonTotal + pageTotal
 
   const activeCare = CONFIG.carePlans.find((c) => c.id === carePlan) ?? CONFIG.carePlans[0]
-  const carePrice = currency === 'INR' ? activeCare.priceINR : activeCare.priceUSD
+  // A package with its own monthly plan replaces the optional care plan.
+  const pkgMonthly = activePkg?.monthly
+  const showCare = !pkgMonthly && !isPilot
+  const monthlyLabel = pkgMonthly ? pkgMonthly.label : showCare && activeCare.id !== 'none' ? `${activeCare.label} (after launch)` : null
+  const carePrice = pkgMonthly
+    ? (currency === 'INR' ? pkgMonthly.INR : pkgMonthly.USD)
+    : showCare ? (currency === 'INR' ? activeCare.priceINR : activeCare.priceUSD) : 0
+  const monthlyDisplay = carePrice > 0 ? `${activePkg?.fromPrice ? 'from ' : ''}${formatPrice(carePrice, currency)}/mo` : 'On call'
+  const totalDisplay = total === 0 && activePkg ? 'Custom' : `${activePkg?.fromPrice ? 'from ' : ''}${formatPrice(total, currency)}`
 
   // Start the page stepper at the package's included pages
   function selectPackage(id: string | null) {
@@ -205,7 +281,6 @@ export function QuotationBuilder() {
     return p.label
   }
 
-  const isB2B = selectedPackage === 'b2b'
 
   // Step 1: the Download button opens the lead form instead of printing straight away.
   function handlePDF() {
@@ -236,11 +311,10 @@ export function QuotationBuilder() {
       package: activePkg?.label ?? null,
       pages: showPages ? pages : null,
       extraPages,
-      addons: CONFIG.addons.filter((a) => selectedAddons.has(a.id)).map((a) => a.label),
-      carePlan: activeCare.id === 'none' ? null : activeCare.label,
+      addons: chosenAddons.map((a) => a.label),
+      carePlan: monthlyLabel,
       carePlanMonthly: carePrice,
-      total: isB2B && total === 0 ? 'Custom' : formatPrice(total, currency),
-      foundingRate: founding,
+      total: totalDisplay,
       note: negotiationNote.trim() || null,
       page: typeof window !== 'undefined' ? window.location.href : null,
     }
@@ -267,28 +341,25 @@ export function QuotationBuilder() {
 
   function printEstimate(preparedFor: string) {
     const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
-    const totalDisplay = isB2B && total === 0 ? 'Custom' : formatPrice(total, currency)
-
     const pkgRow = activePkg
-      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td>${pkgPrice === 0 ? 'On call' : formatPrice(pkgPrice, currency)}</td></tr>`
+      ? `<tr><td>${pkgDisplayName(activePkg)}</td><td>${pkgPriceLabel(activePkg)}</td></tr>`
       : ''
-    const addonRows = CONFIG.addons
-      .filter((a) => selectedAddons.has(a.id))
+    const addonRows = chosenAddons
       .map((a) => `<tr><td>${a.label}</td><td>${formatPrice(getAddonPrice(a), currency)}</td></tr>`)
       .join('')
     const pageRow = showPages
       ? `<tr><td>${pages} page${pages !== 1 ? 's' : ''} (${includedPages} included${extraPages > 0 ? `, ${extraPages} extra × ${formatPrice(CONFIG.pageRate[currency], currency)}` : ''})</td><td>${extraPages > 0 ? formatPrice(pageTotal, currency) : 'Included'}</td></tr>`
       : ''
-    const careRow = activeCare.id !== 'none'
-      ? `<tr><td>${activeCare.label} (after launch)</td><td>${formatPrice(carePrice, currency)}/month</td></tr>`
+    const careRow = monthlyLabel
+      ? `<tr><td>${monthlyLabel}</td><td>${monthlyDisplay}</td></tr>`
       : ''
     const noteBlock = negotiationNote.trim()
       ? `<div class="section">Notes / Budget</div><div class="notes">${escapeHtml(negotiationNote.trim())}</div>`
       : ''
-    const foundingNote = founding && !(isB2B && total === 0)
-      ? ' · Founding client rate, in exchange for a case study + testimonial'
+    const foundingNote = activePkg?.foundingNote && currency === 'INR'
+      ? ` · ${activePkg.foundingNote} (${CONFIG.founding.slotsLeft} of 5 left, until ${CONFIG.founding.endsLabel})`
       : ''
-    const scheduleBlock = total > 0 ? `
+    const scheduleBlock = total > 0 && !isPilot ? `
       <div class="section">Payment Schedule</div>
       <div class="schedule">
         <div class="schedule-title">How payments are split</div>
@@ -366,8 +437,8 @@ export function QuotationBuilder() {
   <table>${pkgRow}${addonRows}${pageRow}${careRow}</table>
 
   <div class="total-wrap">
-    <div class="total-amount${isB2B && total === 0 ? ' custom' : ''}">${totalDisplay}</div>
-    <div class="total-note">${isB2B && total === 0 ? 'B2B pricing discussed on call · AMC &amp; scope included' : `Estimate only · final quote confirmed after discovery call${foundingNote}`}</div>
+    <div class="total-amount${total === 0 ? ' custom' : ''}">${totalDisplay}</div>
+    <div class="total-note">${total === 0 ? 'Priced on a call · scope and monthly plan agreed together' : isPilot ? 'Paid upfront · deducted from the RFQ Launch Kit if you continue' : `Estimate only · final quote confirmed after discovery call${foundingNote}`}</div>
   </div>
 
   ${scheduleBlock}
@@ -421,19 +492,6 @@ export function QuotationBuilder() {
           <p style={{ color: 'var(--color-muted)', fontSize: 'var(--fs-lg)', maxWidth: '520px' }}>
             Pick what you need, see the price right away. No sales calls, no waiting.
           </p>
-          {founding && (
-            <p
-              className="mt-4 inline-block text-sm font-medium px-3 py-1.5"
-              style={{
-                color: 'var(--color-primary-ink)',
-                backgroundColor: 'rgba(11,100,108,0.08)',
-                border: '1px solid rgba(11,100,108,0.2)',
-                borderRadius: 'var(--radius-full)',
-              }}
-            >
-              Founding client rates · {CONFIG.foundingRates.slotsLeft} of 5 left · until {CONFIG.foundingRates.endsLabel} · in exchange for a case study
-            </p>
-          )}
         </FadeUp>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
@@ -450,7 +508,7 @@ export function QuotationBuilder() {
                 Choose a package
               </h2>
               <div className="flex flex-col gap-3" role="radiogroup" aria-label="Choose a website package">
-                {CONFIG.packages.map((pkg) => {
+                {visiblePackages.map((pkg) => {
                   const active = selectedPackage === pkg.id
                   const badge = TIER_BADGE[pkg.tier] ?? TIER_BADGE.Starter
                   return (
@@ -498,7 +556,7 @@ export function QuotationBuilder() {
                             <span className="font-semibold text-sm" style={{ color: 'var(--color-text)' }}>
                               {pkg.label}
                             </span>
-                            {pkg.tier === 'B2B' && (
+                            {pkg.badge && (
                               <span
                                 className="font-semibold"
                                 style={{
@@ -511,7 +569,7 @@ export function QuotationBuilder() {
                                   borderRadius: 4,
                                 }}
                               >
-                                Call Support
+                                {pkg.badge}
                               </span>
                             )}
                           </div>
@@ -519,21 +577,24 @@ export function QuotationBuilder() {
                             className="font-mono text-sm shrink-0"
                             style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-muted)' }}
                           >
-                            {getPkgPrice(pkg) === 0 ? 'Custom' : (
-                              <>
-                                {formatPrice(getPkgPrice(pkg), currency)}
-                                {showFounding(pkg) && (
-                                  <span className="block text-xs" style={{ opacity: 0.75 }}>
-                                    founding rate · standard {formatPrice(listOf(pkg), currency)}
-                                  </span>
-                                )}
-                              </>
+                            {pkgPriceLabel(pkg)}
+                            {pkg.monthly && (
+                              <span className="block text-xs" style={{ opacity: 0.75 }}>
+                                {(currency === 'INR' ? pkg.monthly.INR : pkg.monthly.USD) > 0
+                                  ? `+ ${pkg.fromPrice ? 'from ' : ''}${formatPrice(currency === 'INR' ? pkg.monthly.INR : pkg.monthly.USD, currency)}/mo`
+                                  : '+ monthly plan'}
+                              </span>
                             )}
                           </span>
                         </div>
                         <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
                           {pkg.description}
                         </p>
+                        {pkg.foundingNote && currency === 'INR' && CONFIG.founding.slotsLeft > 0 && (
+                          <p className="text-xs mt-2 font-medium" style={{ color: 'var(--color-primary-ink)', lineHeight: 1.5 }}>
+                            {pkg.foundingNote} · {CONFIG.founding.slotsLeft} of 5 left · until {CONFIG.founding.endsLabel}
+                          </p>
+                        )}
                       </div>
                     </button>
                   )
@@ -542,6 +603,7 @@ export function QuotationBuilder() {
             </FadeUp>
 
             {/* ADD-ONS — checkbox group */}
+            {visibleAddons.length > 0 && (
             <FadeUp delay={150}>
               <h2
                 className="text-xs font-semibold tracking-widest uppercase mb-4"
@@ -550,7 +612,7 @@ export function QuotationBuilder() {
                 Add-ons
               </h2>
               <div className="flex flex-col gap-3" role="group" aria-label="Select add-on services">
-                {CONFIG.addons.map((addon) => {
+                {visibleAddons.map((addon) => {
                   const active = selectedAddons.has(addon.id)
                   return (
                     <button
@@ -580,11 +642,6 @@ export function QuotationBuilder() {
                             style={{ color: active ? 'var(--color-primary-ink)' : 'var(--color-muted)' }}
                           >
                             {formatPrice(getAddonPrice(addon), currency)}
-                            {showFounding(addon) && (
-                              <span className="block text-xs" style={{ opacity: 0.75 }}>
-                                founding rate · standard {formatPrice(listOf(addon), currency)}
-                              </span>
-                            )}
                           </span>
                         </div>
                         <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)', lineHeight: 1.5 }}>
@@ -596,6 +653,7 @@ export function QuotationBuilder() {
                 })}
               </div>
             </FadeUp>
+            )}
 
             {/* PAGE STEPPER — only when a package is selected */}
             {showPages && (
@@ -665,7 +723,7 @@ export function QuotationBuilder() {
             )}
 
             {/* CARE PLAN — monthly, after launch */}
-            {hasSelection && (
+            {hasSelection && showCare && (
               <FadeUp delay={250}>
                 <h2
                   className="text-xs font-semibold tracking-widest uppercase mb-4"
@@ -747,7 +805,7 @@ export function QuotationBuilder() {
                       wordBreak: 'break-word',
                     }}
                   >
-                    {isB2B && total === 0 ? 'Custom' : formatPrice(total, currency)}
+                    {totalDisplay}
                   </div>
                 ) : (
                   <div
@@ -758,14 +816,19 @@ export function QuotationBuilder() {
                   </div>
                 )}
                 <p className="text-xs mt-2" style={{ color: 'var(--color-muted)' }}>
-                  {isB2B && total === 0
-                    ? 'Pricing discussed on call — AMC & scope included'
-                    : 'Estimate only · final quote after discovery call'}
+                  {total === 0
+                    ? 'Priced on a call · scope and monthly plan agreed together'
+                    : isPilot
+                      ? 'Paid upfront · deducted from the RFQ Launch Kit if you continue'
+                      : 'Estimate only · final quote after discovery call'}
+                  {monthlyLabel && total > 0 && (
+                    <span className="block mt-1">+ {monthlyDisplay} · {monthlyLabel}</span>
+                  )}
                 </p>
               </div>
 
               {/* Payment split */}
-              {hasSelection && (
+              {hasSelection && total > 0 && !isPilot && (
                 <div>
                   <div
                     className="p-4 flex flex-col gap-3"
@@ -832,12 +895,11 @@ export function QuotationBuilder() {
                     <div className="flex items-center justify-between text-sm">
                       <span style={{ color: 'var(--color-muted)' }}>{pkgDisplayName(activePkg)}</span>
                       <span className="font-mono" style={{ color: 'var(--color-text)' }}>
-                        {pkgPrice === 0 ? 'On call' : formatPrice(pkgPrice, currency)}
+                        {pkgPriceLabel(activePkg)}
                       </span>
                     </div>
                   )}
-                  {CONFIG.addons
-                    .filter((a) => selectedAddons.has(a.id))
+                  {chosenAddons
                     .map((a) => (
                       <div key={a.id} className="flex items-center justify-between text-sm">
                         <span style={{ color: 'var(--color-muted)' }}>{a.label}</span>
@@ -859,11 +921,11 @@ export function QuotationBuilder() {
                       </span>
                     </div>
                   )}
-                  {activeCare.id !== 'none' && (
+                  {monthlyLabel && (
                     <div className="flex items-center justify-between text-sm">
-                      <span style={{ color: 'var(--color-muted)' }}>{activeCare.label} (after launch)</span>
+                      <span style={{ color: 'var(--color-muted)' }}>{monthlyLabel}</span>
                       <span className="font-mono" style={{ color: 'var(--color-text)' }}>
-                        {formatPrice(carePrice, currency)}/mo
+                        {monthlyDisplay}
                       </span>
                     </div>
                   )}
