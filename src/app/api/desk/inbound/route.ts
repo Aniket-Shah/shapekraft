@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import { processEnquiry } from '@/lib/desk/engine'
 import type { Channel } from '@/lib/desk/types'
 
-// Inbound enquiries from other channels: the Cloudflare Email Worker (email),
-// or a manual/test call. Protected by DESK_SECRET in the x-desk-secret header.
+// Generic inbound enquiries (manual, test, or any form/webhook). Email arrives
+// through the Zoho poller at /api/desk/poll. Protected by DESK_SECRET in the x-desk-secret header.
 
 type Body = {
   channel?: Channel
@@ -16,8 +16,7 @@ type Body = {
   autoSubmitted?: string
 }
 
-const OWN_DOMAINS = /@(shapekraft\.(co|in))$/i
-const NO_REPLY = /(no-?reply|mailer-daemon|postmaster|notifications?@|bounce)/i
+import { skipReason } from '@/lib/desk/inbound'
 
 export async function POST(request: Request) {
   if (!process.env.DESK_SECRET || request.headers.get('x-desk-secret') !== process.env.DESK_SECRET) {
@@ -28,9 +27,9 @@ export async function POST(request: Request) {
   const text = (b.text ?? '').trim()
   if (!text) return NextResponse.json({ ok: false, error: 'Empty message' }, { status: 400 })
 
-  // Never answer ourselves, robots or auto-replies (prevents mail loops).
-  if (b.channel === 'email' && (OWN_DOMAINS.test(from) || NO_REPLY.test(from) || (b.autoSubmitted && b.autoSubmitted !== 'no'))) {
-    return NextResponse.json({ ok: true, skipped: 'automated or own address' })
+  if (b.channel === 'email') {
+    const reason = skipReason(from, b.autoSubmitted)
+    if (reason) return NextResponse.json({ ok: true, skipped: reason })
   }
 
   const { record } = await processEnquiry({
