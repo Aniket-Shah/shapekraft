@@ -23,7 +23,11 @@ export function SplitText({
 
   useEffect(() => {
     if (!ref.current) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // No animation: show the text immediately instead of leaving it at opacity 0
+      ref.current.querySelectorAll<HTMLElement>('.char').forEach((el) => { el.style.opacity = '1' })
+      return
+    }
 
     const run = async () => {
       await whenReady()
@@ -58,7 +62,9 @@ export function SplitText({
   const words = text.split(' ')
 
   return (
-    <span ref={ref} className={className} aria-label={text}>
+    <span ref={ref} className={className}>
+      {/* Real text for screen readers and crawlers; the per-letter spans are visual only */}
+      <span className="sr-only">{text}</span>
       {words.map((word, wi) => (
         <span key={wi} className="inline-block overflow-hidden" style={{ whiteSpace: 'nowrap' }} aria-hidden="true">
           {word.split('').map((char, ci) => (

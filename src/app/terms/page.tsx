@@ -8,13 +8,10 @@ export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
     'The terms and conditions that govern your use of ShapeKraft services and website.',
-  alternates: {
-    canonical: 'https://shapekraft.co/terms',
-  },
   openGraph: {
     title: 'Terms of Service — ShapeKraft',
     description: 'The terms and conditions that govern your use of ShapeKraft services.',
-    url: 'https://shapekraft.co/terms',
+    url: 'https://www.shapekraft.co/terms',
   },
 }
 
@@ -22,8 +19,8 @@ const termsSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://shapekraft.co' },
-    { '@type': 'ListItem', position: 2, name: 'Terms of Service', item: 'https://shapekraft.co/terms' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.shapekraft.co' },
+    { '@type': 'ListItem', position: 2, name: 'Terms of Service', item: 'https://www.shapekraft.co/terms' },
   ],
 }
 

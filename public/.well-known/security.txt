@@ -1,9 +1,9 @@
 Contact: mailto:hello@shapekraft.co
 Expires: 2027-06-26T23:59:59Z
 Preferred-Languages: en
-Canonical: https://shapekraft.co/.well-known/security.txt
+Canonical: https://www.shapekraft.co/.well-known/security.txt
 
 Contact: mailto:hello@shapekraft.in
 Expires: 2027-06-26T23:59:59Z
 Preferred-Languages: en
-Canonical: https://shapekraft.in/.well-known/security.txt
+Canonical: https://www.shapekraft.in/.well-known/security.txt

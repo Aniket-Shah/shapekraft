@@ -1,7 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
-export const alt = 'ShapeKraft — Digital Engineering Studio'
+export const alt = 'ShapeKraft — Web Design, Development & AI Automation Studio'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -124,7 +123,7 @@ export default function OGImage() {
             gap: 16,
           }}
         >
-          <span>Digital Engineering Studio</span>
+          <span>Web Design · Development · AI Automation</span>
           <span
             style={{
               background: '#0B646C',

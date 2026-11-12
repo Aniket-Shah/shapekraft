@@ -5,16 +5,13 @@ import { QuotePageClient } from './QuotePageClient'
 import { SchemaOrg } from '@/components/SchemaOrg'
 
 export const metadata: Metadata = {
-  title: 'Get a Quote',
+  title: 'Website Cost Calculator: Instant Quote',
   description:
-    'Build your instant project estimate. Pick a package, add services, choose page count — live pricing with no forms.',
-  alternates: {
-    canonical: 'https://shapekraft.co/quote',
-  },
+    'Build your instant project estimate. Pick a package, add services, choose page count — live pricing in INR or USD.',
   openGraph: {
     title: 'Get a Quote — ShapeKraft',
     description: 'Live pricing builder. Pick a package and add-ons for an instant estimate.',
-    url: 'https://shapekraft.co/quote',
+    url: 'https://www.shapekraft.co/quote',
     type: 'website',
   },
 }
@@ -27,13 +24,13 @@ const quoteSchema = {
       '@type': 'ListItem',
       position: 1,
       name: 'Home',
-      item: 'https://shapekraft.co',
+      item: 'https://www.shapekraft.co',
     },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Get a Quote',
-      item: 'https://shapekraft.co/quote',
+      item: 'https://www.shapekraft.co/quote',
     },
   ],
 }
