@@ -2,8 +2,10 @@
 // DESK_FROM_EMAIL is the sender, e.g. "ShapeKraft <hello@shapekraft.co>"; its
 // domain must be verified with the provider.
 
+import { sendMail as zohoSend, zohoConfigured } from './zoho'
+
 export function mailerConfigured() {
-  return !!process.env.DESK_FROM_EMAIL && (!!process.env.RESEND_API_KEY || !!process.env.BREVO_API_KEY)
+  return zohoConfigured() || (!!process.env.DESK_FROM_EMAIL && (!!process.env.RESEND_API_KEY || !!process.env.BREVO_API_KEY))
 }
 
 function parseFrom(from: string) {
@@ -12,6 +14,11 @@ function parseFrom(from: string) {
 }
 
 export async function sendEmail(opts: { to: string; subject: string; text: string; inReplyTo?: string }) {
+  // Zoho Mail first: it's where hello@ lives, so replies come from the same mailbox.
+  if (zohoConfigured()) {
+    await zohoSend({ to: opts.to, subject: opts.subject, text: opts.text })
+    return
+  }
   const from = process.env.DESK_FROM_EMAIL
   if (!from) throw new Error('DESK_FROM_EMAIL not set')
   const headers: Record<string, string> = opts.inReplyTo ? { 'In-Reply-To': opts.inReplyTo, References: opts.inReplyTo } : {}
