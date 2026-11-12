@@ -1,4 +1,6 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, after } from 'next/server'
+import { processEnquiry } from '@/lib/desk/engine'
+import { CONFIG, type MarketCurrency } from '@/lib/pricing'
 
 // Receives quote-builder leads and forwards them to whichever delivery channel is configured.
 //
@@ -78,6 +80,34 @@ export async function POST(request: Request) {
   ]
   const subject = `New quote lead: ${name} · ${str(body.package) || 'add-ons'} · ${str(body.total)}`
   const text = lines.join('\n')
+
+  // Quote desk: draft a reply from the visitor's own choices and ask the owner
+  // on Telegram. Runs after the response so the PDF is never delayed.
+  after(async () => {
+    try {
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)
+      const addonLabels = Array.isArray(body.addons) ? body.addons.map(String) : []
+      const currency: MarketCurrency = body.currency === 'INR' ? 'INR' : 'USD'
+      await processEnquiry({
+        channel: 'web',
+        name,
+        email: isEmail ? contact : undefined,
+        phone: isEmail ? undefined : contact,
+        subject: '',
+        message: text,
+        source: str(body.page),
+        preselected: {
+          currency,
+          packageId: CONFIG.packages.find((p) => p.label === str(body.package))?.id,
+          pages: typeof body.pages === 'number' ? body.pages : undefined,
+          addonIds: CONFIG.addons.filter((a) => addonLabels.includes(a.label)).map((a) => a.id),
+          carePlanId: CONFIG.carePlans.find((c) => str(body.carePlan).startsWith(c.label))?.id,
+        },
+      })
+    } catch (err) {
+      console.error('[desk] web lead failed:', err)
+    }
+  })
 
   const deliveries: Promise<Response>[] = []
 

@@ -1,5 +1,5 @@
 // FAQ copy. Answers are shown on the page AND sent as FAQPage schema, so they
-// must stay identical and must match the prices in QuotationBuilder CONFIG.
+// must stay identical and must match the prices in src/lib/pricing.ts.
 // If you change a price there, change it here.
 export interface Faq {
   q: string

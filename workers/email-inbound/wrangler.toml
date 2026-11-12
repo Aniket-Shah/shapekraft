@@ -1,0 +1,7 @@
+name = "shapekraft-email-desk"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+DESK_URL = "https://www.shapekraft.co/api/desk/inbound"
+# Set these as secrets:  npx wrangler secret put DESK_SECRET  /  FORWARD_TO
