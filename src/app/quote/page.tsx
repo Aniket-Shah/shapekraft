@@ -3,6 +3,8 @@ import { NavStickyMinimal } from '@/components/sections/NavStickyMinimal'
 import { SiteFooter } from '@/components/sections/SiteFooter'
 import { QuotePageClient } from './QuotePageClient'
 import { SchemaOrg } from '@/components/SchemaOrg'
+import { FAQSection } from '@/components/sections/FAQSection'
+import { QUOTE_FAQS } from '@/lib/faq'
 
 export const metadata: Metadata = {
   title: 'Website Cost Calculator: Instant Quote',
@@ -42,6 +44,7 @@ export default function QuotePage() {
       <NavStickyMinimal />
       <main id="main-content" style={{ paddingTop: '5rem' }}>
         <QuotePageClient />
+        <FAQSection items={QUOTE_FAQS} showQuoteLink={false} />
       </main>
       <SiteFooter />
     </>
