@@ -12,9 +12,6 @@ import { SiteFooter }        from '@/components/sections/SiteFooter'
 import { SchemaOrg }         from '@/components/SchemaOrg'
 
 export const metadata: Metadata = {
-  alternates: {
-    canonical: 'https://www.shapekraft.co',
-  },
 }
 
 const homeSchema = [

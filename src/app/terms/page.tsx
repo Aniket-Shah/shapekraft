@@ -8,9 +8,6 @@ export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
     'The terms and conditions that govern your use of ShapeKraft services and website.',
-  alternates: {
-    canonical: 'https://www.shapekraft.co/terms',
-  },
   openGraph: {
     title: 'Terms of Service — ShapeKraft',
     description: 'The terms and conditions that govern your use of ShapeKraft services.',

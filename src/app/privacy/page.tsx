@@ -8,9 +8,6 @@ export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
     'How ShapeKraft collects, uses, and protects your information when you use our website and services.',
-  alternates: {
-    canonical: 'https://www.shapekraft.co/privacy',
-  },
   openGraph: {
     title: 'Privacy Policy — ShapeKraft',
     description: 'How ShapeKraft collects, uses, and protects your information.',

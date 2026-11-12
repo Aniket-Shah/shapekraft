@@ -55,9 +55,6 @@ export const metadata: Metadata = {
   authors: [{ name: 'ShapeKraft', url: 'https://www.shapekraft.co' }],
   creator: 'ShapeKraft',
   publisher: 'ShapeKraft',
-  alternates: {
-    canonical: 'https://www.shapekraft.co',
-  },
   openGraph: {
     title: 'ShapeKraft — Web Design, Development & AI Automation Studio',
     description:

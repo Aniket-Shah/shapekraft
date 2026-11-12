@@ -8,9 +8,6 @@ export const metadata: Metadata = {
   title: 'Website Cost Calculator: Instant Quote',
   description:
     'Build your instant project estimate. Pick a package, add services, choose page count — live pricing in INR or USD.',
-  alternates: {
-    canonical: 'https://www.shapekraft.co/quote',
-  },
   openGraph: {
     title: 'Get a Quote — ShapeKraft',
     description: 'Live pricing builder. Pick a package and add-ons for an instant estimate.',
