@@ -14,6 +14,7 @@ export function FAQSection({ items, showQuoteLink = true }: Props) {
   return (
     <section
       id="faq"
+      className="theme-cream"
       aria-labelledby="faq-heading"
       style={{ padding: 'clamp(3rem, 8vw, var(--s-24)) var(--gutter)' }}
     >
