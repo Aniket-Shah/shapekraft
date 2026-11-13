@@ -313,3 +313,172 @@ html[data-seen] .preloader { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .cursor-ring, .cursor-dot, .link-underline::after { transition: none; }
 }
+
+/* ════════════════════════════════════════════════════════
+   GLASS (testimonials)
+   Frosted cream panel for use on the Burnt Sienna context.
+   Text on it stays Obsidian; teal text uses --color-primary-ink.
+   ════════════════════════════════════════════════════════ */
+.glass-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  /* Fallback for browsers without backdrop-filter: a more opaque panel */
+  background: color-mix(in srgb, var(--color-cream-50) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-cream-50) 70%, transparent);
+  box-shadow:
+    0 24px 60px -24px color-mix(in srgb, var(--color-sienna-900) 55%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--color-cream-50) 90%, transparent);
+  transition:
+    transform var(--d-base) var(--ease-out),
+    box-shadow var(--d-base) var(--ease-out);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-card {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-cream-50) 62%, transparent),
+      color-mix(in srgb, var(--color-cream-50) 38%, transparent)
+    );
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+  }
+}
+@media (hover: hover) {
+  .glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 32px 70px -24px color-mix(in srgb, var(--color-sienna-900) 65%, transparent),
+      inset 0 1px 0 color-mix(in srgb, var(--color-cream-50) 90%, transparent);
+  }
+}
+
+.glass-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+}
+.glass-glow--teal {
+  width: min(46vw, 520px);
+  aspect-ratio: 1;
+  top: 12%;
+  left: -8%;
+  background: color-mix(in srgb, var(--color-teal-500) 55%, transparent);
+}
+.glass-glow--cream {
+  width: min(52vw, 600px);
+  aspect-ratio: 1;
+  bottom: -10%;
+  right: -6%;
+  background: color-mix(in srgb, var(--color-cream-100) 70%, transparent);
+}
+
+/* Live site preview inside a testimonial card. The iframe renders at twice the
+   card width and is scaled to half, so the site shows its desktop layout. */
+.site-preview {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-obsidian-900) 14%, transparent);
+  background: var(--color-cream-50);
+}
+.site-preview__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: color-mix(in srgb, var(--color-obsidian-900) 8%, var(--color-cream-50));
+}
+.site-preview__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-obsidian-900) 30%, transparent);
+}
+.site-preview__host {
+  margin-left: 8px;
+  font-size: 0.75rem;
+  color: var(--color-obsidian-700);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.site-preview__viewport {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.site-preview__viewport iframe {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 200%;
+  height: 200%;
+  border: 0;
+  transform: scale(0.5);
+  transform-origin: top left;
+  pointer-events: none;
+}
+.site-preview__link {
+  position: absolute;
+  inset: 0;
+}
+.site-preview__link:focus-visible {
+  outline: 3px solid var(--color-teal-900);
+  outline-offset: -3px;
+}
+
+/* Testimonial slider: one card per view, native scroll-snap. The block padding
+   leaves room for the card's shadow and hover lift inside the scroll container. */
+.t-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  padding-block: 1rem 3.5rem;
+  border-radius: var(--radius-lg);
+}
+.t-slider::-webkit-scrollbar { display: none; }
+.t-slider:focus-visible {
+  outline: 3px solid var(--color-teal-900);
+  outline-offset: 4px;
+}
+.t-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  padding-inline: 2px;
+}
+.t-slider__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid var(--color-obsidian-900);
+  color: var(--color-obsidian-900);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--d-base) var(--ease-out), color var(--d-base) var(--ease-out), opacity var(--d-base) var(--ease-out);
+}
+.t-slider__btn:hover:not(:disabled) {
+  background: var(--color-obsidian-900);
+  color: var(--color-cream-50);
+}
+.t-slider__btn:focus-visible {
+  outline: 3px solid var(--color-teal-900);
+  outline-offset: 3px;
+}
+.t-slider__btn:disabled { opacity: 0.35; cursor: not-allowed; }
+@media (prefers-reduced-motion: reduce) {
+  .t-slider__btn { transition: none; }
+}
+/* Inside the slider the card's shadow is clipped by the scroll container, so keep it tight. */
+.t-slide .glass-card,
+.t-slide .glass-card:hover {
+  transform: none;
+  box-shadow:
+    0 20px 36px -30px color-mix(in srgb, var(--color-sienna-900) 70%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--color-cream-50) 90%, transparent);
+}
