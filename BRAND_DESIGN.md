@@ -5,7 +5,7 @@ Single source of truth for the visual identity. Tokens below mirror [src/app/glo
 ## Principles
 - **60 / 30 / 10.** Burnt Sienna dominates, Cream Linen supports, Royal Teal accents.
 - **Obsidian Black text** everywhere, in tone-shades, except on teal fills (cream text).
-- **Bold display, quiet body.** Syne for headlines, Inter for everything else.
+- **Bold display, quiet body.** Bricolage Grotesque for headlines, Inter for everything else.
 - **Generous space, smooth motion.** 8pt spacing, fluid type, eased animation.
 - **Accessible by default.** Visible focus rings, reduced-motion support, AA contrast.
 
@@ -64,7 +64,7 @@ Guidelines
 
 | Role | Font | Variable | Notes |
 |---|---|---|---|
-| Display / headings | **Syne** | `--font-display` (`.font-display`) | Tight, bold, large |
+| Display / headings | **Bricolage Grotesque** | `--font-display` (`.font-display`) | Tight, bold, large |
 | Body / UI | **Inter** | `--font-sans` | Default on `body`, line-height 1.6 |
 | Accent (special use) | **Black Ops One** | `--font-black-ops-one` | Loaded in layout; use only for deliberate stylistic moments |
 
@@ -119,7 +119,7 @@ Rules
 - Minimum touch target 44×44px.
 
 ## Do / Don't
-- ✅ Sienna base, cream bands, teal accents, obsidian text, large Syne headlines.
+- ✅ Sienna base, cream bands, teal accents, obsidian text, large Bricolage Grotesque headlines.
 - ✅ Use tokens (`bg-surface`, `text-muted`, `border-border`) rather than raw hex.
 - ❌ Don't use pure white or pure black, or any hue outside the four families.
 - ❌ Don't use Black Ops One for body or UI text.
