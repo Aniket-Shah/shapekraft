@@ -6,6 +6,7 @@ import { HugeTextScroll }    from '@/components/sections/HugeTextScroll'
 import { AboutStrip }        from '@/components/sections/AboutStrip'
 import { ServicesGrid }      from '@/components/sections/ServicesGrid'
 import { StatsGrid }         from '@/components/sections/StatsGrid'
+import { Testimonials }      from '@/components/sections/Testimonials'
 import { ProcessSteps }      from '@/components/sections/ProcessSteps'
 import { ContactBigCTA }     from '@/components/sections/ContactBigCTA'
 import { SiteFooter }        from '@/components/sections/SiteFooter'
@@ -152,6 +153,7 @@ export default function HomePage() {
         {/* <FeaturedWork /> */}
         <ServicesGrid />
         <StatsGrid />
+        <Testimonials />
         <ProcessSteps />
         <FAQSection items={HOME_FAQS} />
         <ContactBigCTA />
