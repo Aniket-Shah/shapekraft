@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Syne, Black_Ops_One } from 'next/font/google'
+import { Inter, Bricolage_Grotesque, Black_Ops_One } from 'next/font/google'
 import './globals.css'
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider'
 import { ClientEffects } from '@/components/providers/ClientEffects'
@@ -14,10 +14,10 @@ const inter = Inter({
   display: 'swap',
 })
 
-const syne = Syne({
+// Variable font: one file covers every heading weight (200 to 800).
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-syne',
-  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-display-face',
   display: 'swap',
 })
 
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${syne.variable} ${blackOpsOne.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${display.variable} ${blackOpsOne.variable}`}>
       <head>
         {/* Skip the intro for returning visitors before first paint */}
         <script
