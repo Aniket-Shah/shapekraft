@@ -1,5 +1,7 @@
 // ── CONFIG: all pricing lives here — do not scatter ─────────────────────────
 // Source: Notion "Founder Pack v2 — Board, Pricing, Marketing, Brand (12 Nov)".
+// USD site tiers and AI automation raised 14 Nov 2026 to the low-mid of the
+// US/UK freelancer range (Notion "Pricing benchmark — India vs international market").
 // India (INR) leads with the B2B ladder: Pilot → Catalogue Site → RFQ Launch
 // Kit (headline) → Sales Desk; the Starter site stays as a quiet side option.
 // US/global (USD) keeps the Starter / Growth / Studio site tiers (inbound only).
@@ -103,7 +105,7 @@ export const CONFIG = {
       description: '5 custom pages, fast on every device, a contact form wired to your inbox, and the SEO basics. 90+ Lighthouse.',
       includedPages: 5,
       listINR: 15_000,
-      listUSD: 750,
+      listUSD: 1_200,
       markets: ['INR', 'USD'],
     },
     {
@@ -113,7 +115,7 @@ export const CONFIG = {
       description: 'Up to 10 pages, smooth animations, a blog or portfolio you update yourself, analytics, and enquiries sent straight to email, WhatsApp or your CRM.',
       includedPages: 10,
       listINR: 35_000,
-      listUSD: 1_500,
+      listUSD: 2_500,
       markets: ['USD'],
     },
     {
@@ -123,7 +125,7 @@ export const CONFIG = {
       description: 'Up to 15 pages built from scratch to your brand: your own design system, custom interactions, and a performance guarantee.',
       includedPages: 15,
       listINR: 60_000,
-      listUSD: 3_000,
+      listUSD: 4_500,
       markets: ['USD'],
     },
   ] as Package[],
@@ -133,7 +135,7 @@ export const CONFIG = {
       label: 'AI Automation (first workflow)',
       description: 'One workflow that saves you hours: RFQ → auto-quote, enquiry → CRM/WhatsApp, or invoice and document extraction.',
       listINR: 30_000,
-      listUSD: 1_500,
+      listUSD: 2_500,
       hideFor: ['b2b', 'salesdesk'],
     },
     {

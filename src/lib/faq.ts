@@ -13,7 +13,7 @@ const COST_INDIA: Faq = {
 
 const COST_USD: Faq = {
   q: 'How much do you charge international clients?',
-  a: 'For clients outside India, prices are in USD: $750 for a 5-page Starter site, $1,500 for a 10-page Growth site and $3,000 for a 15-page Studio site. Extra pages are $40 each. We work remotely with businesses in the US, UK, Canada and Australia.',
+  a: 'For clients outside India, prices are in USD: $1,200 for a 5-page Starter site, $2,500 for a 10-page Growth site and $4,500 for a 15-page Studio site. Extra pages are $40 each. We work remotely with businesses in the US, UK, Canada and Australia.',
 }
 
 const PAYMENT: Faq = {
@@ -38,7 +38,7 @@ const AFTER_LAUNCH: Faq = {
 
 const AI: Faq = {
   q: 'Can you add AI automation to my business?',
-  a: 'Yes. Your first AI automation workflow starts at ₹30,000 ($1,500). Common examples are answering enquiries, drafting quotes and moving leads into your CRM or WhatsApp automatically. It can be added to a new site or an existing one.',
+  a: 'Yes. Your first AI automation workflow starts at ₹30,000 ($2,500). Common examples are answering enquiries, drafting quotes and moving leads into your CRM or WhatsApp automatically. It can be added to a new site or an existing one.',
 }
 
 const RFQ: Faq = {
